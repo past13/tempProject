@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>HTML5 Visualization</title>
+  <link rel="stylesheet" type="text/css" href="H5Vis.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="Three.js"></script>
+  <script src="ui.js"></script>
+  <script src="recipe.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <!-- <script src="js/THREEx.KeyboardState.js"></script>
+  <script src="js/THREEx.FullScreen.js"></script>
+  <script src="js/THREEx.WindowResize.js"></script> -->
+  <script src="js/threex.domevent.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/Projector.js"></script>
+  <script src="js/lodash.js"></script>
+  <script src="js/jquery-1.9.1.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/info.js"></script>
+
+  <style>
+    body { margin:0; padding:0; background-color:#fff }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <div id="statusLabel"><p>Loading</p></div>
+    <div id="toolbar">test</div>
+    <div id="logs"></div>
+    <div id="containerpreviews"></div>
+    <div id="containerfullview"></div>
+  </div>
+  <script>
+    $(function() { readRecipeFile('recipe.xml'); });
+  </script>
+</body>
+</html>

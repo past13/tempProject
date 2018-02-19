@@ -1,0 +1,134 @@
+#container {
+    background: none no-repeat 0 0 scroll #aaa;
+    height: 600px;    
+    /* width: 1388px; */
+    width: 100%;
+    
+    position: relative;
+    overflow: hidden;  
+  }
+
+  h3 {    
+    margin: 10px;
+    font: 25px arial, sans-serif;
+    color: #db1919;    
+  }
+  
+  .col {
+    height: 95%;
+    float: left;
+    z-index: 8000;  
+  }
+  
+  .col > p {
+    color: #ffffff;
+  }
+
+  .first {
+    width: 3%;
+    height: 100%;
+    float: left; 
+    background-color: rgba(210, 231, 17, 0.938);  
+    z-index: 9000;
+    left: 25%;
+  }
+
+  .resizer:hover {
+    cursor: col-resize;
+  }  
+
+  #col1 {
+    background: none no-repeat 0 0 scroll rgb(112, 100, 100);
+    float: left;
+    width: 22%;
+  }
+
+  #col2 {
+    background: none no-repeat 0 0 scroll rgb(255, 255, 255);
+    float: left;
+    width: 22%;   
+  }
+  #col3 {
+    background: none no-repeat 0 0 scroll rgb(255, 255, 255);  
+    float: left;
+    width: 22%;       
+  }
+
+  #col4 {
+    float: left;
+    width: 22%;  
+  } 
+  
+  #route {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 1200px;
+    width: 1200px;
+    background: url("img/map.png") no-repeat top left;
+  }
+
+  .minimzepanel {
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+    color: red;
+    transform: translate(-140px, 90px) rotate(90deg); 
+    float: left;
+    position: absolute;
+  }
+  
+  .widget-content {
+    position: left;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+}
+.btn-minimize {
+    position: left;  
+    width: 50px;
+    height: 50px;
+    background-color: #F00;
+}
+.btn-minimize.btn-plus {
+    background-color: #0F0;
+}
+
+#toggle {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+}
+
+#containerpreviews {
+	width: auto;
+	height: 100%;
+	background-color: #fff;
+	overflow: auto;
+}
+
+.containerpreview  {
+	height: 150px;
+	width: 100px;
+	background-color: #fff;
+	/* margin: 5px; */
+	float: left;
+	/*border-radius: 1em;*/
+	/* border: 1px solid #fff; */
+	/* box-shadow: 5px 5px 5px #ddd; */
+}
+.containerpreview:hover {
+	background-color: #eef;
+	border: 1px solid #ddf;
+}
+.containerpreview  canvas{
+	padding: 0;
+  margin: 20px auto;
+  display: block;
+}
+#statistictotal {
+  width: 300px;
+  height: 500px;
+}

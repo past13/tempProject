@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta charset="utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head> 
+	
+	<div data-id="tab1">
+		<ul class="nav nav-tabs">
+		<li class="aaas"><a href="#aaa" data-toggle="tab">AAA</a></li>
+		<li class="aaas"><a href="#bbb" data-toggle="tab">BBB</a></li>
+		<li><a href="#ccc" data-toggle="tab">CCC</a></li>
+		</ul>
+		<!-- <div class="tab-content">
+			<div class="tab-pane" id="aaa">
+				<div>111</div>
+				<div>222</div>
+				<div>333</div>
+			</div>
+			<div class="tab-pane" id="bbb">
+				<div>444</div>
+				<div>555</div>
+				<div>666</div>
+			</div>
+			<div class="tab-pane" id="ccc">
+				<div>777</div>
+				<div>888</div>
+				<div>999</div>
+			</div>
+		</div> -->
+	</div>
+		<!-- <div data-id="tab2">
+			<ul class="nav nav-tabs">
+				<li><a href="#ddd" data-toggle="tab">DDD</a></li>
+				<li><a href="#eee" data-toggle="tab">EEE</a></li>
+				<li><a href="#fff" data-toggle="tab">FFF</a></li>
+			</ul>
+			<div class="tab-content">
+			<div class="tab-pane" id="ddd">
+				<div>zcxz</div>
+				<div>zxcasd</div>
+				<div>adsasd</div>
+			</div>
+			<div class="tab-pane" id="eee">
+				<div>123123</div>
+				<div>fsdfs</div>
+				<div>sdfsdf</div>
+			</div>
+			<div class="tab-pane" id="fff">
+				<div>sdfsdf</div>
+				<div>sdf</div>
+				<div>ddd</div>
+			</div>
+		</div>
+	</div>
+		<div data-id="tab3">
+			<ul class="nav nav-tabs">
+				<li><a href="#ggg" data-toggle="tab" onclick="init()">GGG</a></li>
+			</ul>
+			<div class="tab-content">
+			<div class="tab-pane" id="ggg">
+				<canvas id="myCanvas"></canvas>
+			</div>
+		</div>
+	</div> -->
+	<script>
+		var selector = '.aaas';
+		$ = function(selector) {
+
+			var elements = document.querySelectorAll(selector);
+
+			for (var i = 0; i < elements.length; i++) {
+				this[i] = elements[i];
+			}
+			this.length = elements.length;
+
+		};
+
+
+
+	</script>
+		</html>
+		

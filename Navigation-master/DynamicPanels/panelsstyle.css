@@ -1,0 +1,92 @@
+#container {
+    background: none no-repeat 0 0 scroll #aaa;
+    height: 600px;    
+    width: 1388px;
+    position: relative;
+    overflow: hidden;  
+  }
+
+  h3 {    
+    margin: 10px;
+    font: 25px arial, sans-serif;
+    color: #db1919;    
+  }
+  
+  .col {
+    height: 95%;
+    float: left;
+    z-index: 8000;  
+  }
+  
+  .col > p {
+    color: #ffffff;
+  }
+
+  .first {
+    width: 40px;
+    height: 100%;
+    float: left; 
+    background-color: rgba(210, 231, 17, 0.938);  
+    z-index: 9000;
+    left: 25%;
+  }
+
+  .resizer:hover {
+    cursor: col-resize;
+  }  
+
+  #col1 {
+    background: none no-repeat 0 0 scroll rgb(112, 100, 100);
+    float: left;
+    width: 307px;
+  }
+
+  #col2 {
+    background: none no-repeat 0 0 scroll #111;
+    float: left;
+    width: 307px;    
+  }
+  #col3 {
+    background: none no-repeat 0 0 scroll #777;
+    float: left;
+    width: 307px;        
+  }
+
+  #col4 {
+    background: none no-repeat 0 0 scroll #312234;
+    float: left;
+    width: 307px;  
+  } 
+
+  .minimzepanel {
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+    color: red;
+    transform: translate(-140px, 90px) rotate(90deg); 
+    float: left;
+    position: absolute;
+  }
+  
+  .widget-content {
+    position: left;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+}
+.btn-minimize {
+    position: left;  
+    width: 50px;
+    height: 50px;
+    background-color: #F00;
+}
+.btn-minimize.btn-plus {
+    background-color: #0F0;
+}
+
+#toggle {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+}
