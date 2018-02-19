@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" /> 
+  </head>
+  <body>
+      <div id="container">
+          <div id="splitter0" class="resizer first"></div>
+          <div id="col1" class="col" >
+              <h3 id="panel1" onclick="hidepanel(this)">First container</h3>              
+          </div>
+          <div id="splitter1" class="resizer first"></div>
+          <div id="col2" class="col">            
+            <h3 id="panel2" onclick="hidepanel(this)">Second container</h3>
+            <button id="treeview" type="button" class="btn btn-primary btn-md" onclick="changeListView()">
+                <img src="img/treeviewbutton.png" width="20" />
+            </button>
+            <div id="containerpreviews" style="display:visible;"></div>    
+            <div id="tree" class="treeview" style="display:none;"></div>
+                        
+          </div>
+          <div id="splitter2" class="resizer first"></div>
+          <div id="col3" class="col">
+              <h3 id="panel3" onclick="hidepanel(this)">Third container</h3> 
+              <canvas id="canvasTest"></canvas>                  
+              
+              <!-- <div id="containerfullview"></div>                   -->
+          </div>
+          <div id="splitter3" class="resizer first"></div>
+          <div id="col4" class="col">
+              <h3 id="panel4" onclick="hidepanel(this)">Four container</h3>
+              <!-- <div id="route"></div> -->
+              
+          </div>
+      </div>
+    <script>     
+    draggedpanel = -1;
+    panels = [];
+    currmousex = -1;
+    MINPANELWIDTH = 307;    
+    PREFIXCOL = '#col';  
+    PREFIXPANEL = 'panel';  
+    PREFIXCROSS = '#';
+    CONTAINER = '#container';   
+
+    // $(function() { 
+    //   $( "#col2" ).load(readRecipeFile('recipe.xml')); 
+    // });
+
+    // var canvas = document.getElementById('canvasTest');
+    // console.log(canvas)
+    // $( "#col2" ).append(canvas);
+
+    
+
+    // $(function() { 
+    //   $( "#col2" ).load(readRecipeFile('recipe.xml')); 
+    // });
+
+    // document.getElementById('treeview').addEventListener('click',changeListView,false);
+   
+   function changeListView(id) {
+
+    if ($('#containerpreviews').is(":visible")) {   
+      $('#tree').show();
+      $('#containerpreviews').hide();
+    }
+    else {
+      $('#tree').hide();
+      $('#containerpreviews').show();
+    }
+   }
+  
+  function showTree(obj) {
+    $('#tree').treeview({
+      color: "#428bca",       
+      // expandIcon: "glyphicon glyphicon-stop",
+      // collapseIcon: "glyphicon glyphicon-unchecked",
+      // nodeIcon: Image('pallet.png'),//"glyphicon glyphicon-user",
+      showTags: true,
+      data: obj
+    });  
+  }
+
+    function calculateColWidth(columnwidth) {  
+      if (columnwidth >! MINPANELWIDTH && columnwidth != MINPANELWIDTH) {      
+        columnwidth = Math.abs(MINPANELWIDTH - columnwidth);
+      }    
+      else {
+        columnwidth = columnwidth - MINPANELWIDTH;
+      }      
+      return columnwidth;      
+    } 
+
+    function checkGapedCol(columnwidth) {      
+      var gap = 0;
+      switch (true) {
+      case columnwidth > MINPANELWIDTH:      
+        gap = 1;
+        break;
+      case columnwidth < MINPANELWIDTH:         
+        gap = -1;
+        break;    
+      case columnwidth === MINPANELWIDTH: 
+        gap = 0;
+        break;
+      }  
+      return gap;    
+    }
+   
+    function recalculateAllColumns(columns) {
+      var list = [];
+      var index = 0;
+      for (var columnnode of columns) {
+      var width = columnnode.clientWidth;
+        var column = {
+          columnid: Number(columnnode.id.replace(/^\D+/g, '')),
+          colwidth : gapwidth = width,
+          gapwidth : colwidth = calculateColWidth(width),
+        }
+        list.push(column)
+      }     
+      return list;
+    } 
+
+  function getNearestNumber(array, num) {
+    var i = 0, closest, closestDiff, currentDiff;
+    if (array.length) {
+        closest = array[0].columnid;        
+        for (i;i<array.length;i++) {
+            closestDiff = Math.abs(num - closest);
+            currentDiff = Math.abs(num - array[i].columnid);
+            if (currentDiff < closestDiff) {
+                closest = array[i].columnid;   
+            }
+            closestDiff = null;
+            currentDiff = null;
+        }  
+        return closest;
+    }
+    return false;
+  }  
+ 
+  function cleanColumnId (currentcolumn) {
+    var id;
+    if (typeof currentcolumn === "number") {id = currentcolumn;} 
+    else {id = Number(currentcolumn.id.replace(/^\D+/g, ''));}    
+    return id;
+  }
+
+  function sortList(objlist, id) {  
+    var currentid = id; 
+    var nearestcol = getNearestNumber(objlist, currentid);      
+     objlist.sort(function (a, b) {
+      var position = 0; 
+      if (a.columnid == nearestcol) {
+        position = position;
+      }
+      if (b.columnid == nearestcol) {
+        position = position + 1;
+      }      
+    return position;
+    });     
+    return objlist;
+  }
+
+  function minimizeColumn(colwidth, currentpanelid) {  
+    if ( colwidth < MINPANELWIDTH) { 
+      document.getElementById(currentpanelid).classList.add('minimzepanel');
+    }
+    else {      
+      document.getElementById(currentpanelid).classList.remove('minimzepanel');
+    }   
+  }
+
+  function calculatewidth(panelid, current, close) {
+    if (!document.getElementById(panelid).classList.contains('minimzepanel')) {
+      close[0].colwidth += current[0].colwidth;
+      current[0].gapwidth = 0;
+      current[0].gapflag = 0;      
+      current[0].colwidth = 0;  
+    }
+    else {
+      current[0].colwidth += close[0].colwidth;
+      close[0].gapwidth = 0;
+      close[0].gapflag = 0;      
+      close[0].colwidth = 0; 
+    }
+  }
+
+  function CompareForSort(first, second) {      
+    if (first == second)  
+        return 0;  
+    if (first < second)  
+        return -1;  
+    else  
+        return 1;   
+  }
+
+  function recalcColumns(allnodecolumns, currentcolumn, panelid) {       
+    var currentcolid = cleanColumnId(currentcolumn);  
+    var rawcol = recalculateAllColumns(allnodecolumns); 
+    var allcol = rawcol.filter(o => o.columnid != currentcolid); 
+    var currentcolobj = rawcol.filter(o => o.columnid == currentcolid);    
+    var currentcolpanel = currentcolumn.querySelector('h3'); 
+    var closestcolid = getNearestNumber(allcol, currentcolid);
+    var closestcolobj = allcol.filter(o => o.columnid == closestcolid);     
+    calculatewidth(panelid, currentcolobj, closestcolobj); 
+    var result = closestcolobj.concat(currentcolobj);
+    Object.keys(result).forEach(function(key) { 
+      result[key].gapflag = checkGapedCol(result[key].colwidth); 
+    });     
+    var sortedlist = sortList(result, currentcolid); 
+    return [sortedlist, currentcolpanel];
+  }
+
+   function hidepanel(panelnode) { 
+    var currentcolumn = document.getElementById(panelnode.id).parentElement; 
+    var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
+    var preparedlist = recalcColumns(allcolarray, currentcolumn, panelnode.id);  
+    animate(preparedlist, currentcolumn);
+  };
+  
+  function handledrag_new(deltax, leftpanelindex, leftpanel, rightpanel) {
+    var totalwidth = leftpanel.width() + rightpanel.width();
+    var newwidthleft = leftpanel.width() + deltax;
+    var newwidthright = rightpanel.width() - deltax;  
+    leftpanelid = leftpanel[0].firstElementChild.id;
+    rightpanelid = rightpanel[0].firstElementChild.id;
+    if ((newwidthleft < 0) || (newwidthright < 0)) {
+      if (deltax > 0) {
+        newwidthright = 0;
+        newwidthleft = totalwidth;
+      }
+      else {
+        newwidthleft = 0;
+        newwidthright = totalwidth;
+      }
+    }
+    var rightarray = leftpanel.toArray();
+    var lefttarray = rightpanel.toArray();
+    var newarray = rightarray.concat(lefttarray);
+    for (var item in newarray) {
+      minimizeColumn(newarray[item].clientWidth, newarray[item].children[0].id); 
+    }
+    leftpanel.width(newwidthleft);
+    rightpanel.width(newwidthright);
+  }
+  
+  //animate columns
+  function animate(list, currentcolumn) {     
+    Object.keys(list[0]).forEach(function(key) { 
+      columnidprefix = PREFIXCOL + list[0][key].columnid;
+      columnwidth = list[0][key].colwidth;
+      columnid = PREFIXPANEL + list[0][key].columnid; 
+      $(columnidprefix).animate({            
+        width: columnwidth,
+        style: minimizeColumn(columnwidth, columnid)
+      }, 500)     
+    });    
+  }
+  var splitters = [];
+    $(document).ready(function() {
+      panels = $(CONTAINER).children().not(".resizer");       
+      splitters = $(CONTAINER).children().not(".col").toArray();  
+      Object.keys(splitters).forEach(function(key) {        
+        var splitterid = PREFIXCROSS + splitters[key].id;
+        var currentsplitterid = splitters[key];        
+        var cleanid = cleanColumnId(currentsplitterid);
+        $(splitterid).on("mousedown", function(e){
+          draggedpanel = cleanid - 1;
+          return false;
+        });
+      });
+  
+    $(CONTAINER).on("mouseup", function(e){ 
+      draggedpanel = -1;
+    });
+      
+    $(CONTAINER).on("mousemove", function (e){    
+      var mousex = e.pageX;
+      if (draggedpanel != -1) {
+        parentOffset = $(this).offset();
+        var deltax =  mousex - currmousex;             
+        var leftpanel = panels[draggedpanel];
+        var rightpanel = panels[draggedpanel + 1];
+        handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
+     }
+     currmousex = mousex;
+    }); 
+  });  // .onready()
+    </script> 
+  </body>
+  </html>
+ 
