@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+<meta charset="utf-8">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<link rel="stylesheet" type="text/css" href="panelsstyle.css" />
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7/dist/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="bootstrap-treeview.css" >
+<!-- remote libs -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/bootstrap-treeview.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- local libs -->
+<script src="js/libs/xml2jsobj.js"></script>		
+<script src='js/libs/three.min.js'></script>
+</head>
+<body>
+<hgroup>
+<header class="header">
+      <div id="logo"></div>
+      <h1>CICT</h1>
+      <h1 style="color:grey; padding-left: 15px;">Innovations</h1>
+</header>
+</hgroup>
+<nav>
+<div class="navbar navbar-inverse">
+<div id="navigation">
+  <ul class="nav navbar-nav" id="navigationContainer">
+      <li id="home" onclick="navMenu(id)"><a href="#">Home</a></li> 
+      <li id="view1" onclick="navMenu(id)"><a href="#">Order Info</a></li>    
+      <li id="dynamicPanels" onclick="navMenu(id)"><a href="#">Visualization</a></li>
+      <li id="view3" onclick="navMenu(id)"><a href="#">Recipe Info</a></li>  
+    <li><a class="disabled">Order Code</a></li>
+  </ul>
+</div>
+    <ul class="nav navbar-nav navbar-right">
+	    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <span class="glyphicon glyphicon-cog"></span>
+      </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main class="mainContainer">
+    <div id="includedContent"></div>    
+    
+</main>
+  <footer>
+      <p>©Copyright 2017 by CICT. All rights reversed.</p>
+    </footer>
+</body>
+
+<script type="text/javascript">
+var xmlObj = (function(dataURL) {  
+	var result = $.ajax({
+	async: false,
+	url: 'recipe.xml',
+	method: 'GET',  
+	}).done();
+	return result;
+})(xmlObj);
+
+var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
+
+function navMenu(filename) {
+  var url = document.URL;
+  var shorturl = url.substring(0,url.lastIndexOf("/"));
+  var fullurl = shorturl + '/Views/' + filename + '.html';
+  $( "#includedContent" ).load(fullurl);
+}
+
+
+
+</script>
+<!-- UI scripts -->
+
+<script src="js/ui.js"></script>
+
+<!-- 3D Model scripts -->
+<script src="js/3D Model/sceneSubjects/SceneSubject.js"></script>
+<script src="js/3D Model/sceneSubjects/GeneralLights.js"></script>
+<script src="js/3D Model/SceneManager.js"></script>  
+<script src="js/3D Model/main.js"></script>
