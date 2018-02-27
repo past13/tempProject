@@ -1,0 +1,65 @@
+navmenu.css
+
+--------------------------------------------------------------
+navmenu.js
+
+var viewlist = [];
+var buttonlist = []
+
+function initialize_navmenu(containerdiv) {
+  create #navmenu_buttonscontainer in containerdiv;
+  create #navmenu_viewcontainer in containerdiv;
+
+  prepareview(createview_orderinfo());
+  prepareview(createview_recipeinfo());
+  // todo: set up callbacks (probably not necessary for views)
+}
+
+
+function createbutton(viewdiv) {
+  // todo: create button here
+  button = ....;
+  button.view = viewdiv;
+  button.onclick = buttonclick(button);
+}
+
+function buttonclick(button) {
+  for each b in buttonlist 
+  if b== button b.highlight;
+  else b.donthighlight;
+  
+  for each v in viewlist {
+    if v = button.view v.show();
+	else v.hide();
+  }
+}
+
+function prepareview(viewdiv) {
+  viewlist.push(viewdiv);
+  buttonlist.push(createbutton(viewdiv));
+}
+
+
+
+----------------------------------------------------------------
+
+view_orderinfo.js
+
+createview_orderinfo() {
+  viewdiv = createnode("""....);
+  // fill in viewdiv
+  viewdiv.menucaption = "Order information";
+  return viewdiv;
+}
+
+----------------------------------------------------------------
+
+
+view_recipeinfo.js
+
+createview_orderinfo() {
+  viewdiv = createnode("""....);
+  // fill in viewdiv
+  viewdiv.menucaption = "Recipe statistcs";
+  return viewdiv;
+}

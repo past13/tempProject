@@ -1,0 +1,55 @@
+
+recipe.js
+order.js
+
+container.js
+
+viewcontrol.css
+viewcontrol.js
+  (contains list of views, list of buttons, show+hide views)
+  
+view_orderinfo.js
+view_recipeinfo.js
+view_visualisation.js
+
+panelcontrol.css
+panelcontrol.js
+  (contains list of panels, list of splitters, show+hide+collapse+resize panels)
+  
+panel_selectedinfo.js
+panel_list.js
+panel_3dview.js
+panel_warehouse.js
+
+
+index.html
+- first: load recipe (while showing loading label)
+- setup: viewcontrol + views
+- when visualisation view is clicked (first time only): 
+  - setup: 3d meshes etc.
+  - setup: panelcontrol + panels
+  
+
+MVC
+// var View = function() {
+//     return {
+
+// render: function() { }
+//     }
+// }
+
+
+// var Controller = function() {
+//     var view = View();
+
+//     EventBus.addEventListener("update", function() {
+//         
+view.render();
+//     });
+// }
+
+// var Application = function() 
+{
+//     var model = Model();
+//     var controller = Controller();
+// }
