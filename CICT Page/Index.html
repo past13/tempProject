@@ -23,6 +23,7 @@
 <script src="js/services.js"></script>
 
 <!-- views -->
+<script src="Views/view_home.js"></script>
 <script src="Views/view_orderInfo.js"></script>
 <script src="Views/view_recipeInfo.js"></script>
 <script src="Views/view_warehouse.js"></script>
@@ -51,15 +52,10 @@
 </header>
 </hgroup>
 
- 
-
 <div class="navbar navbar-inverse">
 <div id="navigation">
     <ul class="nav navbar-nav" id="navigationContainer"></ul>    
-</div>
-   
-<!-- <a id="test1" href="Views/sample.html#sushi">Sushi</a>
-<a id="test2" href="Views/sample.html" onclick="navMenu(id)">BBQ</a> -->
+</div>   
 
 <!-- <ul class="nav navbar-nav navbar-right">
 	    <li class="dropdown">
@@ -75,10 +71,12 @@
     </ul> -->
   </div>
 
-<main id="mainContainer">    
-    <div id="container" class="container">  
+  <main class="mainContainer">  
+  
+        <!-- <div id="includedContent"></div>   -->
+        <div id="container" > 
     </div>
-    <div id="includedContent"></div>
+ 
 </main>
   <footer>
       <p>©Copyright 2017 by CICT. All rights reversed.</p>
@@ -87,16 +85,20 @@
 <script type="text/javascript">
 
 var recipeService = new services();
-  var xml = recipeService.getXml();  
-  xmlToObj = (function(){
+var xml = recipeService.getXml();  
+xmlToObj = (function(){
     var result = recipeService.getXmlToObj(xml);
     return result;
   }());  
-  statistics = (function(){
+statistics = (function(){
     var result = recipeService.getStatistics(xmlToObj);
     return result;
   }()); 
-  var treeView = recipeService.getTreeView(xmlToObj);
+
+treeview = (function(){
+    var result = recipeService.getTreeView(xmlToObj);
+    return result;
+}());
 
 window.onload = function() {
   
@@ -104,6 +106,9 @@ window.onload = function() {
 
 $(document).ready(function() {  
   init_Page();
+  dragg_Panels();
+
+
 
 
 });

@@ -13,10 +13,12 @@ function menu_view(title, index, parent, tag) {
 }
 function navBtnClicked(navclass, navid) {    
     var parent = document.getElementById('container'); 
-    parent.innerHTML = '';
-    var createfunction = 'create_' + navid;        
-    var node = window[createfunction]();
-    if (!parent.hasChildNodes()) {
-        parent.appendChild(node);
-    }
+    if (parent !== null) {
+        parent.innerHTML = '';
+        var createfunction = 'create_' + navid;  
+        var node = window[createfunction]();        
+        if (!parent.hasChildNodes()) {
+            parent.appendChild(node);
+        }
+    } 
 }

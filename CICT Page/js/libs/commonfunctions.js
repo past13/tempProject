@@ -4,6 +4,7 @@ function create_Node(parent, tag, id, href, text, nodeclass) {
     if( href ) {node.href = href;}
     if( text ) {node.innerHTML = text;}  
     if( nodeclass ) {node.className = nodeclass;}
+
     if( parent ) {parent.appendChild(node);  }      
     return node;
 }
@@ -40,28 +41,16 @@ function create_button(viewdiv) {
   else {
     // if (viewdiv[i].className ===)
   }
-
-
 }
+
+function buttonClick(button) {   
+
+  // if b== button b.highlight;
+  // else b.donthighlight;
   
-function navMenu(button) {
-
-  // var main = document.getElementById('container');
-  // main.appendChild(button);
-
-
-
+  // for each v in viewlist {
+  //   if v = button.view v.show();
+  //   else v.hide();
+  // }
 }
 
-
-  function buttonClick(button) {  
-    
-
-    // if b== button b.highlight;
-    // else b.donthighlight;
-    
-    // for each v in viewlist {
-    //   if v = button.view v.show();
-    //   else v.hide();
-    // }
-  }

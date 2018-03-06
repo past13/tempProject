@@ -35,11 +35,13 @@ function prepareDataForTreeView(recipe) {
 }
 
 titleslist = (function() {
-	listofcolumns = [ 'statistics',
-					  'listoforders',
-					  'visualisation',
-					  'warehouse'
+	listofcolumns = [
+					[ 'statistics'],
+					['listoforders'],
+					['visualisation'],
+					['warehouse']
 	];
+
 	listofviews = [ 'home', 
 					'orderinfo', 
 					'visualisation', 

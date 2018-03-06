@@ -11,7 +11,7 @@
   h3 {    
     margin: 10px;
     font: 25px arial, sans-serif;
-    color: #db1919;    
+    color: #188ddb;    
   }
   
   .col {
@@ -38,7 +38,7 @@
   }  
 
   #col0 {
-    background: none no-repeat 0 0 scroll rgb(112, 100, 100);
+    background: none no-repeat 0 0 scroll rgb(100, 102, 112);
     float: left;
     width: 22%;
   }

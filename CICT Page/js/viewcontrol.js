@@ -1,22 +1,43 @@
+
+
 function init_Page() {     
     var obj = xmlToObj;
-    this.viewlist = titleslist;  
+    // this.viewlist = titleslist;  
     this.statistic = statistics;  
-    
-    var men = prepareview(create_menuview());
-    var ord = prepareview(create_orderinfo());
-    var vis = prepareview(create_visualisation());
+    this.treeview = treeview;
+    this.titleslist = titleslist;
 
-    console.log(ord)
-  
-    function prepareview(viewdiv) { 
-        viewlist = [];
-        buttonlist = [];
-        viewlist.push(viewdiv);    
-        // buttonlist.push(create_button(viewdiv));
-        return viewlist;
-      }
+    var viewlist = [];
+    var buttonlist = []; 
+
+    prepareView(create_visualisation());
+    prepareView(create_orderinfo());
+    
+    // prepareView(create_recipeinfo());
+    prepareView(create_menuview());    
+    
+    function prepareView(viewdiv) {           
+        viewlist.push(viewdiv);   
+        // var button = createbutton(viewdiv); 
+        // buttonlist.push(button);
+    }
+
+    for (list in viewlist) {
+        assignContent(viewlist[list], titleslist);
+
+    } 
 }
+
+function assignContent(list, titleslist) {
+    if (list.className === 'panelContainer' && titleslist !== null) {
+        assignPanels(list, titleslist);
+    }
+    else {
+
+    }
+}
+
+
 
 
 // function createbutton(viewdiv) {
@@ -36,12 +57,6 @@ function init_Page() {
 //       else v.hide();
 //     }
 //   }
-function navmenu_buttonscontainer() {
-    create_button();
-}
-
-function create_button(viewdiv) { 
-} 
 
 addEventListener("click", function(event) {      
 
