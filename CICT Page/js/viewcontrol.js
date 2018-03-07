@@ -1,40 +1,38 @@
 
 
-function init_Page() {     
-    var obj = xmlToObj;
-    // this.viewlist = titleslist;  
-    this.statistic = statistics;  
-    this.treeview = treeview;
-    this.titleslist = titleslist;
 
+function init_Page() { 
     var viewlist = [];
     var buttonlist = []; 
-
-    prepareView(create_visualisation());
-    prepareView(create_orderinfo());
-    
-    // prepareView(create_recipeinfo());
-    prepareView(create_menuview());    
+    prepareView(create_menuview()); 
+    prepareView(create_orderinfo()); 
+    // prepareView(create_visualisation());      
+    // prepareView(create_recipeinfo());       
     
     function prepareView(viewdiv) {           
-        viewlist.push(viewdiv);   
+        viewlist.push(viewdiv); 
         // var button = createbutton(viewdiv); 
         // buttonlist.push(button);
     }
 
     for (list in viewlist) {
-        assignContent(viewlist[list], titleslist);
-
+        assignContent(viewlist[list]);
     } 
 }
 
-function assignContent(list, titleslist) {
-    if (list.className === 'panelContainer' && titleslist !== null) {
-        assignPanels(list, titleslist);
+function assignContent(node) {
+    //todoswitch    
+     if (node.assignfunction === 'assignorderinfo'){
+        assignorderinfo(node);
     }
-    else {
-
+    else if (node.assignfunction === 'assignmenuview'){               
+        assignMenu(node);
     }
+    else if (node.className === 'panelContainer'){        
+        assignPanels(node);
+    }
+    console.log('assign')
+    
 }
 
 
@@ -62,10 +60,10 @@ addEventListener("click", function(event) {
 
     var classname = event.originalTarget.parentNode.className;
     var id = event.originalTarget.parentNode.id;
-            
+    var node = event.originalTarget;        
     switch (classname) {
         case 'navItem':
-            navBtnClicked(classname, id);
+            navBtnClicked(classname, id, node);
             break;
         case 1:
             break;

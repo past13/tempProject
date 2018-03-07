@@ -4,15 +4,8 @@ function create_visualisation() {
     return panels;
 }
 
-function assignPanels(list, titleslist) {
-
-    var result = list.querySelectorAll('.col');
-    // var test = result.filter( x => x.id === "col0");
+function assignPanels(node, titleslist) {     
+    console.log('assignPanels')
     
-    var list = titleslist.listofcolumns
-
-    
-
-
 }
 

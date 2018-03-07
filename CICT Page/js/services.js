@@ -1,3 +1,22 @@
+titleslist = (function() {
+	listofcolumns = [
+					['statistics'],
+					['listoforders'],
+					['visualisation'],
+					['warehouse']
+	];
+
+	listofviews = [ 'home', 
+					'orderinfo', 
+					'visualisation', 
+					'recipeinfo'
+	];  
+	return viewlist = {
+		listofcolumns : listofcolumns,
+		listofviews : listofviews
+	} 
+}());
+
 services = function(dataURL) {
 	this.getXml = function() {
 		return $.ajax({
@@ -6,14 +25,18 @@ services = function(dataURL) {
 			url: 'recipe.xml'		 
 		})
 	}	
-	this.getXmlToObj = function(xmlObj) {
-		return XML2jsobj(xmlObj.responseXML.documentElement);
+
+	this.getXmlToObj = function(data) {		
+		return XML2jsobj(data.responseXML.documentElement);
 	}	
-	this.getStatistics = function(obj) {
-		return obj.recipestatistics.statistic; 	 
+	this.getStatistics = function(data) {	
+		return data.recipestatistics.statistic; 	 
 	}
-	this.getTreeView = function(obj) {
-		return prepareDataForTreeView(obj); 	 
+	this.getTreeView = function(data) {
+		return prepareDataForTreeView(data); 	 
+	}
+	this.getOrderInfoView = function(data) {
+		return data.order.orderinfo;	 
 	}
 }
 function prepareDataForTreeView(recipe) {
@@ -34,23 +57,5 @@ function prepareDataForTreeView(recipe) {
 	return obj;
 }
 
-titleslist = (function() {
-	listofcolumns = [
-					[ 'statistics'],
-					['listoforders'],
-					['visualisation'],
-					['warehouse']
-	];
-
-	listofviews = [ 'home', 
-					'orderinfo', 
-					'visualisation', 
-					'recipeinfo'
-	];  
-	return viewlist = {
-		listofcolumns : listofcolumns,
-		listofviews : listofviews
-	} 
-}());
 
 

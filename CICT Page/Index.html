@@ -28,7 +28,6 @@
 <script src="Views/view_recipeInfo.js"></script>
 <script src="Views/view_warehouse.js"></script>
 <script src="Views/view_visualisation.js"></script>
-<script src="Views/view_orderInfo.js"></script>
 <script src="Views/view_panel.js"></script>
 
 <script src="js/ui.js"></script>
@@ -99,15 +98,20 @@ treeview = (function(){
     var result = recipeService.getTreeView(xmlToObj);
     return result;
 }());
+orderinfo = (function(){
+    var result = recipeService.getOrderInfoView(xmlToObj);
+    return result;
+}());
+
 
 window.onload = function() {
+  
   
 };
 
 $(document).ready(function() {  
   init_Page();
   dragg_Panels();
-
 
 
 

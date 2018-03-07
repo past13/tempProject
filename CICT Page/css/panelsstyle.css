@@ -13,7 +13,12 @@
     font: 25px arial, sans-serif;
     color: #188ddb;    
   }
-  
+    
+  .panelContainer {
+    height: 600px;
+    width: 1300px;
+  }
+
   .col {
     height: 95%;
     float: left;
