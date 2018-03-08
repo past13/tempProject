@@ -7,13 +7,15 @@ function init_Page() {
     prepareView(create_menuview()); 
     prepareView(create_orderinfo()); 
     // prepareView(create_visualisation());      
-    // prepareView(create_recipeinfo());       
+    prepareView(create_recipeinfo());       
     
     function prepareView(viewdiv) {           
         viewlist.push(viewdiv); 
         // var button = createbutton(viewdiv); 
         // buttonlist.push(button);
     }
+
+
 
     for (list in viewlist) {
         assignContent(viewlist[list]);
@@ -22,16 +24,15 @@ function init_Page() {
 
 function assignContent(node) {
     //todoswitch    
-     if (node.assignfunction === 'assignorderinfo'){
-        assignorderinfo(node);
-    }
-    else if (node.assignfunction === 'assignmenuview'){               
+    //  if (node.assignfunction === 'assignorderinfo'){
+    //     assignorderinfo(node);
+    // }
+    if (node.assignfunction === 'assignmenuview' && typeof assignMenu === 'function'){               
         assignMenu(node);
     }
     else if (node.className === 'panelContainer'){        
         assignPanels(node);
     }
-    console.log('assign')
     
 }
 
@@ -56,16 +57,18 @@ function assignContent(node) {
 //     }
 //   }
 
-addEventListener("click", function(event) {      
+addEventListener("click", function(event) { 
+ 
+//   console.log(event)
+    var node = event.originalTarget;     
+    var attribute = node.getAttribute('href');
 
-    var classname = event.originalTarget.parentNode.className;
-    var id = event.originalTarget.parentNode.id;
-    var node = event.originalTarget;        
-    switch (classname) {
-        case 'navItem':
-            navBtnClicked(classname, id, node);
+    switch (event.originalTarget.parentNode.className) {
+        case 'menuList':
+            navBtnClicked(node, attribute);
             break;
         case 1:
+
             break;
         case 2:
             break;
@@ -83,12 +86,12 @@ addEventListener("click", function(event) {
         $('#containerpreviews').show();
         }
     }
-    if (id === 'dynamicPanels') {
-        $("#dynamicPanels").show();
-    }
-    else {
-        $("#dynamicPanels").hide();       
-    }
+    // if (id === 'dynamicPanels') {
+    //     $("#dynamicPanels").show();
+    // }
+    // else {
+    //     $("#dynamicPanels").hide();       
+    // }
 });
 
 // viewControl = function(listofcolumns, fn) { 

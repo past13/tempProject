@@ -1,16 +1,19 @@
-function create_Node(parent, tag, id, href, text, nodeclass) {
-  var node = document.createElement(tag);  
-  if( id ) {node.id = id;}
-  if( href ) {node.href = href;}
-  if( text ) {node.innerHTML = text;}  
-  if( nodeclass ) {node.className = nodeclass;}
-  if( parent ) {parent.appendChild(node); }      
+function create_Node(nodeparameters) {
+  // console.log(create_Node.caller)
+  var node = document.createElement(nodeparameters.tag); 
+  if( nodeparameters.id ) {node.id = nodeparameters.id;}
+  if( nodeparameters.href ) {node.href = nodeparameters.href;}
+  if( nodeparameters.text ) {node.innerHTML = nodeparameters.text;}  
+  if( nodeparameters.nodeclass ) {node.className = nodeparameters.nodeclass;}
+  if( nodeparameters.dataid ) {node.dataid = nodeparameters.dataid;}
+  if( nodeparameters.parent ) {nodeparameters.parent.appendChild(node); }   
   return node;
 }
-function create_Attribute(parent, name, value) {
-    var attribute = document.createAttribute(name);
-    attribute.value = value;
-    parent.setAttributeNode(attribute);
+function create_Attribute(attparameters) {
+
+    var attribute = document.createAttribute(attparameters.name);
+    attribute.value = attparameters.value;
+    attparameters.parent.setAttributeNode(attribute);
     return attribute;
 }
 
