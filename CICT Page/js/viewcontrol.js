@@ -1,22 +1,20 @@
-
-
-
 function init_Page() { 
     var viewlist = [];
     var buttonlist = []; 
+
     prepareView(create_menuview()); 
+    prepareView(create_home());
     prepareView(create_orderinfo()); 
-    // prepareView(create_visualisation());      
+    prepareView(create_panel());      
     prepareView(create_recipeinfo());       
     
+    create_panel();
+
     function prepareView(viewdiv) {           
         viewlist.push(viewdiv); 
         // var button = createbutton(viewdiv); 
         // buttonlist.push(button);
     }
-
-
-
     for (list in viewlist) {
         assignContent(viewlist[list]);
     } 
@@ -32,12 +30,8 @@ function assignContent(node) {
     }
     else if (node.className === 'panelContainer'){        
         assignPanels(node);
-    }
-    
+    }    
 }
-
-
-
 
 // function createbutton(viewdiv) {
 //     // todo: create button here
@@ -57,15 +51,13 @@ function assignContent(node) {
 //     }
 //   }
 
-addEventListener("click", function(event) { 
- 
-//   console.log(event)
+addEventListener("click", function(event) {  
     var node = event.originalTarget;     
     var attribute = node.getAttribute('href');
 
     switch (event.originalTarget.parentNode.className) {
         case 'menuList':
-            navBtnClicked(node, attribute);
+            navBtnClicked(attribute);
             break;
         case 1:
 

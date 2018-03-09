@@ -10,9 +10,7 @@ function createview_orderinfo(statistic) {
     });   
 
     // // fill in viewdiv
-    // viewdiv.menucaption = "Recipe statistcs";
-
-    
+    // viewdiv.menucaption = "Recipe statistcs";    
     return div;
 };
 

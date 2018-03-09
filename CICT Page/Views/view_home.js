@@ -1,6 +1,24 @@
 function create_home() {
-    var content = create_Node(null, 'div', 'homeContent', null, null, ''); 
-    var header = create_Node(content, 'h1', 'homeHeader', null, null, ''); 
-    var body = create_Node(content, 'div', 'homeBody', null, null, ''); 
-    return content;
+    var parent = document.getElementById("container");
+    var home = {
+        parent : parent,
+        tag : 'div',
+        id : 'home',
+        nodeclass : 'navItem'
+    }
+    var node = create_Node(home); 
+    node.assignfunction = 'assignhome'; 
+    var header = {
+        parent : node,
+        tag : 'h1',
+        id : 'homeHeader'
+    }
+    create_Node(header); 
+    var body = {
+        parent : node,
+        tag : 'div',
+        id : 'homeBody'
+    }
+    create_Node(body);   
+    return node;
 }

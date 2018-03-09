@@ -2,7 +2,7 @@ draggedpanel = -1;
 CONTAINER = '#container'; 
 PREFIXCROSS = '#';
 
-function create_panel() {   
+function create_panel_old() {   
     var tag = 'div';
     var parent = document.createElement("div");  
     parent.classList.add("panelContainer");
@@ -16,7 +16,7 @@ function create_panel() {
     }
     return panellist[0];
 }
-function panel_View(title, index, parent, tag) {
+function panel_View_old(title, index, parent, tag) {
     var tag1 = 'h3';  
     var createSplitter = create_Node(parent, tag, 'splitter' + index, null, '', 'resizer first');
     var createCol = create_Node(parent, tag, 'col' + index, null, null, 'col'); 
@@ -25,7 +25,7 @@ function panel_View(title, index, parent, tag) {
     return parent;
 }
 
-function panel_Button(viewdiv) {
+function panel_Button_old(viewdiv) {
     // todo: create button here
     button = {};
     button.view = viewdiv;
@@ -33,7 +33,7 @@ function panel_Button(viewdiv) {
     return button;
   }
   
-  function buttonclick(button) {
+  function buttonclick_old(button) {
   return 1;
     // for each b in buttonlist 
     // if b== button b.highlight;

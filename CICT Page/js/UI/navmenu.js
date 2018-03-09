@@ -32,95 +32,33 @@ function assignMenu(node) {
         parent.appendChild(node.removeChild(node.firstChild))
     }
 }
-function navBtnClicked(node, element) {
-
-    // var visible = document.querySelector('.navItem:not([style="display: none"])').id;    
-    
-    var name = element.replace("#", "");
-
-    console.log(node)
-
-    if (visible !== null && visible.id === name) {
-    
-    $('#' + visible.id ).hide(); 
-    $( element ).show(); 
-    
-    console.log('true');
-    
-    }
-    else if (visible === null && visible.id !== name) {
-    // $('#' + visible.id ).hide(); 
-    $( element ).show(); 
-    console.log(visible.id )
-
-    console.log('false');
-    
-    }
-        // $( element ).hide();        
-    
-    
+function hideNode(value, elementname) {
+    if (value.id !== elementname) {
+        var full = '#' + value.id;
+        $(full).hide();
+    }  
 }
-    
-    // if (isHidden(temp)) {
-    //     
-    // }
-    // else {
-    //     $( element ).hide();       
-    // }
 
-  
-
-
-
-
-    // if ($( "#container:visible" )) {
-    //     console.log('hit')
-    //     $( "#container" ).show();
-    // }
-    // else {
-    //     $( "#container" ).hide();
-        
-    // }
-
-  
-
-
-
-
-    // if ($(element).is(":visible")) {
-    //     $(element).hide();
-        
-
-    // }else{
-    //     $(element).show();
-        
-    // }
-
-// $('.leftSideBar > div:not([data-id=' + id + '])').hide();
-
-
-
-
-// $('.leftSideBar > div[data-id=' + id + ']').show();
-// $('.leftSideBar > div:not([data-id=' + id + '])').hide();
-  
-
-//     // var parent = document.getElementById('container'); 
-//     // if (parent === null) {
-//     //     parent.innerHTML = '';
-//         var createfunction = 'assign' + navid;       
-        
-//         var node = window[createfunction](node);  
-//         console.log(node)
-              
-//         // if (!parent.hasChildNodes()) {
-//         //     parent.appendChild(node);
-//         // }
-//     // } 
-
-
-
-function isHidden(el) {
-    var style = window.getComputedStyle(el);
-    return (style.display === 'none')
+function navBtnClicked(element) {
+    var query = '.navItem:not([style="display: none"])';
+    var elementname = element.replace("#", "");
+    if (document.querySelector(query) !== null) {
+        var visible = document.querySelectorAll(query); 
+        if (visible.id === elementname) {       
+            $(element).show();   
+        }
+        else {            
+        $(element).show();
+        for( i=0; i < visible.length; i++){            
+            hideNode(visible[i], elementname); 
+            }          
+        }       
+    }
+    else {      
+        $(element).show(); 
+    }    
 }
+
+
+
+

@@ -9,12 +9,12 @@ function create_orderinfo() {
     }
     var node = create_Node(orderinfo);
     node.assignfunction = 'assignorderinfo';       
-    var suborderinfohide = { 
+    var attribute = { 
         parent : node,
         name : 'style',
         value : 'display: none'
     }
-    create_Attribute(suborderinfohide)
+    create_Attribute(attribute);
     var orderinfoheader = { 
         parent : node,
         tag : 'h3',
