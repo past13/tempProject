@@ -8,7 +8,7 @@ function create_orderinfo() {
   
     }
     var node = create_Node(orderinfo);
-    node.assignfunction = 'assignorderinfo';       
+    node.assignfunction = 'assignOrderInfo';       
     var attribute = { 
         parent : node,
         name : 'style',
@@ -31,17 +31,20 @@ function create_orderinfo() {
     return node;
 }
 
-// function assignorderinfo(node) {
-    // console.log(node)
-    // var titletext = orderinfo.modules.split(',').map(function(item) {
-    //     return item.trim();
-    // });  
-    // var parent = document.getElementById("container");    
-    // var title = node.querySelector('h1'); 
+function assignOrderInfo(node) {
 
-    // title.innerText = 'aaaa';
-    // parent.appendChild(node);
-// }
+    var orderinfo = glbObj.order.orderinfo;
+   
+    var titletext = orderinfo.modules.split(',').map(function(item) {
+        return item.trim();
+    });  
+    var parent = document.getElementById("container");    
+    var title = node.querySelector('h3'); 
+
+    title.innerText = 'Order Information';
+
+    parent.appendChild(node);
+}
 
 // var Exposer = (function() {
 //     var privateVariable = 10;  

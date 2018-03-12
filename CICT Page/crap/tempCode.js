@@ -22,3 +22,32 @@
 //         //     parent.appendChild(node);
 //         // }
 //     // } 
+
+
+
+
+
+	// $.ajax({
+	// 	url: '',
+	// 	success: function(data) {				
+	// 		xmlobj = XML2jsobj(data.childNodes[0]); 
+	// 		this.data = xmlobj;
+			
+	// 		// this._callback();	
+	// 	}
+	// 	// error callback display error
+	// });	
+
+
+		// this._callback = callback;
+		// $.ajax({
+		// 	url: 'recipe.xml',
+
+		// 	success: function(data) {				
+		// 		var xmlobj = XML2jsobj(data.childNodes[0]); 
+		// 		this.data = xmlobj;
+		// 		console.log(xmlobj)
+		// 		this._callback();	
+		// 	}
+		// 	// error callback display error
+		// });	

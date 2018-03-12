@@ -1,3 +1,5 @@
+var glbObj;
+
 titleslist = (function() {
 	listofcolumns = [
 					['statistics'],
@@ -16,29 +18,20 @@ titleslist = (function() {
 		listofviews : listofviews
 	} 
 }());
-
-services = function(dataURL) {
-	this.getXml = function() {
-		return $.ajax({
-			type: 'GET', 
-			async: false,
-			url: 'recipe.xml'		 
-		})
-	}	
-
-	this.getXmlToObj = function(data) {		
-		return XML2jsobj(data.responseXML.documentElement);
-	}	
-	this.getStatistics = function(data) {	
-		return data.recipestatistics.statistic; 	 
-	}
-	this.getTreeView = function(data) {
-		return prepareDataForTreeView(data); 	 
-	}
-	this.getOrderInfoView = function(data) {
-		return data.order.orderinfo;	 
-	}
-}
+var dataStore = (function(){
+    $.ajax({
+		type: 'GET', 
+		url: 'recipe.xml',	
+		success: function(data) {
+			glbObj = XML2jsobj(data.childNodes[0]); 	
+		}	 
+	});
+    return {getXml : function()
+    {
+        if (glbObj) return glbObj;
+        else {console.log("can't load recipe")};
+    }};
+})();
 function prepareDataForTreeView(recipe) {
 	var obj = [];  
 	var containerlist = recipe.containerrecipelist.containerrecipe;
