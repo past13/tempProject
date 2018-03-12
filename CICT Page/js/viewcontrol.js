@@ -4,8 +4,7 @@ function init_Page() {
     var buttonlist = []; 
 
     prepareView(create_menuview()); 
-    prepareView(create_orderinfo()); 
-    
+    prepareView(create_orderinfo());     
     // prepareView(create_home());
     // prepareView(create_panel());      
     // prepareView(create_recipeinfo());

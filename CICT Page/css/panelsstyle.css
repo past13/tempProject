@@ -1,18 +1,4 @@
-#container {
-    background: none no-repeat 0 0 scroll #aaa;
-    height: 600px;    
-    /* width: 1388px; */
-    width: 100%;
-    
-    position: relative;
-    overflow: hidden;  
-  }
 
-  h3 {    
-    margin: 10px;
-    font: 25px arial, sans-serif;
-    color: #188ddb;    
-  }
     
   .panelContainer {
     height: 600px;
