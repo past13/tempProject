@@ -1,6 +1,5 @@
 function create_panel() {
     var parent = document.getElementById('container'); 
-    // var parent = document.createElement('div');
     var panellist = [];
     var list = titleslist.listofcolumns;
     var panelinstructions = {
@@ -10,7 +9,6 @@ function create_panel() {
         nodeclass : 'navItem'  
     }
     var node = create_Node(panelinstructions);
-    node.assignfunction = 'assignpanels'; 
     var attribute = { 
         parent : node,
         name : 'style',
@@ -35,6 +33,7 @@ function create_panel() {
     var panele = panel_View(item, list[item], nodecol);        
         panellist.push(panele);     
     }   
+    node.assignfunction = 'assignPanels'; 
     return node;
 }
 function panel_View(index, title, node) {    
@@ -53,16 +52,9 @@ function panel_View(index, title, node) {
     return node;
 }
 
-// function create_visualisation() { 
-//     var panels = create_panel();
-//     panels.assignfunction = 'assignPanels';   
-//     console.log(panels)
-//     return panels;
-// }
-
-function assignPanels(node, titleslist) {     
-    // console.log('assignPanels')
-    
+function assignPanels(node) {  
+    var parent = document.getElementById("container");   
+    parent.appendChild(node);
 }
 
 

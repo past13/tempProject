@@ -1,5 +1,4 @@
 var glbObj;
-
 titleslist = (function() {
 	listofcolumns = [
 					['statistics'],

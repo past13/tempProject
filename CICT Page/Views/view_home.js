@@ -7,23 +7,34 @@ function create_home() {
         nodeclass : 'navItem'
     }
     var node = create_Node(home); 
-    node.assignfunction = 'assignhome'; 
-    var header = {
+    var attribute = { 
         parent : node,
-        tag : 'h1',
-        id : 'homeHeader'
+        name : 'style',
+        value : 'display: none'
     }
-    create_Node(header); 
+    create_Attribute(attribute);
+    var homeheader = {
+        parent : node,
+        tag : 'h3',
+        id : 'titleSubPage'
+    }
+    create_Node(homeheader); 
     var body = {
         parent : node,
         tag : 'div',
-        id : 'homeBody'
+        id : 'containerbody'
     }
-    create_Node(body);   
+    create_Node(body); 
+    node.assignfunction = 'assignHome';   
     return node;
 }
-
-
-// function assignHome () {
-//     console.log('hit')
-// }
+function assignHome (node) {
+    var parent = document.getElementById("container");   
+    var body = document.getElementsByClassName("contentSub"); 
+    var title = node.querySelector('h3'); 
+    var orderinfotype = glbObj;
+    var orderinfocode = glbObj;
+    title.innerHTML = orderinfotype + ' type'; 
+    body.innerHTML = orderinfocode + ' code'; 
+    parent.appendChild(node);
+}

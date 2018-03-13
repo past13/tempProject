@@ -5,10 +5,8 @@ function create_orderinfo() {
         tag : 'div', 
         id : 'orderinfo', 
         nodeclass : 'navItem',
-  
     }
-    var node = create_Node(orderinfo);
-    node.assignfunction = 'assignOrderInfo';       
+    var node = create_Node(orderinfo);      
     var attribute = { 
         parent : node,
         name : 'style',
@@ -24,49 +22,19 @@ function create_orderinfo() {
     var orderinfobody = { 
         parent : node,
         tag : 'div',
-        nodeclass : 'contentSub'
+        nodeclass : 'containerbody'
     }
     create_Node(orderinfobody); 
-    node.view = node;
+    node.assignfunction = 'assignOrderInfo'; 
     return node;
 }
-
-function assignOrderInfo(node) {
-
-    var orderinfo = glbObj.order.orderinfo;
-   
-    var titletext = orderinfo.modules.split(',').map(function(item) {
-        return item.trim();
-    });  
-    var parent = document.getElementById("container");    
+function assignOrderInfo(node) { 
+    var parent = document.getElementById("container");   
+    var body = document.getElementsByClassName("contentSub"); 
     var title = node.querySelector('h3'); 
-
-    title.innerText = 'Order Information';
-
+    var orderinfotype = glbObj.type;
+    var orderinfocode = glbObj.order.code;
+    title.innerHTML = orderinfotype + ' type'; 
+    body.innerHTML = orderinfocode + ' code'; 
     parent.appendChild(node);
 }
-
-// var Exposer = (function() {
-//     var privateVariable = 10;  
-//     var privateMethod = function(data) {
-//     var node = create_orderinfo();   
-//     var title = node.querySelector('h1'); 
-//     title.innerText = 'aaaa';
-    
-//       console.log('Inside a private method!');
-//       privateVariable++;
-//     }
-  
-//     var methodToExpose = function() {
-//       console.log('This is a method I want to expose!');
-//     }
-  
-//     var otherMethodIWantToExpose = function(data) {
-//       privateMethod(data);
-//     }
-  
-//     return {
-//         first: methodToExpose,
-//         second: otherMethodIWantToExpose
-//     };
-// })();

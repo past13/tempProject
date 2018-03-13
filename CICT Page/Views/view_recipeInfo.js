@@ -1,5 +1,5 @@
 function create_recipeinfo() { 
-    var parent = document.getElementById("container");    
+    var parent = document.getElementById("container"); 
     var recipeinfo = {
         parent : parent,
         tag : 'div',
@@ -15,8 +15,8 @@ function create_recipeinfo() {
     create_Attribute(recipeinfohide)
     var recipeinfoheader = {
         parent : node,
-        tag : 'h1',     
-        nodeclass : 'containerheader'    
+        tag : 'h3',     
+        nodeclass : 'titleSubPage'    
     }
     var header = create_Node(recipeinfoheader); 
     var recipeinfobody = {
@@ -24,8 +24,21 @@ function create_recipeinfo() {
         tag : 'div',     
         nodeclass : 'containerbody'    
     }
-    var body = create_Node(recipeinfobody);    
+    create_Node(recipeinfobody);    
     node.assignfunction = 'assignRecipeInfo';
-    return parent;
+    return node;
 };
 
+function assignRecipeInfo(node){ 
+    var parent = document.getElementById("container");   
+    var body = document.getElementsByClassName("contentSub");
+    var title = node.querySelector('h3'); 
+    var orderinfomodules = glbObj.order.orderinfo;
+    var recipe = glbObj.order;
+    var titletext = orderinfomodules.modules.split(',').map(function(item) {
+        return item.trim();
+    }); 
+    title.innerHTML = 'Order Recipe Info'; 
+    body.innerHTML = 'body' + titletext; 
+    parent.appendChild(node);
+}
