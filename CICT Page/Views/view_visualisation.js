@@ -183,4 +183,23 @@ function mapValues(titlelist, columns, dataforpanels) {
         
     // });
 }
+// testArr = riskNamesArr.map( function(x, i){
+//     return {"name": x, "state": riskWorkflowStateArr[i]}        
+// }.bind(this));
 
+
+// for(var prop in context) {
+
+
+//     console.log(context[prop])
+
+//     if(context.hasOwnProperty(prop)) {      
+//       var content = (
+//         '<tr>' +
+//         '<td>' + context[prop].name + '</td>' +
+//         '<td>' + context[prop].value + '</td>' +
+//         '</tr>'
+//       );
+//       tbody.insertAdjacentHTML('afterbegin', content);      
+//     }
+//   }
