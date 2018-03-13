@@ -16,25 +16,21 @@ function create_home() {
     var homeheader = {
         parent : node,
         tag : 'h3',
-        id : 'titleSubPage'
+        nodeclass : 'titleSubPage'
     }
     create_Node(homeheader); 
-    var body = {
+    var homebody = {
         parent : node,
         tag : 'div',
-        id : 'containerbody'
+        nodeclass : 'containerbody'
     }
-    create_Node(body); 
+    create_Node(homebody); 
     node.assignfunction = 'assignHome';   
     return node;
 }
 function assignHome (node) {
-    var parent = document.getElementById("container");   
-    var body = document.getElementsByClassName("contentSub"); 
-    var title = node.querySelector('h3'); 
-    var orderinfotype = glbObj;
-    var orderinfocode = glbObj;
-    title.innerHTML = orderinfotype + ' type'; 
-    body.innerHTML = orderinfocode + ' code'; 
-    parent.appendChild(node);
+    var body = node.querySelector('div'); 
+    var title = node.querySelector('h3');
+    title.innerHTML = 'Home Page title'; 
+    body.innerHTML = 'Home Page body';
 }

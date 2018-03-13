@@ -17,45 +17,45 @@ var rect = new Rectangle(10, 20);
 }
 */
 
-function addChilds(packages) {    
-  var newlist = [];
-  packages.forEach(element => {    
-  var pack = {
+// function addChilds(packages) {    
+//   var newlist = [];
+//   packages.forEach(element => {    
+//   var pack = {
   
-    text: element.orderlineid 
-  }
-    newlist.push(pack)
-  });
-  return newlist;
-}
+//     text: element.orderlineid 
+//   }
+//     newlist.push(pack)
+//   });
+//   return newlist;
+// }
 
-function prepareOverallStatistics(recipe) {
-  var statistics = recipe.recipestatistics.statistic;
-  return statistics;
-}
+// function prepareOverallStatistics(recipe) {
+//   var statistics = recipe.recipestatistics.statistic;
+//   return statistics;
+// }
 
-function prepareDataForTreeView(recipe) {
-  var obj = [];
+// function prepareDataForTreeView(recipe) {
+//   var obj = [];
 
-  var containerlist = recipe.containerrecipelist.containerrecipe;
-  var contammount = containerlist.length;
+//   var containerlist = recipe.containerrecipelist.containerrecipe;
+//   var contammount = containerlist.length;
 
-  containerlist.forEach(element => {
+//   containerlist.forEach(element => {
 
-    var pallettype = element.containertypecode;    
-    var amountonpallet = element.physicalresult.package.length;
-    var package = element.physicalresult.package;
+//     var pallettype = element.containertypecode;    
+//     var amountonpallet = element.physicalresult.package.length;
+//     var package = element.physicalresult.package;
        
-    var pallet = {
-      text: pallettype,
-      tags: [amountonpallet],
-      nodes : child = addChilds(package),
-    }
-    obj.push(pallet)  
-  });   
+//     var pallet = {
+//       text: pallettype,
+//       tags: [amountonpallet],
+//       nodes : child = addChilds(package),
+//     }
+//     obj.push(pallet)  
+//   });   
   
-  return obj;
-}
+//   return obj;
+// }
 
 function create3DMeshes() {
   // setStatus('Creating 3D objects...');

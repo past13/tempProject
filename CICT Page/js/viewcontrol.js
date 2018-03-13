@@ -1,4 +1,3 @@
-
 function init_Page() { 
     var viewlist = [];
     var buttonlist = []; 
@@ -15,9 +14,14 @@ function init_Page() {
         // buttonlist.push(button);
     }
     for (list in viewlist) {
-        //todo: need to check if function exist before calling it.
-        var funcname = viewlist[list].assignfunction;
-        window[funcname](viewlist[list]); 
+        try {
+            var funcname = viewlist[list].assignfunction;
+            window[funcname](viewlist[list]); 
+        }
+        catch(error) {
+            console.log(error)
+            console.log('missing assignfunction function' + viewlist[list].id)
+        }          
     } 
 }
 

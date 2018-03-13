@@ -3,27 +3,25 @@ h3 {
   font: 25px arial, sans-serif;
   color: #188ddb;    
 }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
 .header {
   display: flex;
   justify-content: left;
   align-items: center;
   color: #eaea6b;
 }
-a.disabled {
-   pointer-events: none;
-   cursor: default;
+td:first-child {  
+  font-weight: bold; 
 }
-#logo {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  height: 70px;
-  width: 100px;
-  background: url("img/logo.png") no-repeat top left;
+
+table {
+  width: 30%;
+  border: solid black;
 }
+
 .mainContainer {
   /* display: flex; */
   width: 100%;
@@ -66,21 +64,14 @@ a.disabled {
   border: solid pink;
   height: 500px;
 }
-#containerfullview {
-	/* display: hidden; */
-	background-color: #ffc;
-	width: 300px;
-	height: 300px;
-	background-color: #fff;
-	/* overflow: hidden; */
-}
+
 .containerorderinfo {
   width: 100%;
   height: 100%;
 }
 .titleSubPage {
 
-  width: 200px;
+  width: 100%;
   height: 10%;
 }
 .contentSub {
@@ -94,8 +85,19 @@ a.disabled {
 .containerheader {
   height: 5%;  
 }
+
+.navItem {
+  height: 100%;
+  
+}
 .containerbody {
-  height: 90%;
+  width: 100%;
+  height: 550px;
+}
+
+.panelbody {
+  width: 100%;
+  height: 95%;
 }
 
 #container {
@@ -107,12 +109,27 @@ a.disabled {
   position: relative;
   overflow: hidden;  
 }
-
 #orderinfo {
 height: 550px;    
   /* width: 1388px; */
   width: 100%;
 }
-
-
-
+#logo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 70px;
+  width: 100px;
+  background: url("img/logo.png") no-repeat top left;
+}
+#containerfullview {
+	/* display: hidden; */
+	background-color: #ffc;
+	width: 300px;
+	height: 300px;
+	background-color: #fff;
+	/* overflow: hidden; */
+}

@@ -10,7 +10,6 @@ function create_Node(nodeparameters) {
     if( nodeparameters.parent ) {nodeparameters.parent.appendChild(node); }   
   }
   catch(err) {
-    // alert(err)
     console.log(err)
   }
   return node;
@@ -20,6 +19,24 @@ function create_Attribute(attparameters) {
     attribute.value = attparameters.value;
     attparameters.parent.setAttributeNode(attribute);
     return attribute;
+}
+
+function createTable(context) {  
+  var table = document.createElement('table');  
+  var tbody = document.createElement('tbody');
+  table.appendChild(tbody); 
+  for(var prop in context) {
+    if(context.hasOwnProperty(prop)) {      
+        var content = (
+        '<tr>' +
+        '<td>' + context[prop].name + '</td>' +
+        '<td>' + context[prop].value + '</td>' +
+        '</tr>'
+        );
+        tbody.insertAdjacentHTML('afterbegin', content);      
+    }
+  }
+  return table;
 }
 
 //treeview part
@@ -33,12 +50,10 @@ function addChilds(packages) {
   });
   return newlist;
 }
-
 function create_button(viewdiv) {
   this.viewdiv = viewdiv;   
   var button = {};
   button.view = viewdiv;
-
   if(viewdiv.length > 1) {
     for (i=0; i<viewdiv.length; i++) {
     if (viewdiv[i].className === 'navItem')
@@ -49,9 +64,7 @@ function create_button(viewdiv) {
     // if (viewdiv[i].className ===)
   }
 }
-
-function buttonClick(button) {   
-
+function buttonClick(button) {
   // if b== button b.highlight;
   // else b.donthighlight;
   
@@ -59,27 +72,4 @@ function buttonClick(button) {
   //   if v = button.view v.show();
   //   else v.hide();
   // }
-}
-
-function loadScript(url, callback){
-
-  var script = document.createElement("script")
-  script.type = "text/javascript";
-
-  if (script.readyState){  //IE
-      script.onreadystatechange = function(){
-          if (script.readyState == "loaded" ||
-                  script.readyState == "complete"){
-              script.onreadystatechange = null;
-              callback();
-          }
-      };
-  } else {  //Others
-      script.onload = function(){
-          callback();
-      };
-  }
-
-  script.src = url;
-  document.getElementsByTagName("head")[0].appendChild(script);
 }
