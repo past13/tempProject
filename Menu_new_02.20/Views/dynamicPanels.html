@@ -33,8 +33,6 @@
     panels = [];
     currmousex = -1;
     MINPANELWIDTH = 307;    
-    PREFIXCOL = '#col';  
-    PREFIXPANEL = 'panel';  
     PREFIXCROSS = '#';
     CONTAINER = '#container';   
 
@@ -56,8 +54,7 @@
   }
     function showTree(obj) {
       $('#tree').treeview({
-        color: "#428bca",   
-      
+        color: "#428bca",         
         // expandIcon: "glyphicon glyphicon-stop",
         // collapseIcon: "glyphicon glyphicon-unchecked",
         // nodeIcon: Image('pallet.png'),//"glyphicon glyphicon-user",
@@ -93,6 +90,8 @@
     }
    
     function recalculateAllColumns(columns) {
+     console.log('3')
+      
       var list = [];
       var index = 0;
       for (var columnnode of columns) {
@@ -149,6 +148,8 @@
   }
 
   function minimizeColumn(colwidth, currentpanelid) {  
+    console.log('4')
+    
     if ( colwidth < MINPANELWIDTH) { 
       document.getElementById(currentpanelid).classList.add('minimzepanel');
     }
@@ -158,6 +159,8 @@
   }
 
   function calculatewidth(panelid, current, close) {
+    console.log('5')
+    
     if (!document.getElementById(panelid).classList.contains('minimzepanel')) {
       close[0].colwidth += current[0].colwidth;
       current[0].gapwidth = 0;
@@ -181,7 +184,9 @@
         return 1;   
   }
 
-  function recalcColumns(allnodecolumns, currentcolumn, panelid) {       
+  function recalcColumns(allnodecolumns, currentcolumn, panelid) {    
+    console.log('2')
+
     var currentcolid = cleanColumnId(currentcolumn);  
     var rawcol = recalculateAllColumns(allnodecolumns); 
     var allcol = rawcol.filter(o => o.columnid != currentcolid); 
@@ -199,6 +204,8 @@
   }
 
    function hidepanel(panelnode) { 
+     console.log('1')
+
     var currentcolumn = document.getElementById(panelnode.id).parentElement; 
     var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
     var preparedlist = recalcColumns(allcolarray, currentcolumn, panelnode.id);  
@@ -232,7 +239,10 @@
   }
   
   //animate columns
-  function animate(list, currentcolumn) {     
+  function animate(list, currentcolumn) {  
+    console.log('3')
+    
+
     Object.keys(list[0]).forEach(function(key) { 
       columnidprefix = PREFIXCOL + list[0][key].columnid;
       columnwidth = list[0][key].colwidth;

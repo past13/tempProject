@@ -6,7 +6,10 @@ function create_Node(nodeparameters) {
     if( nodeparameters.href ) {node.href = nodeparameters.href;}
     if( nodeparameters.text ) {node.innerHTML = nodeparameters.text;}  
     if( nodeparameters.nodeclass ) {node.className = nodeparameters.nodeclass;}
+    if( nodeparameters.type ) {node.type = nodeparameters.type;}      
+    if( nodeparameters.src ) {node.src = nodeparameters.src;} 
     if( nodeparameters.dataid ) {node.dataid = nodeparameters.dataid;}
+    if( nodeparameters.style ) {node.style = nodeparameters.style;}
     if( nodeparameters.parent ) {nodeparameters.parent.appendChild(node); }   
   }
   catch(err) {
@@ -20,7 +23,6 @@ function create_Attribute(attparameters) {
     attparameters.parent.setAttributeNode(attribute);
     return attribute;
 }
-
 function createTable(context) {  
   var table = document.createElement('table');  
   var tbody = document.createElement('tbody');
@@ -38,8 +40,6 @@ function createTable(context) {
   }
   return table;
 }
-
-//treeview part
 function addChilds(packages) {    
   var newlist = [];
   packages.forEach(element => {    
@@ -50,7 +50,7 @@ function addChilds(packages) {
   });
   return newlist;
 }
-function create_button(viewdiv) {
+function createButton(viewdiv) {
   this.viewdiv = viewdiv;   
   var button = {};
   button.view = viewdiv;

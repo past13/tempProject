@@ -10,8 +10,6 @@ function init_Page() {
 
     function prepareView(viewdiv) {           
         viewlist.push(viewdiv); 
-        // var button = createbutton(viewdiv); 
-        // buttonlist.push(button);
     }
     for (list in viewlist) {
         try {
@@ -25,7 +23,7 @@ function init_Page() {
     } 
 }
 
-addEventListener("click", function(event) {  
+addEventListener("click", function(event) { 
     var node = event.originalTarget;     
     var attribute = node.getAttribute('href');
 
@@ -33,8 +31,8 @@ addEventListener("click", function(event) {
         case 'menuList':
             navBtnClicked(attribute);
             break;
-        case 1:
-
+        case 'hidepanel':
+            hidepanel(data);
             break;
         case 2:
             break;

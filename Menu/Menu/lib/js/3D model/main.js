@@ -4,12 +4,10 @@
 		// $.loadScript('url_to_someScript.js', function(){	
 		// //Stuff to do after someScript has loaded
 		// });
-		console.log($this) //first time load
 		
 
 
-if (($('#dynamicPanels').innerText === 'Visualization') ) {  //&& filename === 'dynamicPanels'
-		console.log('hit')
+	console.log('hit')
 	const canvas = document.getElementById("canvasTest");
 	
 	const sceneManager = new SceneManager(canvas);
@@ -36,7 +34,7 @@ if (($('#dynamicPanels').innerText === 'Visualization') ) {  //&& filename === '
 		requestAnimationFrame(render);	
 		sceneManager.update();
 	}
-}
+
 	
 
 

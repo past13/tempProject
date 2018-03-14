@@ -16,16 +16,15 @@ var dataStore = (function() {
 titleslist = (function() {	
 	listofcolumns = [
 					'statistics',
-					'listoforders',
-					'visualisation',
-					'warehouse'
+					'listoforders',				
+					
+					'warehouse'	,
+					'visualisation',	
 	];
-
 	listofviews = [ 'home', 
 					'recipeinfo',
 					'orderinfo', 
-					'visualisation' 
-					
+					'visualisation'
 	];  
 	return viewlist = {
 		listofcolumns : listofcolumns,
