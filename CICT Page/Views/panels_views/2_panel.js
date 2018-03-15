@@ -1,11 +1,10 @@
-function assignpanel_col1(node, data, index) {
+function assignpanel_col1(node) {
     var title = node.querySelector('h3');
-    var body = node.querySelector('#panel' + index);
-    var treeview = data.treeview;    
+    var body = node.querySelector('.panelbody');   
+    var treeviewdata = getDataforPanels().treeview;            
     var treeviewparam = {
         tag : 'button',
         id : 'treeviewbtn',
-        // nodeclass : 'btn btn-primary btn-md',
         type : 'button' 
     } 
     var treeviewbtn = create_Node(treeviewparam);
@@ -36,11 +35,13 @@ function assignpanel_col1(node, data, index) {
     var treeview = create_Node(treediv);   
     body.appendChild(treeviewbtn); 
     body.appendChild(treeview);    
-    assignTree(node, data);
+    assignTree(node, treeviewdata);
     title.innerHTML = 'Tree View or List';     
+    return node;
 }
-function assignTree(node, data) {
-    $('#treeview').treeview({data: data.treeview});
+//todo move to addeventlistener
+function assignTree(node, treeviewdata) {
+    $('#treeview').treeview({data: treeviewdata});
 }
 
 function changeListView() {

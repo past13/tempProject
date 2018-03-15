@@ -168,26 +168,58 @@ function recalcColumns(allnodecolumns, currentcolumn, panelid) {
     return [sortedlist, currentcolpanel];
   }
 
-function hidepanel(panelnode) { 
+  $(function() {
+    $("h2").click(function() {
+      $(this).nextAll().each(function() {
+        if (this.tagName == 'H2') {
+          return false; // stop execution
+        }
+        $(this).toggleClass("highlighted");
+      });
+    });
+  });
 
-    var parent = document.getElementById(panelnode.id).parentElement; 
-    var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
-
-    var tempas = '#' + parent.id;
-
-    var vis = $("#visualisation");
 
 
-    var test = $(tempas).nextUntil(".col").css({"color": "red", "border": "2px solid red"});;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // var vis = $(parentcol)[0].offsetWidth;
+
+    // $(parentcol).click(function() {
+    //   var parenttest = $(this)[0].offsetWidth;
+    //   $(this).nextAll().each(function() {
+    //     var result = $(this).hasClass( "col" ); 
+    //     var nextcolwidth = $(this)[0].offsetWidth;
+    //     console.log('parenttest' + parenttest)
+    //     console.log('result' + result)
+    //     console.log('nextcolwidth' + nextcolwidth)
+    //     if (nextcolwidth >  290) {         
+    //     }
+    //     else {
+    //     }        
+    //     if (this.tagName == 'H2') {
+    //       return false; // stop execution   
+    //     }
+    //     // $(this).toggleClass("highlighted");
+    //   });
+    // });
+    // var test1 = $(tempas).next().next();//.find("div.col").next("div").css({"color": "blue", "border": "2px solid red"});
+
+    // var test = $(tempas).nextUntil(".col").css({"color": "red", "border": "2px solid red"});
     
-    console.log(test)
-    console.log(tempas)
-    console.log(vis)
-
-
-
-
-
     // var preparedlist = recalcColumns(allcolarray, parent, panelnode.id);  
     // animate(preparedlist, parent);
-}
+// }

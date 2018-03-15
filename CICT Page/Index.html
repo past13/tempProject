@@ -17,10 +17,14 @@
 <script src="js/libs/bootstrap-treeview.js"></script>
 <script src="js/libs/three.min.js"></script>
 <!-- UI scripts -->
+<script src="js/panel_engine.js"></script>
+<script src="js/draggingpanel.js"></script>
+
+<script src='js/viewcontrol.js'></script>
 <script src="js/services.js"></script>
 
 <script src="js/UI/navmenu.js"></script>
-<script src='js/viewcontrol.js'></script>
+
 <script src='js/libs/commonfunctions.js'></script>
 <script src="Views/buttonsFunc/buttons_func.js"></script>
 
@@ -29,6 +33,10 @@
 <script src="Views/view_orderInfo.js"></script>
 <script src="Views/view_recipeInfo.js"></script>
 <script src="Views/view_warehouse.js"></script>
+
+
+<script src="js/create_panels_nodes.js"></script>
+<script src="js/assignPanels.js"></script>
 
 <script src="Views/panels_views/1_panel.js"></script>
 <script src="Views/panels_views/2_panel.js"></script>
@@ -68,9 +76,29 @@
 </body>
 <script type="text/javascript">
 
+
+function cleanColumnId (currentcolumn) {
+    var id;
+    if (typeof currentcolumn === "number") {id = currentcolumn;} 
+    else {id = Number(currentcolumn.id.replace(/^\D+/g, ''));}    
+    return id;
+  }
+
+var splitters = [];
+CONTAINER = '#container'; 
+draggedpanel = -1;
+panels = [];
+currmousex = -1;
+MINPANELWIDTH = 307;    
+PREFIXCOL = '#col';  
+PREFIXPANEL = 'panel';  
+PREFIXCROSS = '#';
+
 $(document).ready(function() {  
   //todo: 
   init_Page();
+  
+
 });
 </script>
 </html>

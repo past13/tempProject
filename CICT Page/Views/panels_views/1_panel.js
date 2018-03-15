@@ -1,8 +1,11 @@
-function assignpanel_col0(node, data, index) {
-    var title = node.querySelector('h3');
-    var body = node.querySelector('#panel' + index);
-    var statistics = data.statistics;
+function assignpanel_col0(node) { 
+    var title = node.querySelector('h3');   
+    var body = node.querySelector('.panelbody');  
+    var statistics =  glbObj.recipestatistics.statistic;
     var table = createTable(statistics);     
     title.innerHTML = 'Statistics'; 
-    body.appendChild(table); 
+    body.appendChild(table);
+    return node;
 }
+
+

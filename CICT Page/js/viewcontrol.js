@@ -1,26 +1,17 @@
 function init_Page() { 
     var viewlist = [];
-    var buttonlist = []; 
 
-    prepareView(create_menuview()); 
-    prepareView(create_orderinfo());     
+    prepareView(init_Menu()); 
     prepareView(create_home());
-    prepareView(create_panel());      
-    prepareView(create_recipeinfo());
+    prepareView(create_orderinfo());
+    prepareView(createVisualisation_view());  
+    prepareView(create_recipeinfo());    
 
-    function prepareView(viewdiv) {           
-        viewlist.push(viewdiv); 
-    }
-    for (list in viewlist) {
-        try {
-            var funcname = viewlist[list].assignfunction;
-            window[funcname](viewlist[list]); 
-        }
-        catch(error) {
-            console.log(error)
-            console.log('missing assignfunction function' + viewlist[list].id)
+    function prepareView(viewdiv) {         
+        if (viewdiv !== undefined) {
+            viewlist.push(viewdiv);
         }          
-    } 
+    }
 }
 
 addEventListener("click", function(event) { 
@@ -31,29 +22,14 @@ addEventListener("click", function(event) {
         case 'menuList':
             navBtnClicked(attribute);
             break;
-        case 'hidepanel':
-            hidepanel(data);
+        case 'collapsePanel(this)':
+            collapsePanel(data);
             break;
-        case 2:
+        case 'changeListView()':
+            changeListView(data);   
             break;
-            // default: monthString = "Invalid month";
+        case 'draggpanel(this)':
+            draggpanel(data);
             break;
     }
-
-    function changeListView(id) {
-        if ($('#containerpreviews').is(":visible")) {   
-        $('#tree').show();
-        $('#containerpreviews').hide();
-        }
-        else {
-        $('#tree').hide();
-        $('#containerpreviews').show();
-        }
-    }
-    // if (id === 'dynamicPanels') {
-    //     $("#dynamicPanels").show();
-    // }
-    // else {
-    //     $("#dynamicPanels").hide();       
-    // }
 });
