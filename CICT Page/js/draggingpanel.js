@@ -1,28 +1,35 @@
+var splitters = [];
+CONTAINER = '#visualisation'; 
+draggedpanel = -1;
+panels = [];
+currmousex = -1;
+MINPANELWIDTH = 307;    
+PREFIXCOL = '#col';  
+PREFIXPANEL = 'panel';  
+PREFIXCROSS = '#';
+
 function draggpanel(data) {
 
-    panels = $(CONTAINER); //.children().not(".resizer");    
-    panels.find('');
-    
-
-
+    panels = $('#visualisation').children().not(".resizer");    
     console.log(panels)
-    splitters = $(CONTAINER).children().not(".col").toArray();
-    console.log($(CONTAINER))  
+
+    splitters = $('#visualisation').children().not(".col").toArray();
+
     Object.keys(splitters).forEach(function(key) {        
     var splitterid = PREFIXCROSS + splitters[key].id;
     var currentsplitterid = splitters[key];        
     var cleanid = cleanColumnId(currentsplitterid);
-    $(splitterid).on("mousedown", function(e){
-        draggedpanel = cleanid - 1;
-        return false;
-    });
+        $(splitterid).on("mousedown", function(e){
+            draggedpanel = cleanid - 1;
+            return false;
+        });
     });
 
-    $(CONTAINER).on("mouseup", function(e){ 
+    $('#visualisation').on("mouseup", function(e){ 
     draggedpanel = -1;
     });
 
-    $(CONTAINER).on("mousemove", function (e){   
+    $('#visualisation').on("mousemove", function (e){   
     
     var mousex = e.pageX;
     if (draggedpanel != -1) {
@@ -30,7 +37,7 @@ function draggpanel(data) {
         var deltax =  mousex - currmousex;             
         var leftpanel = panels[draggedpanel];
         var rightpanel = panels[draggedpanel + 1];
-        handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
+        // handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
     }
     currmousex = mousex;
     });   
