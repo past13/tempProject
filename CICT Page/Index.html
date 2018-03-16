@@ -5,7 +5,7 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7/dist/css/bootstrap.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7/dist/css/bootstrap.css" /> -->
 <link rel="stylesheet" type="text/css" href="css/panelsstyle.css" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap-treeview.css" />
 
@@ -17,8 +17,9 @@
 <script src="js/libs/bootstrap-treeview.js"></script>
 <script src="js/libs/three.min.js"></script>
 <!-- UI scripts -->
-<script src="js/panel_engine.js"></script>
-<script src="js/draggingpanel.js"></script>
+<script src="js/UI/panels/panel_engine.js"></script>
+<script src="js/UI/panels/methods_panels.js"></script>
+<script src="js/UI/panels/collpasePanel.js"></script>
 
 <script src='js/viewcontrol.js'></script>
 <script src="js/services.js"></script>
@@ -33,16 +34,19 @@
 <script src="Views/view_orderInfo.js"></script>
 <script src="Views/view_recipeInfo.js"></script>
 <script src="Views/view_warehouse.js"></script>
-
-
-<script src="js/create_panels_nodes.js"></script>
-<script src="js/assignPanels.js"></script>
-
-<script src="Views/panels_views/1_panel.js"></script>
-<script src="Views/panels_views/2_panel.js"></script>
-<script src="Views/panels_views/3_panel.js"></script>
-<script src="Views/panels_views/4_panel.js"></script>
 <script src="Views/view_visualisation.js"></script>
+
+
+<script src="js/UI/panels/create_panels_nodes.js"></script>
+<script src="js/UI/panels/assignPanels.js"></script>
+
+<script src="js/UI/panels/panels_views/1_panel.js"></script>
+<script src="js/UI/panels/panels_views/2_panel.js"></script>
+<script src="js/UI/panels/panels_views/3_panel.js"></script>
+<script src="js/UI/panels/panels_views/4_panel.js"></script>
+
+
+<script src="js/UI/panels/panels_views/4_panel.js"></script>
 
 
 <!-- 3D Model scripts -->
@@ -75,29 +79,12 @@
     </footer>
 </body>
 <script type="text/javascript">
-
-
-function cleanColumnId (currentcolumn) {
-    var id;
-    if (typeof currentcolumn === "number") {id = currentcolumn;} 
-    else {id = Number(currentcolumn.id.replace(/^\D+/g, ''));}    
-    return id;
-  }
-
-var splitters = [];
-CONTAINER = '#container'; 
-draggedpanel = -1;
-panels = [];
-currmousex = -1;
-MINPANELWIDTH = 307;    
-PREFIXCOL = '#col';  
-PREFIXPANEL = 'panel';  
-PREFIXCROSS = '#';
+const REGPATTERN = /^\D+/g;
 
 $(document).ready(function() {  
-  //todo: 
+  //todo: check for async if work correct
   init_Page();
-  
+
 
 });
 </script>

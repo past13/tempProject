@@ -213,6 +213,8 @@
   };
   
   function handledrag_new(deltax, leftpanelindex, leftpanel, rightpanel) {
+    console.log('4')
+    
     var totalwidth = leftpanel.width() + rightpanel.width();
     var newwidthleft = leftpanel.width() + deltax;
     var newwidthright = rightpanel.width() - deltax;  
@@ -255,6 +257,7 @@
   }
   var splitters = [];
     $(document).ready(function() {
+      console.log('1')
       panels = $(CONTAINER).children().not(".resizer");       
       splitters = $(CONTAINER).children().not(".col").toArray();  
       Object.keys(splitters).forEach(function(key) {        
@@ -268,10 +271,16 @@
       });
   
     $(CONTAINER).on("mouseup", function(e){ 
+      console.log('2')
+      
       draggedpanel = -1;
     });
       
     $(CONTAINER).on("mousemove", function (e){    
+      console.log(CONTAINER)
+      
+      console.log('3')
+      
       var mousex = e.pageX;
       if (draggedpanel != -1) {
         parentOffset = $(this).offset();

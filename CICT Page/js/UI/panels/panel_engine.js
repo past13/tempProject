@@ -1,16 +1,33 @@
 function panel_engine() {
-    var panels = [];   
-    
+    var panels = [];
+    var func = new panelsFunctions(); 
+
     this.addPanel = function (node) {        
         panels.push(node); 
         return panels;
+    } 
+
+    this.collapseCol = function(panelnode) {   
+    var currentcolumn = panelnode.parentNode; 
+
+    var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
+    var preparedlist = func.collapse(allcolarray, currentcolumn, panelnode.id); 
+
+
+
+    // animate(preparedlist, currentcolumn); 
     }  
-    this.collapsePanel = function(panelnode) {   
-        var parent = document.getElementById(panelnode.id).parentElement;     
-        var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
-        var parentcol = '#' + parent.id;
+
+    this.splitterDragged = function(splitternode) {
+      func.draggpanel(splitternode);
     }
 
+
+
+    this.uncollapsePanel = function() {
+
+
+    }
     this.changeListView = function() {
         if ($('#treeview').is(":visible")) {   
         $('#treeview').hide();
@@ -22,27 +39,16 @@ function panel_engine() {
         }
     }
 
-    function uncollapsePanel() {
-
-    }
-    function showPanel() {
-
-    }
     function hidePanel() {
-
     }
-    function splitterDragged() {
 
-    }
+    
     function containerResized() {
-
     }
     function updateDOMobject() {
-
     }
     function panelContainerDiv() {
-
-    }
-
+    
+    }  
 
 }

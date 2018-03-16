@@ -30,12 +30,12 @@ function initialisePanels() {
                 nodeclass : 'splitter'  
             }  
             var splitter = create_Node(splitterparam);
-            var attribute = { 
-                parent : splitter,
-                name : 'onclick',
-                value : 'draggpanel(this)'
-            }
-            create_Attribute(attribute);  
+            // var attribute = { 
+            //     parent : splitter,
+            //     name : 'onclick',
+            //     value : 'draggpanel(this)'
+            // }
+            // create_Attribute(attribute);  
             var nodecol = create_Node(column);  
             var panele = panel_View(item, list[item], nodecol);        
             panellist.push(panele);    
@@ -47,15 +47,10 @@ function initialisePanels() {
         var panellabel = {
             parent : node,
             tag : 'h3', 
-            id : 'panellabel' + index       
+            id : 'panellabel' + index,
+            nodeclass : 'panelsheader'       
         } 
-        var paneltitle = create_Node(panellabel);  
-        var attribute = { 
-            parent : paneltitle,
-            name : 'onclick',
-            value : 'collapsePanel(this)'
-        }
-        create_Attribute(attribute);    
+        var paneltitle = create_Node(panellabel);
         var panelbody = {
             parent : node,
             tag : 'div', 
