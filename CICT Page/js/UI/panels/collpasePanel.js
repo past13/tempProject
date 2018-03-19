@@ -1,38 +1,31 @@
 
 function collapseFunctions() {
-    draggedpanel = -1;
-    panels = [];
-    splitters = [];
-    currmousex = -1;
-    MINPANELWIDTH = 307;           
-    PREFIXCROSS = '#';
-    CONTAINER = '#visualisation'; 
-    list = [];
-    gap = 0;
-    this.recalculateAllColumns = function(columns, currentid, currentwidth, node) { 
+  
+
+    this.prepareColumns = function(columns, currentid, currentwidth) { 
         var map1 = columns.map((currElement, index) => {    
             var column = {
-                columnid: currElement.id.replace(/^\D+/g, ''),
-                colwidth : changeColWidth(currentid, currentwidth, currElement),
-                // gap : collectGap()
-                // gapwidth : 1//colwidth = calculateColWidth(currElement.clientWidth)
+                columnid: parseInt(currElement.id.replace(/^\D+/g, '')),
+                colwidth : changeColWidth(currentid, currentwidth, currElement, columns)  
             }
             list.push(column);       
-        });  
+        });     
         return list;
     } 
     
-    this.getNearestNumber = function(array, num) {
-        console.log(list)
+    this.getNearestNumber = function(array, id) {
+        var num = parseInt(id);        
         var i = 0, closest, closestDiff, currentDiff;
         if (array.length) {
-            closest = array[0].columnid; 
-
+            closest = parseInt(array[0].columnid); 
             for (i;i<array.length;i++) {
-                closestDiff = Math.abs(num - closest);
-                currentDiff = Math.abs(num - array[i].columnid);
+                closestDiff = Math.abs(num - closest);                
+                currentDiff = Math.abs(num - parseInt(array[i].columnid));
                 if (currentDiff < closestDiff) {
-                    closest = array[i].columnid;   
+                    closest = parseInt(array[i].columnid) - 1;                                                             
+                }
+                else if (currentDiff === 0 && closestDiff === 0) {
+                    closest = parseInt(array[i].columnid) + 1;
                 }
                 closestDiff = null;
                 currentDiff = null;
@@ -40,33 +33,65 @@ function collapseFunctions() {
             return closest;
         }
         return false;
-    }  
+    } 
+    
+    this.recapColumns = function(closestcol, list, clickedcol) { 
+        this.closestcol = closestcol;        
+        this.clickedcol = clickedcol;
+        this.list = list;
 
-    function changeColWidth(currentid, currentwidth, node) {   
+        var temp;
+
+
+       
+
+        
+
+
+
+
+        if (clickedcol.colwidth[0] > 0 || clickedcol.colwidth[1] > 0 ) {
+
+            console.log(clickedcol.colwidth)
+            
+            
+
+
+
+
+        }
+        
+            // list.map(function(col) {
+            //     if (clickedcol.colwidth > 0) {
+            //          temp.colwidth[0] += activecol.colwidth[1];   
+            //          temp.colwidth[1] += activecol.colwidth[1];
+            //          activecol.colwidth[1] = 0;
+            //          activecol.colwidth[0] = 0;                
+            //     }        
+            //  });  
+
+         
+        
+             return list;        
+    }
+
+    function changeColWidth(currentid, currentwidth, node, columns) {         
         this.currentid = currentid;
         this.currentwidth = currentwidth;    
-        this.node = node;        
-        var newwidth;
-
-
-
-
-        if (currentid === node.id.replace(REGPATTERN, '')) {
-            collectGap(currentwidth);
-            newwidth = 0;  
+        this.node = node;  
+        var newwidth;  
+        var gap = 0;
+        if (currentid === node.id.replace(REGPATTERN, '')) {                            
+            if (currentwidth > 0) {          
+                newwidth = 0;
+                gap = currentwidth;
+            } 
         } else {
             newwidth = currentwidth;
-        }    
-        return newwidth;
-    }
-    function collectGap(currentwidth) {
-        if (currentwidth > 0) {
-            gap += currentwidth;
-        }
-        else {
-            gap -= currentwidth;
-        }
-    }
+            // gap = 0;
+        } 
+        return [newwidth, gap];
+    }  
 }
 // function hidePanels() {
 

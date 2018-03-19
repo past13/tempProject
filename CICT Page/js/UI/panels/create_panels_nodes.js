@@ -16,26 +16,20 @@ function initialisePanels() {
             value : 'display: none'
         }
         create_Attribute(attribute);  
-        for (item in list) {
+        for (i=0; i < list.length; i++) {
             var column = {
                 parent : node,
                 tag : 'div', 
-                id : 'col' + item, 
+                id : 'col' + (i + 1), 
                 nodeclass : 'col'  
             }      
             var splitterparam = {
                 parent : node,
                 tag : 'div', 
-                id : 'splitter' + item, 
+                id : 'splitter' + (i + 1), 
                 nodeclass : 'splitter'  
             }  
             var splitter = create_Node(splitterparam);
-            // var attribute = { 
-            //     parent : splitter,
-            //     name : 'onclick',
-            //     value : 'draggpanel(this)'
-            // }
-            // create_Attribute(attribute);  
             var nodecol = create_Node(column);  
             var panele = panel_View(item, list[item], nodecol);        
             panellist.push(panele);    

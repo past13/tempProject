@@ -1,22 +1,31 @@
 //todo:  
 //https://code.tutsplus.com/tutorials/quick-tip-create-a-click-and-drag-function-with-javascript--net-493
 function panelsFunctions () {
+
     this.collapse = function(columnlist, node, id) {
        this.columnlist = columnlist;
        this.node = node;
        this.id = id;
 
-       var methods = new collapseFunctions();
-
-        // var currentcolid = cleanColumnId(currentcolumn);  
-        currentid = id.replace(REGPATTERN, '');
+       var methods = new collapseFunctions();       
         currentcolwidth = node.clientWidth;  
 
-        var rawcol = methods.recalculateAllColumns(columnlist, currentid, currentcolwidth, node); 
+        var rawcol = methods.prepareColumns(columnlist, id, currentcolwidth, node);
+        var closestcolid = methods.getNearestNumber(rawcol, id);
+
+        var clickedcol = rawcol.find(x => x.columnid === parseInt(id));
+        var closestcol = rawcol.find(x => x.columnid === closestcolid);
         
-        // console.log(document.getElementById('splitter1').clientWidth)
+
+
+        var result = methods.recapColumns(closestcol, rawcol, clickedcol);
         
-        var closestcolid = methods.getNearestNumber(columnlist, currentid);
+        // Animate(result);
+
+        
+
+        
+        
 
 
 
@@ -35,6 +44,21 @@ function panelsFunctions () {
         return columnlist;
     };
 
+    function Animate (list) {
+        this.list = list;
+        console.log(list)
+        Object.keys(list[0]).forEach(function(key) { 
+            columnidprefix = '#' + list[0][key].columnid;
+            columnwidth = list[0][key].colwidth;
+            columnid = '#' + list[0][key].columnid; 
+            $(columnidprefix).animate({            
+              width: columnwidth,
+            //   style: minimizeColumn(columnwidth, columnid)
+            }, 500)     
+          });    
+    }
+
+
     this.draggpanel = function(node) {    
         draggedpanel = -1;
         panels = [];
@@ -47,7 +71,7 @@ function panelsFunctions () {
         function cleanColumnId (currentcolumn) {
             var id;
             if (typeof currentcolumn === "number") {id = currentcolumn;} 
-            else {id = Number(currentcolumn.id.replace(/^\D+/g, ''));} 
+            else {id = Number(currentcolumn.id.replace(REGPATTERN, ''));} 
             return id;
         }
         function minimizeColumn(colwidth, currentpanelid) {  
@@ -107,9 +131,10 @@ function panelsFunctions () {
         var mousex = e.pageX;
         if (draggedpanel != -1) {
             parentOffset = $(this).offset();
-            var deltax =  mousex - currmousex;             
-            var leftpanel = panels[draggedpanel];
-            var rightpanel = panels[draggedpanel + 1];        
+            var deltax =  mousex - currmousex;     
+            var leftpanel = panels[draggedpanel - 1];            
+            var rightpanel = panels[draggedpanel];  
+              
             handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
         }
         currmousex = mousex;

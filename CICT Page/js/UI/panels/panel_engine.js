@@ -8,12 +8,11 @@ function panel_engine() {
     } 
 
     this.collapseCol = function(panelnode) {   
-    var currentcolumn = panelnode.parentNode; 
-
+    var currentnode = panelnode.parentNode; 
+    var id = currentnode.id.replace(REGPATTERN, '');
     var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
-    var preparedlist = func.collapse(allcolarray, currentcolumn, panelnode.id); 
-
-
+    
+    var array = func.collapse(allcolarray, currentnode, id);
 
     // animate(preparedlist, currentcolumn); 
     }  

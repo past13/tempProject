@@ -17,9 +17,10 @@
 <script src="js/libs/bootstrap-treeview.js"></script>
 <script src="js/libs/three.min.js"></script>
 <!-- UI scripts -->
+<script src="js/UI/panels/collpasePanel.js"></script>
 <script src="js/UI/panels/panel_engine.js"></script>
 <script src="js/UI/panels/methods_panels.js"></script>
-<script src="js/UI/panels/collpasePanel.js"></script>
+
 
 <script src='js/viewcontrol.js'></script>
 <script src="js/services.js"></script>
@@ -80,6 +81,15 @@
 </body>
 <script type="text/javascript">
 const REGPATTERN = /^\D+/g;
+draggedpanel = -1;
+panels = [];
+splitters = [];
+currmousex = -1;
+MINPANELWIDTH = (document.body.clientWidth * 1.22) - document.body.clientWidth;//307;           
+PREFIXCROSS = '#';
+CONTAINER = '#visualisation'; 
+list = [];
+gap = 0;
 
 $(document).ready(function() {  
   //todo: check for async if work correct
