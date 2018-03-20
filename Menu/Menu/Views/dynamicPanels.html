@@ -72,7 +72,6 @@
    }
   
   function showTree(obj) {
-    console.log(obj)
     $('#tree').treeview({
       color: "#428bca",       
       // expandIcon: "glyphicon glyphicon-stop",
@@ -175,18 +174,21 @@
   }
 
   function calculatewidth(panelid, current, close) {
-    if (!document.getElementById(panelid).classList.contains('minimzepanel')) {
-      close[0].colwidth += current[0].colwidth;
-      current[0].gapwidth = 0;
-      current[0].gapflag = 0;      
-      current[0].colwidth = 0;  
-    }
-    else {
-      current[0].colwidth += close[0].colwidth;
-      close[0].gapwidth = 0;
-      close[0].gapflag = 0;      
-      close[0].colwidth = 0; 
-    }
+
+    console.log(panelid)
+
+    // if (!document.getElementById(panelid).classList.contains('minimzepanel')) {
+    //   close[0].colwidth += current[0].colwidth;
+    //   current[0].gapwidth = 0;
+    //   current[0].gapflag = 0;      
+    //   current[0].colwidth = 0;  
+    // }
+    // else {
+    //   current[0].colwidth += close[0].colwidth;
+    //   close[0].gapwidth = 0;
+    //   close[0].gapflag = 0;      
+    //   close[0].colwidth = 0; 
+    // }
   }
 
   function CompareForSort(first, second) {      

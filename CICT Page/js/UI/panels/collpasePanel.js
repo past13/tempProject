@@ -1,19 +1,23 @@
 
 function collapseFunctions() {
-  
-
-    this.prepareColumns = function(columns, currentid, currentwidth) { 
-        var map1 = columns.map((currElement, index) => {    
+       
+    this.animateColumns = function(list) { 
+        var temp = list.forEach(ShowResults);       
+    }    
+    this.prepareColumns = function(columns, currentid, currentwidth) {
+        list = [];
+        for (var element of columns) { 
             var column = {
-                columnid: parseInt(currElement.id.replace(/^\D+/g, '')),
-                colwidth : changeColWidth(currentid, currentwidth, currElement, columns)  
+                columnid: parseInt(element.id.replace(/^\D+/g, '')),
+                colwidth : element.clientWidth,
+                gap : checkGaps(element.clientWidth)
             }
             list.push(column);       
-        });     
+        };     
+        console.log(list)
         return list;
-    } 
-    
-    this.getNearestNumber = function(array, id) {
+    }     
+    this.getNearestNumber = function(array, id) {        
         var num = parseInt(id);        
         var i = 0, closest, closestDiff, currentDiff;
         if (array.length) {
@@ -22,10 +26,10 @@ function collapseFunctions() {
                 closestDiff = Math.abs(num - closest);                
                 currentDiff = Math.abs(num - parseInt(array[i].columnid));
                 if (currentDiff < closestDiff) {
-                    closest = parseInt(array[i].columnid) - 1;                                                             
+                    closest = parseInt(array[i].columnid);                                                             
                 }
                 else if (currentDiff === 0 && closestDiff === 0) {
-                    closest = parseInt(array[i].columnid) + 1;
+                    closest = parseInt(array[i].columnid);
                 }
                 closestDiff = null;
                 currentDiff = null;
@@ -33,96 +37,31 @@ function collapseFunctions() {
             return closest;
         }
         return false;
-    } 
-    
-    this.recapColumns = function(closestcol, list, clickedcol) { 
-        this.closestcol = closestcol;        
-        this.clickedcol = clickedcol;
-        this.list = list;
+    }  
 
-        var temp;
-
-
-       
-
-        
-
-
-
-
-        if (clickedcol.colwidth[0] > 0 || clickedcol.colwidth[1] > 0 ) {
-
-            console.log(clickedcol.colwidth)
-            
-            
-
-
-
-
-        }
-        
-            // list.map(function(col) {
-            //     if (clickedcol.colwidth > 0) {
-            //          temp.colwidth[0] += activecol.colwidth[1];   
-            //          temp.colwidth[1] += activecol.colwidth[1];
-            //          activecol.colwidth[1] = 0;
-            //          activecol.colwidth[0] = 0;                
-            //     }        
-            //  });  
-
-         
-        
-             return list;        
+    function clearCol(id) {
+        list.filter(x => x.columnid === id)[0].colwidth[0] = 0;
+        list.filter(x => x.columnid === id)[0].colwidth[1] = 0;
     }
 
-    function changeColWidth(currentid, currentwidth, node, columns) {         
-        this.currentid = currentid;
-        this.currentwidth = currentwidth;    
-        this.node = node;  
-        var newwidth;  
-        var gap = 0;
-        if (currentid === node.id.replace(REGPATTERN, '')) {                            
-            if (currentwidth > 0) {          
-                newwidth = 0;
-                gap = currentwidth;
-            } 
-        } else {
-            newwidth = currentwidth;
-            // gap = 0;
-        } 
-        return [newwidth, gap];
-    }  
+    function checkGaps(width) {
+        if (width > MINPANELWIDTH && width !== MINPANELWIDTH ) {
+            width = Math.abs(MINPANELWIDTH - width)
+        }
+        else {
+            width = 0;
+        }
+        return width;
+    } 
+ 
+    function ShowResults(value, index, ar) {  
+        colid = '#col' + ar[index].columnid;             
+       $(colid).animate({            
+            width: list[index].colwidth[0],
+            // style: minimizeColumn(columnwidth, columnid)
+        }, 500);  
+    }
 }
-// function hidePanels() {
-
-//     function recalcColumns(allnodecolumns, currentcolumn, panelid) {       
-//         var currentcolid = cleanColumnId(currentcolumn);  
-//         var rawcol = recalculateAllColumns(allnodecolumns); 
-//         var allcol = rawcol.filter(o => o.columnid != currentcolid); 
-//         var currentcolobj = rawcol.filter(o => o.columnid == currentcolid);    
-//         var currentcolpanel = currentcolumn.querySelector('h3'); 
-//         var closestcolid = getNearestNumber(allcol, currentcolid);
-//         var closestcolobj = allcol.filter(o => o.columnid == closestcolid);     
-//         calculatewidth(panelid, currentcolobj, closestcolobj); 
-//         var result = closestcolobj.concat(currentcolobj);
-//         Object.keys(result).forEach(function(key) { 
-//           result[key].gapflag = checkGapedCol(result[key].colwidth); 
-//         });     
-//         var sortedlist = sortList(result, currentcolid); 
-//         return [sortedlist, currentcolpanel];
-//       }
 
 
-// function calculateColWidth(columnwidth) { 
-//     var splitterwidth = document.getElementById('splitter0').clientWidth;
-//     // console.log(document.getElementById('visualisation').childNodes)
-//     var withoutsplitters = 4 * splitterwidth;
-//     // console.log(withoutsplitters)        
-//     if (columnwidth >! MINPANELWIDTH && columnwidth != MINPANELWIDTH) {      
-//       columnwidth = Math.abs(MINPANELWIDTH - columnwidth);
-//     }    
-//     else {
-//       columnwidth = columnwidth - MINPANELWIDTH;
-//     }      
-//     return columnwidth;      
-//   }     
+

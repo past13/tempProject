@@ -26,33 +26,33 @@
     cursor: col-resize;
   }   */
 
-  #col0 {
+  #col1 {
     background: none no-repeat 0 0 scroll rgb(100, 102, 112);
     float: left;
     width: 22%;
   }
 
-  #col1 {
+  #col2 {
     background: none no-repeat 0 0 scroll rgb(255, 255, 255);
     float: left;
     width: 22%;   
   }
-  #col2 {
+  #col3 {
     background: none no-repeat 0 0 scroll rgb(255, 255, 255);  
     float: left;
     width: 22%;       
   }
 
-  #col3 {
+  #col4 {
     float: left;
     width: 22%;  
   } 
   
   #route {
-    margin-top: 20px;
+    /* margin-top: 20px;
     margin-left: 20px;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
     height: 1200px;
     width: 1200px;
     background: url("img/map.png") no-repeat top left;

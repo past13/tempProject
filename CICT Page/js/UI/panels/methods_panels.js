@@ -1,6 +1,14 @@
 //todo:  
 //https://code.tutsplus.com/tutorials/quick-tip-create-a-click-and-drag-function-with-javascript--net-493
 function panelsFunctions () {
+    draggedpanel = -1;
+    list = [];
+    splitters = [];
+    currmousex = -1;
+    MINPANELWIDTH = (document.body.clientWidth * 1.22) - document.body.clientWidth;                 
+    PREFIXCROSS = '#';
+    CONTAINER = '#visualisation'; 
+    PANELPREFIX = 'panel';
 
     this.collapse = function(columnlist, node, id) {
        this.columnlist = columnlist;
@@ -10,63 +18,36 @@ function panelsFunctions () {
        var methods = new collapseFunctions();       
         currentcolwidth = node.clientWidth;  
 
-        var rawcol = methods.prepareColumns(columnlist, id, currentcolwidth, node);
-        var closestcolid = methods.getNearestNumber(rawcol, id);
-
-        var clickedcol = rawcol.find(x => x.columnid === parseInt(id));
-        var closestcol = rawcol.find(x => x.columnid === closestcolid);
-        
-
-
-        var result = methods.recapColumns(closestcol, rawcol, clickedcol);
-        
-        // Animate(result);
-
+        var rawcol = methods.prepareColumns(columnlist, id, currentcolwidth, node).filter( o => o.columnid !== parseInt(id));
+        var nearid = methods.getNearestNumber(rawcol, parseInt(id));
         
 
         
-        
-
-
-
-
-    //    var currentcolpanel = currentcolumn.querySelector('h3'); 
-    //    var closestcolobj = allcol.filter(o => o.columnid == closestcolid);     
-    //    calculatewidth(panelid, currentcolobj, closestcolobj); 
-    //    var result = closestcolobj.concat(currentcolobj);
-    //    Object.keys(result).forEach(function(key) { 
-    //      result[key].gapflag = checkGapedCol(result[key].colwidth); 
-    //    });     
-    //    var sortedlist = sortList(result, currentcolid); 
-    //    return [sortedlist, currentcolpanel];
-
+        // calculatewidth(nid, parseInt(id));  
+     
+        Animate();
+        // var sortedlist = sortList(result, currentcolid); 
 
         return columnlist;
     };
 
-    function Animate (list) {
-        this.list = list;
-        console.log(list)
-        Object.keys(list[0]).forEach(function(key) { 
-            columnidprefix = '#' + list[0][key].columnid;
-            columnwidth = list[0][key].colwidth;
-            columnid = '#' + list[0][key].columnid; 
-            $(columnidprefix).animate({            
-              width: columnwidth,
-            //   style: minimizeColumn(columnwidth, columnid)
-            }, 500)     
-          });    
+    function Animate () {  
+        Object.keys(list).forEach(function(key) {        
+           
+
+            columnidprefix = '#col' + list[key].columnid;
+            columnwidth = list[key].colwidth;
+    
+            // $(columnidprefix).animate({            
+            //   width: columnwidth[0],
+            // //   style: minimizeColumn(columnwidth, columnid)
+            // }, 500)     
+        });    
     }
 
 
     this.draggpanel = function(node) {    
-        draggedpanel = -1;
-        panels = [];
-        splitters = [];
-        currmousex = -1;
-        MINPANELWIDTH = 307;           
-        PREFIXCROSS = '#';
-        CONTAINER = '#visualisation'; 
+     
     
         function cleanColumnId (currentcolumn) {
             var id;

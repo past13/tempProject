@@ -31,7 +31,7 @@ function initialisePanels() {
             }  
             var splitter = create_Node(splitterparam);
             var nodecol = create_Node(column);  
-            var panele = panel_View(item, list[item], nodecol);        
+            var panele = panel_View(i, list[item], nodecol);        
             panellist.push(panele);    
         } 
         return panellist;
@@ -41,14 +41,14 @@ function initialisePanels() {
         var panellabel = {
             parent : node,
             tag : 'h3', 
-            id : 'panellabel' + index,
+            id : 'panellabel' + (i + 1),
             nodeclass : 'panelsheader'       
         } 
         var paneltitle = create_Node(panellabel);
         var panelbody = {
             parent : node,
             tag : 'div', 
-            id : 'panel' + index,
+            id : 'panel' + (i + 1),
             nodeclass : 'panelbody'       
         } 
         create_Node(panelbody);    

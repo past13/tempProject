@@ -12,7 +12,8 @@ function panel_engine() {
     var id = currentnode.id.replace(REGPATTERN, '');
     var allcolarray = Array.apply(null, container.querySelectorAll(".col" )); 
     
-    var array = func.collapse(allcolarray, currentnode, id);
+    
+    var array = func.collapse(allcolarray, currentnode, parseInt(id));
 
     // animate(preparedlist, currentcolumn); 
     }  
