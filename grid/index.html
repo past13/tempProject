@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Grid Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="./libs/xml2jsobj.js"></script>	
+
+    <script src="./js/dragg/dragg.js"></script>
+    <script src="./js/collapse/collapse.js"></script>
+    <script src="./js/collapse/collapsefunc.js"></script>
+    
+</head>
+<body>     
+    <div class="main">
+        <div id="visualisation">
+            <div id="splitter1" class="splitter"></div>
+            <div id="col1" class="col">
+                <h3 id="panellabel1" onclick="hidepanel(this)" class="panel">First container</h3>
+                <div id="panel1" class="panelbody"></div>   
+            </div>             
+            <div id="splitter2" class="splitter"></div>
+            <div id="col2" class="col">
+                <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Second container</h3>
+                <div id="panel2" class="panelbody"></div>         
+            
+            </div>
+            <div id="splitter3" class="splitter"></div>
+            <div id="col3" class="col">
+                <h3 id="panellabel3" onclick="hidepanel(this)" class="panel">Third container</h3>                
+                <div id="panel3" class="panelbody"></div> 
+            </div>
+            <div id="splitter4" class="splitter"></div>
+            <div id="col4" class="col">
+                <h3 id="panellabel4" onclick="hidepanel(this)" class="panel">Fourth container</h3>                
+                <div id="panel4" class="panelbody"></div> 
+            </div>
+        </div>
+    </div>  
+</body>
+<script type="text/javascript">
+const REGPATTERN = /^\D+/g;
+var test = new panelsFunctions();
+
+</script>
+</html>

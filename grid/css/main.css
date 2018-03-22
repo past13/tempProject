@@ -1,0 +1,85 @@
+
+/* todo change to window/document size */
+.main { 
+    width: 100%;
+    white-space:nowrap;
+}
+
+#visualisation {  
+    /* width: 1280px; */
+    width: 95%;
+    display: inline-block;
+    height: 600px;
+}
+.splitter {    
+    float: left; 
+    width: 1%;
+    height: 100%;    
+    /* left: 25%; */
+    z-index: 9000;
+}
+.col {
+    float: left; 
+    width: 24%;
+    height: 100%;
+    z-index: 8000;
+    overflow: hidden;
+}
+
+/* columns content */
+.panel {
+    width: 100%;
+    height: 5%;
+}
+.panelbody {
+    width: 100%; 
+    height: 89%;
+    background-color: rgba(0, 128, 0, 0.219);
+}
+
+
+.minimzepanel {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+    color: red;
+    transform: translate(-140px, 90px) rotate(90deg); 
+  }
+
+
+
+
+
+#col1 {
+    /* left: 20px; */
+    background-color: rgba(0, 128, 0, 0.219);    
+}
+#col2 {
+    /* left: 340px; */
+    background-color: blueviolet;    
+}
+#col3 {
+    /* left: 660px; */
+    background-color: blue;    
+}
+#col4 {
+    /* left: 980px;     */
+    background-color: yellow;    
+}
+#splitter1 {
+    background-color: green;    
+}
+#splitter2 {
+    /* left: 320px; */
+    background-color: greenyellow;    
+}
+#splitter3 {
+    /* left: 640px;     */
+    background-color: goldenrod;   
+}
+#splitter4 {
+    /* left: 960px;     */
+    background-color: pink;    
+}
