@@ -7,9 +7,7 @@ function panelsFunctions () {
     MINPANELWIDTH = (document.getElementById('visualisation').clientWidth * 1.22) - document.getElementById('visualisation').clientWidth;
     PREFIXCROSS = '#';
     CONTAINER = '#visualisation'; 
-    PANELPREFIX = 'panel';
-
-      
+    PANELPREFIX = 'panel';     
     
         function cleanColumnId (currentcolumn) {
             var id;
@@ -56,8 +54,7 @@ function panelsFunctions () {
         
         var currentsplitterid = splitters[key];        
         var cleanid = cleanColumnId(currentsplitterid);
-            $(splitterid).on("mousedown", function(e){
-           
+            $(splitterid).on("mousedown", function(e){           
                 draggedpanel = cleanid - 1;
                 return false;
             });
@@ -71,10 +68,12 @@ function panelsFunctions () {
         var mousex = e.pageX;
         if (draggedpanel != -1) {
             parentOffset = $(this).offset();
-            var deltax =  mousex - currmousex;     
-            var leftpanel = panels[draggedpanel - 1];            
-            var rightpanel = panels[draggedpanel];                
-            handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
+            var deltax =  mousex - currmousex;
+            var rightpanel = panels[draggedpanel];                 
+            var leftpanel = panels[draggedpanel - 1]; 
+            if (leftpanel !== undefined) {
+                handledrag_new(deltax, draggedpanel, $(leftpanel), $(rightpanel));
+            }
         }
         currmousex = mousex;
         }); 

@@ -47,9 +47,6 @@ function collapseFunctions() {
                     addWidth(list[item], item);
                 }                
             }
-
-
-
         //     for (item in list) {
         //         if (list[item].gap > 0 && list[item].columnid === nearid) {                     
         //         // if (list[item].columnid === nearid) { 
@@ -110,9 +107,5 @@ function collapseFunctions() {
             width = 0;
         }
         return width;
-    } 
-
-    function addWidth() {
-        
     }
 }

@@ -10,9 +10,18 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-    <script src="./libs/xml2jsobj.js"></script>	
+    <script src='js/3D Model/libs/three.min.js'></script>    
+    <script src="./js/libs/xml2jsobj.js"></script>	
+    <script src="./js/data/data.js"></script>
+    <script src="./js/assignpanels/initialise.js"></script>
+    <script src="./js/assignpanels/commonfunctions.js"></script>
+    
+    <script src='js/3D Model/recipe.js'></script>
+    <script src='js/ui.js'></script>
+    
+ 
 
-    <script src="./js/dragg/dragg.js"></script>
+    <script src="./js/dragg/dragg.js"></script> 
     <script src="./js/collapse/collapse.js"></script>
     <script src="./js/collapse/collapsefunc.js"></script>
     
@@ -28,13 +37,17 @@
             <div id="splitter2" class="splitter"></div>
             <div id="col2" class="col">
                 <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Second container</h3>
-                <div id="panel2" class="panelbody"></div>         
+                <div id="panel2" class="panelbody">
+                    <div id="containerpreviews"></div>
+                </div>         
             
             </div>
             <div id="splitter3" class="splitter"></div>
             <div id="col3" class="col">
                 <h3 id="panellabel3" onclick="hidepanel(this)" class="panel">Third container</h3>                
-                <div id="panel3" class="panelbody"></div> 
+                <div id="panel3" class="panelbody">
+                    <div id="containerfullview"></div>                    
+                </div> 
             </div>
             <div id="splitter4" class="splitter"></div>
             <div id="col4" class="col">
@@ -43,10 +56,30 @@
             </div>
         </div>
     </div>  
+    <!-- <div id="content"> -->
+        <!-- <div id="statusLabel"><p>Loading</p></div> -->
+        <!-- <div id="toolbar">test</div> -->
+        
+      <!-- </div> -->
 </body>
 <script type="text/javascript">
+
 const REGPATTERN = /^\D+/g;
+
 var test = new panelsFunctions();
+
+$(document).ready(function(){ 
+    $.ajax({
+        url: './js/data/recipe.xml', 
+        success: function(data) {            
+            preparedData(data);
+            init();            
+        }
+    });
+});
+
+// window.addEventListener('resize', resizeCanvas, false);
+
 
 </script>
 </html>
