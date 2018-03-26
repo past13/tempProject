@@ -8,7 +8,7 @@ var renderer, domEvents;
 function createContainer3DPreview(parentid, container) {    
   var parentelement = document.getElementById(parentid);
 
-  console.log(parentelement)
+  
 
   var previewwidth = parentelement.clientWidth;
   var previewheight = parentelement.clientHeight-100;
@@ -21,11 +21,14 @@ function createContainer3DPreview(parentid, container) {
   container.previewcamera.up = new THREE.Vector3(0, 1, 0);
   container.previewcamera.lookAt(new THREE.Vector3(0, 500, 0));
 
-  container.previewrenderer = new THREE.WebGLRenderer( {antialias: true, alpha: true, logarithmicDepthBuffer: false} );
+  container.previewrenderer = new THREE.WebGLRenderer( {antialias: true, alpha: true, logarithmicDepthBuffer: false, preserveDrawingBuffer : true} );
   container.previewrenderer.setSize( previewwidth, previewheight );
   container.previewrenderer.setClearColor( 0xffffff, 0);
   container.previewrenderer.shadowMap.enabled = container.shadowsinpreview;
   container.previewrenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+
+
+
   parentelement.appendChild( container.previewrenderer.domElement );
 
   if (!container.previewscene) {
@@ -77,23 +80,26 @@ function createContainer3DPreview(parentid, container) {
 function createContainerPreview(parentid, container) { 
   var previewid = "container_" + container.index;
 
+console.log(container)
+
   $('<div class="containerpreview" id="' + previewid + '" />')
+
     .appendTo(parentid)
-    .hover(function() { container.animatepreview = true; }, function() { container.animatepreview = false; })
-    .click(function() {
-      container.showfull = true;
-      container.animatepreview = false;
+    // .hover(function() { container.animatepreview = true; }, function() { container.animatepreview = false; })
+    // .click(function() {
+    //   container.showfull = true;
+    //   container.animatepreview = false;
      
-      //full view
-      createFullContainerView(container);
+    //   // full view
+    //   // createFullContainerView(container);
 
-      //refresh statisticpanel
-    //   showOverallStatistics(container.index, container.containerstatistics.statistic);
+    //   // refresh statisticpanel
+    //   // showOverallStatistics(container.index, container.containerstatistics.statistic);
 
-      $('containerfullview').show();
-      $('#containerpreviews').show();
+    //   $('containerfullview').show();
+    //   $('#containerpreviews').show();
     
-    });
+    // });
 
 
     
@@ -131,16 +137,21 @@ function createFullContainerView(container) {
   container.fullviewcamera.up = new THREE.Vector3(0, 1, 0);
   container.fullviewcamera.lookAt(new THREE.Vector3(0, 500, 0));
 
-  container.fullviewrenderer = new THREE.WebGLRenderer( {antialias: true, alpha: true, logarithmicDepthBuffer: false} );
+  container.fullviewrenderer = new THREE.WebGLRenderer( {antialias: true, alpha: true, logarithmicDepthBuffer: false, preserveDrawingBuffer : true} );
   container.fullviewrenderer.setSize( fullviewwidth, fullviewheight );
   container.fullviewrenderer.setClearColor( 0xffffff, 0);
   container.fullviewrenderer.shadowMap.enabled = container.shadowsinfullview;
   container.fullviewrenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
   
+
+  
   parentelement.appendChild( container.fullviewrenderer.domElement );
 
   targetList.push(container.mesh);
   renderer = container.fullviewrenderer;
+
+  console.log(enderer.domElement.toDataURL( 'image/png' ), 'screenshot' );
+
   camera = container.fullviewcamera; 
 
   if (!container.fullviewscene) {
@@ -163,7 +174,6 @@ function createFullContainerView(container) {
     directionalLight.shadow.camera.far = 5000;
     directionalLight.shadow.bias = 0.0001;
     container.fullviewscene.add( directionalLight );
-    console.log(container)
     container.fullviewscene.scale.set( 1.5, 1.5, 1.5);
   }
   
@@ -181,11 +191,11 @@ function createFullContainerView(container) {
   container.animateFullView = function () {
     if (!container.showfull) return;
     container.mesh.rotation.y = (container.mesh.rotation.y + 0.01) % (Math.PI * 2);
-        
-    //laurynas
+ 
     document.addEventListener( 'mousedown', onDocumentMouseActions, false );
     
     container.fullviewrenderer.render(container.fullviewscene, container.fullviewcamera);
+ 
   
     container.renderFullView();
    

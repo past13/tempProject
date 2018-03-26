@@ -22,7 +22,7 @@ function create3DMeshes() {
     // create container scenes
     for (var key in globalvar.containerrecipelist.containerrecipe) if (globalvar.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
       var container = globalvar.containerrecipelist.containerrecipe[key];
-      console.log(globalvar)
+      // console.log(globalvar)
          
       container.mesh = new THREE.Mesh();
       var mesh;

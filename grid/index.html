@@ -14,7 +14,7 @@
     <script src="./js/libs/xml2jsobj.js"></script>	
     <script src="./js/data/data.js"></script>
     <script src="./js/assignpanels/initialise.js"></script>
-    <script src="./js/assignpanels/commonfunctions.js"></script>
+    <script src="./commonfunctions.js"></script>
     
     <script src='js/3D Model/recipe.js'></script>
     <script src='js/ui.js'></script>
@@ -38,7 +38,45 @@
             <div id="col2" class="col">
                 <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Second container</h3>
                 <div id="panel2" class="panelbody">
-                    <div id="containerpreviews"></div>
+                    <div id="containerpreviews">
+                        <!-- <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
+                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42"> -->
+                    </div>
                 </div>         
             
             </div>
@@ -67,6 +105,9 @@
 const REGPATTERN = /^\D+/g;
 
 var test = new panelsFunctions();
+
+
+
 
 $(document).ready(function(){ 
     $.ajax({
