@@ -20,6 +20,9 @@ function SceneSubject(scene) {
 
 	scene.add(container.mesh);
 	
+	this.init = function() {
+		
+	}
 
 	this.update = function(time) {
 		container.mesh.rotation.x += 0.001;

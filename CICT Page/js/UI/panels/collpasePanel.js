@@ -14,7 +14,6 @@ function collapseFunctions() {
             }
             list.push(column);       
         };     
-        console.log(list)
         return list;
     }     
     this.getNearestNumber = function(array, id) {        

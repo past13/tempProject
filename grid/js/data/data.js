@@ -138,6 +138,7 @@ function arrayToObject(temporderlinelist, jsObj){
 
   function createContainerPreviews() {
 	// setStatus('Creating previews...');
+
 	for (var key in globalvar.containerrecipelist.containerrecipe) if (globalvar.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
 	var container = globalvar.containerrecipelist.containerrecipe[key];
 	

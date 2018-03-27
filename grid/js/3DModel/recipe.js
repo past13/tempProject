@@ -1,6 +1,7 @@
 function create3DMeshes() {
     // setStatus('Creating 3D objects...');
     // prepare container type meshes
+    
     for (var key in globalvar.order.containertypelist) if (globalvar.order.containertypelist.hasOwnProperty(key)) {
       var containertype = globalvar.order.containertypelist[key];
   

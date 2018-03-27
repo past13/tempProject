@@ -25,10 +25,11 @@ function init() {
     //3 panel
     //4 panel
 
+  
 
     create3DMeshes();
     createContainerPreviews();
 
-    
+    visualisationEngine();
 
 }

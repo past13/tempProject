@@ -5,14 +5,16 @@ var raycaster;
 var mouse = new THREE.Vector2();
 var renderer, domEvents;
 
+var screenshotlist = [];
+
+
 function createContainer3DPreview(parentid, container) {    
   var parentelement = document.getElementById(parentid);
 
+  var previewwidth = parentelement.clientWidth;
+  var previewheight = parentelement.clientHeight;
   
 
-  var previewwidth = parentelement.clientWidth;
-  var previewheight = parentelement.clientHeight-100;
-  
   container.shadowsinpreview = false;  // doesn't work?
   container.animatepreview = false;
 
@@ -26,8 +28,6 @@ function createContainer3DPreview(parentid, container) {
   container.previewrenderer.setClearColor( 0xffffff, 0);
   container.previewrenderer.shadowMap.enabled = container.shadowsinpreview;
   container.previewrenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-
-
 
   parentelement.appendChild( container.previewrenderer.domElement );
 
@@ -56,7 +56,12 @@ function createContainer3DPreview(parentid, container) {
   } 
 
   container.renderPreview = function() {
+    
     container.previewrenderer.render(container.previewscene, container.previewcamera);
+  
+    // var screenshot = container.previewrenderer.domElement.toDataURL("image/jpg"); 
+    // screenshotlist.push(screenshot);
+
     if (container.shadowsinpreview)  // render again if we want shadows
       container.previewrenderer.render(container.previewscene, container.previewcamera);
   }
@@ -80,30 +85,30 @@ function createContainer3DPreview(parentid, container) {
 function createContainerPreview(parentid, container) { 
   var previewid = "container_" + container.index;
 
-console.log(container)
+
+
 
   $('<div class="containerpreview" id="' + previewid + '" />')
-
     .appendTo(parentid)
-    // .hover(function() { container.animatepreview = true; }, function() { container.animatepreview = false; })
-    // .click(function() {
-    //   container.showfull = true;
-    //   container.animatepreview = false;
+    .hover(function() { container.animatepreview = true; }, function() { container.animatepreview = false; })
+    .click(function() {
+      container.showfull = true;
+      container.animatepreview = false;
      
-    //   // full view
-    //   // createFullContainerView(container);
+      // full view
+      createFullContainerView(container);
 
-    //   // refresh statisticpanel
-    //   // showOverallStatistics(container.index, container.containerstatistics.statistic);
+      // refresh statisticpanel
+      // showOverallStatistics(container.index, container.containerstatistics.statistic);
 
-    //   $('containerfullview').show();
-    //   $('#containerpreviews').show();
+      $('containerfullview').show();
+      $('#containerpreviews').show();
     
-    // });
+    });
 
 
     
-  createContainer3DPreview(previewid, container);
+  // createContainer3DPreview(previewid, container);
   $('<div class="containerpreviewinfo">('+container.index+') '+container.containertype+'</div>').appendTo("#"+previewid);
 }
 
@@ -115,19 +120,18 @@ function createFullContainerView(container) {
     myNode.removeChild(myNode.firstChild);
   }
 
-  $("#fullview").remove();
-  $('<div id="fullview"></div>').appendTo("#containerfullview");
+  // $("#fullview").remove();
+  // $('<div id="fullview"></div>').appendTo("#containerfullview");
+
+
 
 
   var parentelement = document.getElementById('containerfullview');
 
 
-  
+
   var fullviewwidth = parentelement.clientWidth;
   var fullviewheight = parentelement.clientHeight;
-  
-
-
 
 
   container.shadowsinfullview = true;
@@ -143,14 +147,10 @@ function createFullContainerView(container) {
   container.fullviewrenderer.shadowMap.enabled = container.shadowsinfullview;
   container.fullviewrenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
   
-
-  
   parentelement.appendChild( container.fullviewrenderer.domElement );
 
   targetList.push(container.mesh);
   renderer = container.fullviewrenderer;
-
-  console.log(enderer.domElement.toDataURL( 'image/png' ), 'screenshot' );
 
   camera = container.fullviewcamera; 
 
@@ -207,7 +207,6 @@ requestAnimationFrame( container.animateFullView );
 
 }
 
-
 // function update() {
 //   var vector = new THREE.Vector3(mouse.x, mouse.y, 1);
   
@@ -215,12 +214,7 @@ requestAnimationFrame( container.animateFullView );
 //   var ray = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
   
 //   var intersects = ray.intersectObjects(targetList , true);
-
-
-
-
 // }
-
 
 function onDocumentMouseActions (event)
 {
@@ -230,7 +224,6 @@ function onDocumentMouseActions (event)
 
   update();
 }
-
 
 function update() {
 
@@ -297,7 +290,13 @@ function update() {
   // stats.update();
   } 
 
- 
+  function testArray(screen) {
+      this.screen = screen;
+
+     
+
+      list.push(screen);
+  }
 
 
 

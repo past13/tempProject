@@ -10,14 +10,21 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-    <script src='js/3D Model/libs/three.min.js'></script>    
+    <script src='js/3DModel/libs/three.min.js'></script>    
     <script src="./js/libs/xml2jsobj.js"></script>	
     <script src="./js/data/data.js"></script>
     <script src="./js/assignpanels/initialise.js"></script>
     <script src="./commonfunctions.js"></script>
     
-    <script src='js/3D Model/recipe.js'></script>
-    <script src='js/ui.js'></script>
+    <!-- 3D Model -->
+    <script src="./js/3DModel/main.js"></script>
+    <script src="./js/3DModel/SceneManager.js"></script>
+    <script src="./js/3DModel/sceneSubjects/GeneralLights.js"></script>
+    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script>
+
+    
+    <script src='./js/3DModel/recipe.js'></script>
+    <script src='./js/ui.js'></script>
     
  
 
@@ -31,65 +38,27 @@
         <div id="visualisation">
             <div id="splitter1" class="splitter"></div>
             <div id="col1" class="col">
-                <h3 id="panellabel1" onclick="hidepanel(this)" class="panel">First container</h3>
+                <h3 id="panellabel1" onclick="hidepanel(this)" class="panel">Statistics</h3>
                 <div id="panel1" class="panelbody"></div>   
             </div>             
             <div id="splitter2" class="splitter"></div>
             <div id="col2" class="col">
-                <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Second container</h3>
+                <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Pallets</h3>
                 <div id="panel2" class="panelbody">
-                    <div id="containerpreviews">
-                        <!-- <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42">
-                        <img src="./images/mountain.jpg" alt="Smiley face" width="42" height="42"> -->
-                    </div>
+                    <div id="containerpreviews"></div>
                 </div>         
             
             </div>
             <div id="splitter3" class="splitter"></div>
             <div id="col3" class="col">
-                <h3 id="panellabel3" onclick="hidepanel(this)" class="panel">Third container</h3>                
+                <h3 id="panellabel3" onclick="hidepanel(this)" class="panel">Visualisation</h3>                
                 <div id="panel3" class="panelbody">
                     <div id="containerfullview"></div>                    
                 </div> 
             </div>
             <div id="splitter4" class="splitter"></div>
             <div id="col4" class="col">
-                <h3 id="panellabel4" onclick="hidepanel(this)" class="panel">Fourth container</h3>                
+                <h3 id="panellabel4" onclick="hidepanel(this)" class="panel">Warehouse</h3>                
                 <div id="panel4" class="panelbody"></div> 
             </div>
         </div>
@@ -110,13 +79,16 @@ var test = new panelsFunctions();
 
 
 $(document).ready(function(){ 
-    $.ajax({
-        url: './js/data/recipe.xml', 
-        success: function(data) {            
-            preparedData(data);
-            init();            
-        }
+    //while loading run status   
+    var recipe = $.ajax({url: './js/data/recipe.xml'});
+    
+    $.when(recipe).done(function(data){
+        preparedData(data); 
+        init();    
+    
     });
+
+    
 });
 
 // window.addEventListener('resize', resizeCanvas, false);
