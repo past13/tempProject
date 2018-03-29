@@ -1,0 +1,329 @@
+<html>
+  <head>
+    <title>Spheres</title>
+		<meta charset="utf-8">
+    
+    <style>
+      /* body { margin: 0; background-color: black;} */
+      /* canvas { width: 100%; height: 100% } */
+    </style>
+     <script src="three.js"></script>
+     <script src="stats.min.js"></script>
+     <script src="orbit_controls.js"></script>
+     
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="xml2jsobj.js"></script>     
+     <script src="trackballcontrols.js"></script> 
+     <script src="anotherproject.js"></script>   
+     
+     <script type='text/javascript' src='DAT.GUI.min.js'></script>
+
+  </head>
+  <body>
+   
+
+
+    <script>   
+    var camera, scene, renderer;     
+    var controls
+    var raycaster;
+    var mouse;
+    var projector;
+    var container;
+
+    var cube;
+    var gui;
+    var parameters;
+
+    init();
+    animate();
+
+    function init() {
+      var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+      var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+      
+      container = document.createElement( 'div' );
+      document.body.appendChild( container );
+      var info = document.createElement( 'div' );
+      // info.style.position = 'absolute';
+      info.style.top = '10px';
+      info.style.width = '100%';
+      info.style.textAlign = 'center';
+      // info.innerHTML = '<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - clickable objects';
+      container.appendChild( info );
+        
+      
+      
+      camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+      // camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 1, 10000);
+      camera.position.set( 0, 300, 500 ); 
+
+      controls = new THREE.TrackballControls(camera);
+      controls.addEventListener('change', render);
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color( 0xf0f0f0 );
+
+      // var xmlObj = (function(dataURL) {  
+      //       var result = $.ajax({
+      //         async: false,
+      //         url: 'recipe.xml',
+      //         method: 'GET',  
+      //       }).done();
+      //       return result;
+      // })();
+      // var external = new externalProj(xmlObj);
+
+      // external.mesh.scale.set(.05, .05, .05);
+
+      // scene.add(external.mesh);
+
+      var cubeGeometry = new THREE.CubeGeometry( 50, 50, 50 );
+      var cubeMaterial = new THREE.MeshPhongMaterial( { color:0xff0000, transparent:true, opacity:1 } );
+      cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
+      cube.position.set(0,30,0);
+      scene.add(cube);
+
+      //Lights
+      var ambientLight = new THREE.AmbientLight(0xf1f1f1);
+      scene.add(ambientLight);
+
+      var spotLight = new THREE.DirectionalLight(0xffffff);
+      spotLight.position.set(150,150,150);
+      scene.add(spotLight);
+
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+
+      renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setPixelRatio( window.devicePixelRatio );
+      renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+      document.body.appendChild(renderer.domElement);  
+
+      document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+      document.addEventListener( 'touchstart', onDocumentTouchStart, false );   
+      
+
+      // GUI////////////////////////////
+      gui = new dat.GUI();
+
+      parameters = {
+        x: 0, y: 30, z: 0,
+        color: "#ff0000", // color (change "#" to "0x")
+        opacity: 1, 
+        visible: true,
+        material: "Phong",
+        reset: function() { resetCube() }
+      };
+
+      var folder1 = gui.addFolder('Position');
+      var cubeX = folder1.add( parameters, 'x' ).min(-200).max(200).step(1).listen();
+      // var cubeY = folder1.add( parameters, 'y' ).min(0).max(100).step(1).listen();
+      // var cubeZ = folder1.add( parameters, 'z' ).min(-200).max(200).step(1).listen();
+      folder1.open();
+
+      cubeX.onChange(function(value) {   cube.position.x = value;   });
+      // cubeY.onChange(function(value) {   cube.position.y = value;   });
+      // cubeZ.onChange(function(value) {   cube.position.z = value;   });
+
+
+      // for (item in external.mesh.children) 
+
+      var cubeColor = gui.addColor( parameters, 'color' ).name('Color').listen();
+        cubeColor.onChange(function(value) {   // onFinishChange
+          cube.material.color.setHex( value.replace("#", "0x") );   
+        });
+
+      var cubeOpacity = gui.add( parameters, 'opacity' ).min(0).max(1).step(0.01).name('Opacity').listen();
+        cubeOpacity.onChange(function(value) { 
+          cube.material.opacity = value;   
+        });
+
+      var cubeMaterial = gui.add( parameters, 'material', [ "Basic", "Lambert", "Phong", "Wireframe" ] ).name('Material Type').listen();
+        cubeMaterial.onChange(function(value) {
+          
+          updateCube();   
+        });
+
+      var cubeVisible = gui.add( parameters, 'visible' ).name('Visible?').listen();
+        cubeVisible.onChange(function(value) {
+          cube.visible = value;  	
+        });
+
+      gui.add( parameters, 'reset' ).name("Reset Cube Parameters");
+
+      gui.open();
+
+    }
+
+
+function updateCube() {
+	var value = parameters.material;
+	var newMaterial;
+	if (value == "Basic")
+		newMaterial = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+	else if (value == "Lambert")
+		newMaterial = new THREE.MeshLambertMaterial( { color: 0x000000 } );
+	else if (value == "Phong")
+		newMaterial = new THREE.MeshPhongMaterial( { color: 0x000000 } );
+	else // (value == "Wireframe")
+		newMaterial = new THREE.MeshBasicMaterial( { wireframe: true } );
+	cube.material = newMaterial;
+	
+	cube.position.x = parameters.x;
+	cube.position.y = parameters.y;
+	cube.position.z = parameters.z;
+	cube.material.color.setHex( parameters.color.replace("#", "0x") );
+	cube.material.opacity = parameters.opacity;  
+	cube.material.transparent = true;
+	cube.visible = parameters.visible;
+	
+}
+  function resetCube() {
+    parameters.x = 0;
+    parameters.y = 30;
+    parameters.z = 0;
+    parameters.color = "#ff0000";
+    parameters.opacity = 1;
+    parameters.visible = true;
+    parameters.material = "Phong";
+    updateCube();
+  }
+  function onDocumentTouchStart( event ) {
+				event.preventDefault();
+				event.clientX = event.touches[0].clientX;
+				event.clientY = event.touches[0].clientY;
+				onDocumentMouseDown( event );
+			}
+
+  function onDocumentMouseDown( event ) {
+    event.preventDefault();
+    mouse.x = 2 * ( event.clientX / window.innerWidth ) - 1;
+    mouse.y = 1 - 2 * ( event.clientY / window.innerHeight );
+
+    raycaster.setFromCamera( mouse, camera );
+    var intersects = raycaster.intersectObjects( scene.children[0].children );
+
+    if ( intersects.length > 0) {
+      console.log('found')
+      intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
+    }
+    else {
+      console.log('not found')
+    }
+  }
+  
+  function animate() {
+      requestAnimationFrame(animate);
+      render();		
+	    update();
+  };
+
+function update()
+{
+	// if ( keyboard.pressed("z") ) 
+	// { 
+	// 	// do something
+	// }
+	
+	controls.update();
+	// stats.update();
+}
+  
+  function render() {    
+    renderer.render(scene, camera);
+  };
+
+    
+    
+    
+      // //Earth
+      // var earthGeometry = new THREE.SphereGeometry(10, 50, 50);
+      // var earthMaterial = new THREE.MeshPhongMaterial({
+      //   map: new THREE.ImageUtils.loadTexture("earth_texture_2.jpg"),
+      //   color: 0xf2f2f2,
+      //   specular: 0xbbbbbb,
+      //   shininess: 2
+      // });
+      // var earth = new THREE.Mesh(earthGeometry, earthMaterial);
+      // scene.add(earth);
+
+      // //Clouds
+      // var cloudGeometry = new THREE.SphereGeometry(10.3,  50, 50);
+      // var cloudMaterial = new THREE.MeshPhongMaterial({
+      //   map: new THREE.ImageUtils.loadTexture("/images/clouds_2.jpg"),
+      //   transparent: true,
+      //   opacity: 0.1
+      // });
+      // var clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+      // scene.add(clouds);
+
+      // //Stars
+      // var starGeometry = new THREE.SphereGeometry(1000, 50, 50);
+      // var starMaterial = new THREE.MeshPhongMaterial({
+      //   map: new THREE.ImageUtils.loadTexture("/images/galaxy_starfield.png"),
+      //   side: THREE.DoubleSide,
+      //   shininess: 0
+      // });
+      // var starField = new THREE.Mesh(starGeometry, starMaterial);
+      // scene.add(starField);
+
+      // //Moon 
+      // var moonGeometry = new THREE.SphereGeometry(3.5, 50,50);
+      // var moonMaterial = new THREE.MeshPhongMaterial({
+      //   map: THREE.ImageUtils.loadTexture("/images/moon_texture.jpg")
+      // });
+      // var moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      // moon.position.set(35,0,0);
+      // scene.add(moon);
+
+      //Camera vector
+      // var earthVec = new THREE.Vector3(0,0,0);
+
+      // var r = 35;
+      // var theta = 0;
+      // var dTheta = 2 * Math.PI / 1000;
+
+      // var dx = .01;
+      // var dy = -.01;
+      // var dz = -.05;
+
+
+
+      //Render loop
+      // var render = function() {
+
+        // earth.rotation.y += .0009;
+        // clouds.rotation.y += .00005;
+
+        //Moon orbit        
+        // theta += dTheta;
+        // moon.position.x = r * Math.cos(theta);
+        // moon.position.z = r * Math.sin(theta);
+
+        //Flyby
+        // if (camera.position.z < 0) {
+        //   dx *= -1;
+        // }
+        // camera.position.x += dx;
+        // camera.position.y += dy;
+        // camera.position.z += dz;
+
+        // camera.lookAt(earthVec);
+
+        //Flyby reset
+        // if (camera.position.z < -100) {
+        //   camera.position.set(0,35,70);
+        // }
+
+        // camera.lookAt(earthVec);
+      //   renderer.render(scene, camera);
+      //   requestAnimationFrame(render);
+      // };
+      // render();
+
+
+    </script>
+  </body>
+</html>
