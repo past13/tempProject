@@ -22,6 +22,9 @@
 
 <script src="js/libs/xml2jsobj.js"></script>
 <script src="js/anotherproject.js"></script>
+
+<script src="js/summaryTable.js"></script>
+
 </head>
 <body>
 
@@ -40,11 +43,12 @@
     <button id="five" style=" top:300px; left:20px;">Reset all</button>
     <button id="six" style=" top:350px; left:20px;">Reset camera</button>    
 </div>
+
+<div id="showInfo"><a>aa</a></div>
 <script>
 
-
 var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
+var mouse = new THREE.Vector2(), INTERSECTED;
 var container, scene, camera, renderer, controls, stats;
 var clock = new THREE.Clock();
 
@@ -64,11 +68,15 @@ function prepareDataFromXml() {
       async: false,
       url: 'recipe.xml',
       method: 'GET',  
-    }).done();
+		}).done();
+		
     return result;
-  })();  
-  var external = new externalProj(xmlObj);
-  external.mesh.scale.set(.09, .09, .09);
+	})();  
+
+	var external = new externalProj(xmlObj);
+
+	external.mesh.scale.set(.09, .09, .09);
+	
   return external;
 }
 function init() {
@@ -138,7 +146,10 @@ function init() {
 	////////////
 	// CUSTOM //
   ////////////
-  result = prepareDataFromXml();
+	result = prepareDataFromXml();
+
+	var test = overalTable(result);
+
   pallet = result.mesh;
 	scene.add(pallet);
 
@@ -261,23 +272,104 @@ function resetCube() {
   // }
 
   function onDocumentMouseDown( event ) {    
-    event.preventDefault();
-  console.log('hit1')
-    
-    mouse.x = 2 * ( event.clientX / window.innerWidth ) - 1;
-    mouse.y = 1 - 2 * ( event.clientY / window.innerHeight );
+    event.preventDefault();    
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+		
     raycaster.setFromCamera( mouse, camera );
-    var intersects = raycaster.intersectObjects(pallet.children );    
+		var intersects = raycaster.intersectObjects(pallet.children );  	
+		
     if ( intersects.length > 0) {
-      console.log('found')
-      intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				if ( INTERSECTED ) 
+
+					INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );	
+					
+				if (intersects[ 0 ].object.productInfo.productcode !== undefined) {
+					
+					var temp = document.getElementById('showInfo');
+
+					//add text to bottom
+
+				
+					if (temp.children.length > 0) {
+						while (temp.firstChild) {
+							temp.removeChild(temp.firstChild);
+						}						
+					}
+					createTable(temp);
+
+					var addline = document.createElement('a');
+					var t = document.createTextNode("xxx");
+
+					t.textContent = intersects[0].object.productInfo.productcode;
+
+					addline.appendChild(t);
+					document.body.appendChild(addline); 
+
+					
+
+				}
+					INTERSECTED = intersects[ 0 ].object;
+					INTERSECTED.material = INTERSECTED.material.clone();
+					INTERSECTED.material.emissive.setHex( 0x2BD80D );						
+					// INTERSECTED.material.emissive.se
+
+				//mark groups
+				// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+				// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+			}		
+					// INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );					
+					// INTERSECTED = intersects[ 0 ].object;
+					// INTERSECTED.material = INTERSECTED.material.clone();
+					// INTERSECTED.material.emissive.setHex( 0x2BD80D );	
+				//mark groups
+				// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+				// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+		
+
+      // console.log('found')
+      // intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
     }
     else {
-    console.log('not found')
+			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+			INTERSECTED = null;
     }
     // button.removeEventListener("click", once);
 
   }
+
+function regularTblCreate(){
+
+
+
+}
+
+function specificTblCreate(){
+
+    var body = node,
+        tbl  = document.createElement('table');
+				tbl.style.width  = '100px';
+				tbl.style.border = '1px solid black';
+
+
+    for(var i = 0; i < 3; i++){
+        var tr = tbl.insertRow();
+        for(var j = 0; j < 2; j++){
+            if(i == 2 && j == 1){
+                break;
+            } else {
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode('Cell'));
+                td.style.border = '1px solid black';
+                if(i == 1 && j == 1){
+                    td.setAttribute('rowSpan', '2');
+                }
+            }
+        }
+    }
+    body.appendChild(tbl);
+}
 
 
 

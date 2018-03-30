@@ -1,8 +1,13 @@
 function externalProj(xmlObj) {
-    var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
+	
+		var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
 		var recipe = customizeXmlObj(xml2bject);
-		
-    var container = prepareContainer(recipe);
+
+		var containerrecipe = recipe.containerrecipelist.containerrecipe;
+
+	
+		var container = prepareContainer(recipe);			
+
     return container;
 }
 
@@ -19,8 +24,11 @@ function externalProj(xmlObj) {
 	}
 
 	function getBoxTexture() {
+	
+
+		// var map = THREE.ImageUtils.loadTexture( "images/blanktexture.jpg" );
 		var texture = new THREE.TextureLoader().load( 'images/blanktexture.jpg' );
-		return texture;
+		return map;
 	}
 
   function defaultColorsAndMesh(orderlinelist) {   
@@ -87,25 +95,28 @@ function customizeXmlObj(jsObj) {
     //modife order properties and add to package
     var packagelist = packageorders(jsObj, orderslist, containerTypeCode);     
     //recalculate rotation property in pack
-    recalculateCoordinates(packagelist);
+		recalculateCoordinates(packagelist);		
     return jsObj;
 }
-function prepareContainer(recipe) {
+function prepareContainer(recipe) {	
+	this.recipe = recipe;
+	
 	var containertype;	
 	for (var key in recipe.order.containertypelist) if (recipe.order.containertypelist.hasOwnProperty(key)) {
 		containertype = recipe.order.containertypelist[key];
 		containertype.geometry = new THREE.BoxBufferGeometry( containertype.physicalsize.width, containertype.physicalsize.height, containertype.physicalsize.length );    
 		
-		containertype.material = new THREE.MeshStandardMaterial( { map: getBoxTexture() }); //0xa0a0a0
+		containertype.material = new THREE.MeshStandardMaterial( {  transparent: true }); //0xa0a0a0 map: getBoxTexture(),
 		//todo: check with change xyz parameters
 		containertype.offset = { x: -containertype.contentoffset.deltax, y: -containertype.contentoffset.deltaz/2, z: -containertype.contentoffset.deltay }; 		
-		var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial());   
+		var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial());  
+	
 	}
 	  for (var key in recipe.order.orderlinelist.orderline) if (recipe.order.orderlinelist.orderline.hasOwnProperty(key)) {
 		var orderline = recipe.order.orderlinelist.orderline[key];
 	
 		orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
-		orderline.material = new THREE.MeshStandardMaterial( { map: getBoxTexture()} );	  
+		orderline.material = new THREE.MeshStandardMaterial( {  transparent: true} );	  //map: getBoxTexture(),
 	}
 	  for (var key in recipe.containerrecipelist.containerrecipe) if (recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
 		var container = recipe.containerrecipelist.containerrecipe[key];   
@@ -123,7 +134,9 @@ function prepareContainer(recipe) {
 		
 		  mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
 		  mesh.castShadow = true;
-		  mesh.receiveShadow = true;
+			mesh.receiveShadow = true;			
+			mesh.productInfo = pack;
+
 		  mesh.position.set(pack.x, pack.z, -pack.y);
 		  mesh.rotation.set(pack.rotation.x, pack.rotation.z, pack.rotation.y);
 		  container.mesh.add(mesh);
