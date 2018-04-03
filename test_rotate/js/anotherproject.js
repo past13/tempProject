@@ -3,12 +3,11 @@ function externalProj(xmlObj) {
 		var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
 		var recipe = customizeXmlObj(xml2bject);
 
-		var containerrecipe = recipe.containerrecipelist.containerrecipe;
+		// var containerrecipe = recipe.containerrecipelist.containerrecipe;
 
-	
 		var container = prepareContainer(recipe);			
 
-    return container;
+    return [container, recipe];
 }
 
   var GOLDEN_RATIO_CONJUGATE = 0.618033988749895;
@@ -24,8 +23,6 @@ function externalProj(xmlObj) {
 	}
 
 	function getBoxTexture() {
-	
-
 		// var map = THREE.ImageUtils.loadTexture( "images/blanktexture.jpg" );
 		var texture = new THREE.TextureLoader().load( 'images/blanktexture.jpg' );
 		return map;
