@@ -64,8 +64,10 @@ animate();
 function prepareDataFromXml() {
   var xmlObj = (function(dataURL) {  
     var result = $.ajax({
-      async: false,
-      url: 'recipe.xml',
+			async: false,
+			url: 'recipe.xml',			
+      // url: 'recipe_old.xml',
+			
       method: 'GET',  
 		}).done();		
     return result;
@@ -130,18 +132,14 @@ function init() {
 	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
 	scene.add(skyBox);
 	scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
-	
-	////////////
-	// CUSTOM //
-  ////////////
+
 	result = prepareDataFromXml();
 	
-
+	//summaryTable.js
 	overalTable(result);
 
   pallet = result[0].mesh;
 	scene.add(pallet);
-
 
   if (ruler) {   
     var topGeometry = new THREE.CubeGeometry( 150, 0, 150 );
@@ -159,15 +157,11 @@ function init() {
 	var axes = new THREE.AxisHelper();
 	scene.add(axes);
 
-
   var parentButton = document.querySelector('#theDude');
 
   parentButton.addEventListener('click', buttonClick, false)
-
-
   document.addEventListener( 'mousedown', onDocumentMouseDown, false );
   // document.addEventListener( 'touchstart ', onDocumentTouchStart, false ); //touchstart   
-      
   
 	gui = new dat.GUI();
 	

@@ -1,4 +1,4 @@
-function createTable(heading, data, div) {
+function createTable(heading, data, div) {   
     "use strict";      
     var table = document.createElement('table');
     var tableBody = document.createElement('tbody');
@@ -12,75 +12,49 @@ function createTable(heading, data, div) {
         tr.appendChild(th);
     }
     for (var i = 0; i < data.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < data[i].length; j++) {
-            var td = document.createElement('td')
-            td.appendChild(document.createTextNode(data[i][j]));
-            tr.appendChild(td)
-        }
+        var productcode = document.createElement('td');
+        var amount = document.createElement('td');
+        var current = document.createElement('td');           
+        var tr = document.createElement('tr');      
+        productcode.appendChild(document.createTextNode(data[i].productcode));
+        amount.appendChild(document.createTextNode(data[i].amount));
+        current.appendChild(document.createTextNode(data[i].current));        
+        tr.appendChild(productcode);
+        tr.appendChild(amount);
+        tr.appendChild(current);        
         tableBody.appendChild(tr);
     }  
     div.appendChild(table);    
     return table;
 }
-
 function countAllproducts(container, mainList) {
     "use strict";
     var list = container.containercontentlist.containercontentitem;
     var amount;
-    var productcode;   
-    list.forEach(element => {
-        var product = [          
-            productcode = element.productcode,
-            amount = Number(element.amount)
-        ]        
-        mainList.push(product);      
+    var productcode;  
+    var current;
+    list.forEach(element => {       
+            var product = {          
+                productcode : element.productcode,
+                amount : Number(element.amount),
+                current : 0
+            }        
+            mainList.push(product);  
     });    
     return mainList;
 }
-
-function calculateProducts(list) {
-    "use strict";
-    var sum = {},newList;
-    for (var i=0,c;c=list[i];++i) {
-        if ( undefined === sum[c[0]] ) {        
-           sum[c[0]] = c;
-        }
-        else {
-            sum[c[0]][1] += c[1];
-        }
-    }
-    newList = Object.keys(sum).map(function(val) { return sum[val]});
-    newList.sort(function(a, b){
-        if(a[0] < b[0]) return -1;
-        if(a[0] > b[0]) return 1;
-        return 0;
-    });
-    return newList;
+function mergeLists(list, current) {  
+    if (current !== undefined) {
+        list.forEach(function (element, index) {
+            current.forEach(c => {
+                if (element.productcode === c.productcode) {               
+                    list[index].current = c.amount;
+                }               
+            });        
+        });  
+    }    
+    return list;
 }
-
-function mergeLists(list, current) {   
-
-
-    var intersection = list.filter(function(e) {
-        return current.indexOf(e) > -1;
-    });
-
-    
-
-    var resulttaas = list.filter(p => p[0] === current[0][0])
-
-
-  
-    // var test = list.map(function (l) {
-    //     var currentpallet = current.filter(function (curr) {
-    //         console.log(l)
-
-    //     })
-        
-    // });
-}
-
 function overalTable(glbobj) {
     "use strict";
     var amount;
@@ -89,16 +63,17 @@ function overalTable(glbobj) {
     var packagingtype; 
     var mainList = [];
     var clickedpallet = true;
+
     var allcontainers = glbobj[1].containerrecipelist.containerrecipe;    
+
     for (var c in allcontainers) {
         countAllproducts(allcontainers[c], mainList);        
     }
-    if (clickedpallet) {
-        var currentpalletarray = [];
-        var currentpalletdata = countAllproducts(glbobj[0], currentpalletarray); 
+    var currentpalletarray = [];     
+    if (clickedpallet) {      
+        var currentpalletdata = countAllproducts(allcontainers[1], currentpalletarray); //todo pass current clicked model now hardcoded allcontainers[2]
     }
-    var preparedlist = calculateProducts(mainList);     
-    mergeLists(preparedlist, currentpalletdata);   
+    var preparedlist = mergeLists(mainList, currentpalletdata);   
     var div = document.getElementById('showTable');
     var data = new Array();
     var heading = new Array();  
@@ -106,5 +81,4 @@ function overalTable(glbobj) {
     heading[1] = "Amount";
     heading[2] = "This carrier";
     var table = createTable(heading, preparedlist, div);  
-    
 }

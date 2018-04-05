@@ -1,12 +1,18 @@
 function externalProj(xmlObj) {
-	
 		var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
 		var recipe = customizeXmlObj(xml2bject);
+		var containerrecipe = recipe.containerrecipelist.containerrecipe;
 
-		// var containerrecipe = recipe.containerrecipelist.containerrecipe;
+		// for (var item in containerrecipe) {
+		// 	prepareContainer(containerrecipe[item]);
+		// }
 
-		var container = prepareContainer(recipe);			
-
+		// for (var item in recipe) {
+		// 	if (recipe[item].containerrecipe !== undefined) {
+		// 		delete recipe[item].containerrecipe[0];
+		// 	}
+		// }
+		var container = prepareContainer(recipe);		
     return [container, recipe];
 }
 
@@ -24,7 +30,7 @@ function externalProj(xmlObj) {
 
 	function getBoxTexture() {
 		// var map = THREE.ImageUtils.loadTexture( "images/blanktexture.jpg" );
-		var texture = new THREE.TextureLoader().load( 'images/blanktexture.jpg' );
+		var map = new THREE.TextureLoader().load( 'images/blanktexture.jpg' );
 		return map;
 	}
 
@@ -41,32 +47,38 @@ function externalProj(xmlObj) {
 	var temporderlineforpack = {};
 	temporderlinelist.reduce(function(obj, value, key) {
 	  temporderlineforpack[value.productcode] = value;        
-	}, {});  
+	}, {}); 
+	 
 	//todo move away assignment
 	jsObj.order.orderlinelist.orderline = temporderlineforpack;  
+	
 	return temporderlineforpack;
-  }
-  function packageorders(jsObj, orderslist, containerTypeCode){    
+	}
+	
+function packageorders(jsObj, orderslist, containerTypeCode) {    
 	var container = {};
-  
+	
 	var containertypeslist = $.each( containerTypeCode, function( key, value ) {  
-	  var containertype = jsObj.order.containertypelist.containertype;
-	  var containerlist = containerTypeCode[key];
-  
-	  var containertypes = $.each( containertype, function( key, value ) {  
-	  containerlist.containerlist = containertype;
-	  });
-	});  
-	var packagelist = $.each( containerTypeCode, function( key, value ) {
-	  var pack = containerTypeCode[key].physicalresult.package;      
-		$.each( pack, function( key, value ) {        
-		if (pack[key].orderlineid == "0") { pack[key].orderlineid = pack[key].productcode; }  
-		  pack[key].orderline = orderslist[pack[key].orderlineid];   
+		var containertype = jsObj.order.containertypelist.containertype;
+		var containerlist = containerTypeCode[key];
+	
+		var containertypes = $.each( containertype, function( key, value ) {  
+		containerlist.containerlist = containertype;
 		});
-	  container[ pack[key].index ] = pack;
-	}); 
+	});  
+
+	var packagelist = $.each( containerTypeCode, function( key, value ) {
+		var pack = containerTypeCode[key].physicalresult.package; 
+		$.each( pack, function( key, value ) {
+			if (pack[key].orderlineid === orderslist[pack[key].productcode].id) { 
+						pack[key].orderline = orderslist[pack[key].productcode];		
+					};
+		});
+		container[ pack[key].index ] = pack;
+	});	
 	return container;
-  }  
+}  
+
   function recalculateCoordinates(packagelist) {
 	// this.packagelist = packagelist;  
 	$.each( packagelist, function( key, value ) {
@@ -103,7 +115,7 @@ function prepareContainer(recipe) {
 		containertype = recipe.order.containertypelist[key];
 		containertype.geometry = new THREE.BoxBufferGeometry( containertype.physicalsize.width, containertype.physicalsize.height, containertype.physicalsize.length );    
 		
-		containertype.material = new THREE.MeshStandardMaterial( {  transparent: true }); //0xa0a0a0 map: getBoxTexture(),
+		containertype.material = new THREE.MeshStandardMaterial( { map: getBoxTexture(), transparent: true }); //0xa0a0a0 map: getBoxTexture(),
 		//todo: check with change xyz parameters
 		containertype.offset = { x: -containertype.contentoffset.deltax, y: -containertype.contentoffset.deltaz/2, z: -containertype.contentoffset.deltay }; 		
 		var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial());  
@@ -113,7 +125,7 @@ function prepareContainer(recipe) {
 		var orderline = recipe.order.orderlinelist.orderline[key];
 	
 		orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
-		orderline.material = new THREE.MeshStandardMaterial( {  transparent: true} );	  //map: getBoxTexture(),
+		orderline.material = new THREE.MeshStandardMaterial( { map: getBoxTexture(), transparent: true} );	  //map: getBoxTexture(),
 	}
 	  for (var key in recipe.containerrecipelist.containerrecipe) if (recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
 		var container = recipe.containerrecipelist.containerrecipe[key];   
@@ -122,13 +134,13 @@ function prepareContainer(recipe) {
 		mesh = new THREE.Mesh(container.containerlist.geometry, container.containerlist.material);
 		mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
 		//todo: BUG move to another place !!!dont change cas and receive shadow!!!
-		mesh.castShadow = true;
-		mesh.receiveShadow = true;
+		// mesh.castShadow = true;
+		// mesh.receiveShadow = true;
 		container.mesh.add( mesh );    
 	
 		for (var p in container.physicalresult.package) if (container.physicalresult.package.hasOwnProperty(p)) {
-		  var pack = container.physicalresult.package[p];
-		
+		  var pack = container.physicalresult.package[p];		
+
 		  mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
 		  mesh.castShadow = true;
 			mesh.receiveShadow = true;			
