@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		
+		<title>three.js webgl - interactive cubes</title>
+		<link rel="stylesheet" href="css/test.css"> 	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+		
+	</head>
+<body>
+
+	
+
+<div class="wrapper">
+		<div class="box a">A</div>
+		<div class="box b">B</div>
+		<div class="box c">C</div>
+		<div class="box d">
+		  <div class="box e">E</div>
+		  <div class="box f">F</div>
+		  <div class="box g">G</div>
+		</div>
+	  </div>
+	  
+	  
+
+
+
+	<!-- <div id="viewModelForm">
+		<div class = "viewModelDiv">
+		<label>Overlay:</label>			
+		<select id="dropDownList" > 
+			<option value="empty">No overlay</option>
+			<option>Family</option>
+			<option>Stacking class</option>
+			<option>Stability</option>
+			<option>Weight on top</option>
+			<option>Rotation</option>
+			<option>Random color per orderline</option>	
+		</select>	
+		</div>
+		<div class="viewModelDiv">		
+			<label>Transparency:</label>
+			<div><input type="range" min="1" max="100" value="50" id="myRange"></div>
+		</div>
+		<div class="viewModelDiv">
+			<label>Carrie view:</label>
+			<ul id="checkBoxList">
+				<li><label><input type="checkbox" value="1">Show maximum stacking height</label></li>
+				<li><label><input type="checkbox" value="2">Show fences</label></li>
+				<li><label><input type="checkbox" value="3">Show wrapping</label></li>
+				<li><label><input type="checkbox" value="4">Show ruler</label></li>
+				<li><label><input type="checkbox" value="5">Show ghost packages</label></li>	
+			</ul>
+		</div>
+		<div class="viewModelDiv">
+			<ul>
+				<li><button type="button" value="reset" onclick="optionsBtn(this)">Reset</button></li>
+				<li><button type="button" value="submit" onclick="optionsBtn(this)">Submit</button></li>
+				<li><button type="button" value="cancel" onclick="optionsBtn(this)">Cancel</button></li>					
+			</ul>					
+		</div>
+	</div> -->
+</body>
+		
+	<script>
+		function optionsBtn(button) {
+			var dropdownlist = document.getElementById('dropDownList');	
+			var slider = document.getElementById('myRange');			
+			var checkboxlist = document.getElementById('checkBoxList');
+
+			if (button.value === 'reset') {	
+				$(dropdownlist).prop('selectedIndex', 0);
+				$('#checkBoxList input:checked').prop('checked', false);			
+				$(slider).first()[0].value = 50;
+
+			} else if (button.value === 'submit') {
+				var checkedbox = checkboxlist.querySelectorAll("input[type='checkbox']:checked");
+				var selected = dropdownlist.querySelector("option:checked");	
+				var slidervalue = slider.value;
+
+			} else if (button.value === 'cancel') {
+
+			}	
+		}
+	</script>
+</html>
+
