@@ -1,0 +1,50 @@
+ var mainList = [];
+    var result;
+    for (var item in countAllproducts) {
+        // console.log(countAllproducts[item])
+        // console.log(countAllproducts[item].containercontentlist.containercontentitem);
+    var obj = countAllproducts[item].containercontentlist.containercontentitem;    
+    // console.log(countAllproducts[item])
+    result = Object.keys(obj).map(function(key) {        
+        return obj[key];
+    });        
+    }
+        for (var item in list) {        
+        var product = list[item].productcode;
+        var amount = list[item].amount;                
+        mainList.push(product);        
+    }
+        // for (var item in list) {
+    //     data.push( parameters = [
+    //         amount = list[item].amount,
+    //         productcode = list[item].productcode,
+    //         type = list[item].type,
+    //         packagingtype = list[item].packagingtype
+    //     ]) 
+    // }
+
+    function calculateProducts(list) {   
+    "use strict";
+
+console.log(list)
+
+    var sum = {},newList;
+
+    // for (var i=0,c;c=list[i];++i) {
+    //     if (sum[c[0]] === undefined ) {       
+             
+    //        sum[c[0]] = c;
+           
+    //     }
+    //     else {
+    //         sum[c[0]][1] += c[1];
+    //     }
+    // }
+    // newList = Object.keys(sum).map(function(val) { return sum[val]}).sort(function(a, b){
+    //     if(a[0] < b[0]) return -1;
+    //     if(a[0] > b[0]) return 1;
+    //     return 0;
+    // });
+
+    // return newList;
+}
