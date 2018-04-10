@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel=stylesheet href="css/base.css"/>
+	<link rel=stylesheet href="css/modelViewTbl.css"/>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/libs/detector.js"></script>
+
+<script src="js/libs/three.js"></script>
+<script src="js/libs/orbit_controls.js"></script>
+<script src="js/libs/xml2jsobj.js"></script>
+<script src="js/anotherproject.js"></script>
+
+<script src="js/summaryTable.js"></script>
+<script src="js/viewModelTbl.js"></script>
+
+</head>
+<body>
+	<div class="wrapper">
+		<div class="headerList">
+			<div class="box">Overlay:</div>
+			<div class="box">Transparency:</div>	
+			<div class="box">Show overlay legend:</div>			
+	</div>
+	<div class="bodyList">
+		<div class="dropdown">
+			<select id="dropDownList" > 
+			<option value="empty">No overlay</option>
+			<option>Family</option>
+			<option>Stacking class</option>
+			<option>Stability</option>
+			<option>Weight on top</option>
+			<option>Rotation</option>
+			<option>Random color per orderline</option>	
+		</select>	
+		</div>
+		<div id="transparencyLine"> 
+			<div><input type="range" aria-label="select pen size" id="myRange" min="1" max="100" value="50" ></div>
+		</div>
+		<div id="showOveralLegend"> 
+			<input type="checkbox" value="7">
+		</div>
+	</div>	
+	<div class="footerList">
+		<ul id="checkBoxList">
+			<li><label><input type="checkbox" value="1">Show carrier model</label></li>
+			<li><label><input type="checkbox" value="2">Show maximum stacking height</label></li>
+			<li><label><input type="checkbox" value="3">Show fences</label></li>
+			<li><label><input type="checkbox" value="4">Show wrapping</label></li>
+			<li><label><input type="checkbox" value="5">Show ruler</label></li>
+			<li><label><input type="checkbox" value="6">Show ghost packages</label></li>	
+		</ul>	 
+	</div>
+	<div class="buttonsList">
+		<ul>
+			<li><button type="button" value="reset" onclick="optionsBtn(this)">Reset</button></li>
+			<li><button type="button" value="submit" onclick="optionsBtn(this)">Submit</button></li>
+			<li><button type="button" value="cancel" onclick="optionsBtn(this)">Cancel</button></li>					
+		</ul>	
+	</div>
+</div>
+
+<div id="ThreeJS"></div>
+
+<script>
+
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2(), INTERSECTED;
+var container, scene, camera, renderer, controls, stats;
+var clock = new THREE.Clock();
+
+// custom global variables
+var result;
+var parameters;
+var gui;
+var pallet;
+var ruler = false;
+
+init();
+animate();
+
+function prepareDataFromXml() {
+  var xmlObj = (function(dataURL) {  
+    var result = $.ajax({
+			async: false,
+			url: 'recipe.xml',			
+      // url: 'recipe_old.xml',			
+      method: 'GET',  
+		}).done();		
+    return result;
+	})();  
+
+	var external = new externalProj(xmlObj);
+	external[0].mesh.scale.set(.09, .09, .09);	
+  return external;
+}
+
+function init() {
+	scene = new THREE.Scene();
+	// CAMERA
+	var SCREEN_WIDTH = 500;//window.innerWidth, 
+	var SCREEN_HEIGHT = 400; //window.innerHeight;
+
+	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 2000;
+
+	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0,150,400);
+	camera.lookAt(scene.position);	
+	// RENDERER
+	if ( Detector.webgl )
+      renderer = new THREE.WebGLRenderer({antialias:true,
+  	});
+	else
+    renderer = new THREE.CanvasRenderer(); 
+			
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	container = document.getElementById( 'ThreeJS' );
+	container.appendChild( renderer.domElement );
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+	// LIGHT
+	var light = new THREE.PointLight(0xffffff);
+	light.position.set(-100,150,100);
+	
+	var lightbulbGeometry = new THREE.SphereGeometry( 10, 16, 8 );
+	var lightbulbMaterial = new THREE.MeshBasicMaterial( { color: 0xffff44, transparent: true,  opacity: 0.8, blending: THREE.AdditiveBlending } );
+	var wireMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
+	var materialArray = [lightbulbMaterial, wireMaterial];
+	var lightbulb = THREE.SceneUtils.createMultiMaterialObject( lightbulbGeometry, materialArray );
+	// var lightbulb = new THREE.Mesh( lightbulbGeometry, lightbulbMaterial );
+	lightbulb.position = light.position;	
+	// lightbulb.material.;
+	// scene.add(lightbulb);
+	
+	scene.add(light);
+	// FLOOR
+	// var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
+	// var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
+	// var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
+	// scene.add(skyBox);
+	// scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
+
+  	//prepared container with meshes and product info
+	result = prepareDataFromXml();
+
+	//summaryTable.js
+	overalTable(result);
+  	pallet = result[0].mesh;
+	scene.add(pallet);
+
+	var canvastest = document.querySelector('canvas');	
+
+	canvastest.addEventListener( 'mousedown', onDocumentMouseDown, false );		
+}
+
+function getOverlay(node, param, list) {
+	this.node = node;
+	this.param = param;	
+	if (node.userData && node.userData.orderline !== undefined) {
+		if (node.userData.orderline.familycode !== '') 	{			
+			var nodeobj = {
+				id: node.id,
+				familycode: Number(node.userData.orderline.familycode),
+				node: node
+			};
+			list.push(nodeobj);
+		}		
+	}	
+}
+function getStackingClass(node, param, list) {
+	this.node = node;
+	this.param = param;		
+	if (node.userData && node.userData.orderline !== undefined || '') {		
+		var nodeobj = {
+			id: node.id,
+			stackingclass: Number(node.userData.orderline.stackinginfo.stackingclass),
+			node: node
+		};
+		list.push(nodeobj);			
+	}
+}
+function getStability(node, param, list) {
+	this.node = node;
+	this.param = param;		
+	if (node.userData && node.userData.statistics !== undefined || '' ) {
+		var nodeobj = {
+			id: node.id,
+			stability: Number(node.userData.statistics.stability),
+			node: node
+		};
+		list.push(nodeobj);			
+	}
+}
+function getRotation(node, param, list) {
+	this.node = node;
+	this.param = param;	
+	if (node.userData && node.userData.rotation !== undefined || '' ) {	
+		var nodeobj = {
+			id: node.id,
+			rotation: node.userData.rotation,
+			node: node
+		};
+		list.push(nodeobj);			
+	}
+}
+function chkBoxList(node, param) { 
+	this.node = node;
+	this.param = param;	
+
+	for (var item in param) {
+		if (param[item].value === '1') {
+			console.log('1')
+			//add/create threejs object
+		}
+		if (param[item].value === '2') {
+			console.log('2')			
+			//add/create threejs object
+		}
+		if (param[item].value === '3') {
+			console.log('3')			
+			//add/create threejs object
+		}
+		if (param[item].value === '4') {
+			console.log('4')
+			//add/create threejs object
+		}
+		if (param[item].value === '5') {
+			console.log('5')
+			//add/create threejs object
+		}
+		if (param[item].value === '6') {
+			console.log('6')
+			//add/create threejs object
+		}
+	}	
+}
+
+function changeColor(list) {
+	this.list = list;	
+}
+
+function countUniqColors(arr){	
+	var dupes = [];
+	var numberuniqcol = [];
+	$.each(arr, function (index, entry) {
+			if (!dupes[entry.familycode]) {
+				dupes[entry.familycode] = true;
+				numberuniqcol.push(entry);
+			}
+	});
+	return numberuniqcol.length;
+}
+function overlayLegend(node, param) { 
+	this.node = node;
+	this.param = param;
+}	
+function viewModelSettings(param) {	
+	var overlaylist = [];
+	scene.traverse( function( node ) {		
+		if (node instanceof THREE.Mesh) {
+			if (param.dropdown === "Family")
+				getOverlay(node, param.dropdown, overlaylist);
+
+			if (param.dropdown === "Stacking class")
+				getStackingClass(node, param, overlaylist);
+
+			if (param.dropdown === "Stability")
+				getStability(node, param, overlaylist);
+
+			if (param.dropdown === "Rotation")
+				getRotation(node, param, overlaylist);
+
+		 	// if (param.dropdown === "Weight on top")
+			// 	getWeightOnTop(node, param, overlaylist);
+
+			// if (param.dropdown === "Random color per orderline")
+			// 	getRandomColorPerBox(node, param, overlaylist);			
+		}	
+	});	
+
+	if (param.checkboxlist.length > 0) 
+		chkBoxList(node, param.checkboxlist);
+		
+	if (param.showOveralLegend.length > 0) 
+		overlayLegend(node, param.showOveralLegend);
+
+	console.log(overlaylist)
+	//draw overlay family
+	// var uniqcolor = countUniqColors(overlaylist);
+	// drawOverlay(overlaylist, uniqcolor);	
+}
+
+function onDocumentMouseDown( event ) {    
+	event.preventDefault();    	
+
+	mouse.x = ( (event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
+	mouse.y = -( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
+
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects(pallet.children, true );  		
+	
+	if ( intersects.length > 0) {
+		if ( INTERSECTED != intersects[ 0 ].object ) {
+			if ( INTERSECTED ) 
+				INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );	
+			if (intersects[ 0 ].object.userData.productcode !== undefined) {	
+				INTERSECTED = intersects[ 0 ].object;
+				INTERSECTED.material = INTERSECTED.material.clone();
+				INTERSECTED.material.emissive.setHex( 0x2BD80D );				
+			}
+		// INTERSECTED.material.emissive.se
+		//mark groups
+		// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+		// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+		}		
+		// INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );					
+		// INTERSECTED = intersects[ 0 ].object;
+		// INTERSECTED.material = INTERSECTED.material.clone();
+		// INTERSECTED.material.emissive.setHex( 0x2BD80D );	
+		//mark groups
+		// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+		// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+		// intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
+	}
+	else {
+	if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+		INTERSECTED = null;
+	}
+}
+	function animate() {		
+	requestAnimationFrame( animate );
+		render();		
+		update();
+	}
+	function update() {
+		controls.update();
+	}
+	function render() 
+	{
+		renderer.render( scene, camera );
+	}
+</script>
+</body>
+</html>
+
+
+<!-- // if ( node instanceof THREE.Mesh ) {
+	// // insert your code here, for example:
+	// 	node.material = new THREE.MeshNormalMaterial();
+	// } -->
