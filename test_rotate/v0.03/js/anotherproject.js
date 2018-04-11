@@ -63,7 +63,7 @@ function packageorders(jsObj, orderslist, containerTypeCode) {
 		var containerlist = containerTypeCode[key];
 	
 		var containertypes = $.each( containertype, function( key, value ) {  
-		containerlist.containerlist = containertype;
+			containerlist.containerlist = containertype;
 		});
 	});  
 
@@ -158,8 +158,7 @@ function prepareContainer(recipe) {
 		  line.position.copy(mesh.position);
 		  line.rotation.copy(mesh.rotation);
 		  container.mesh.add( line );   
-		}
-	
+		}	
 		return container;
 	} 
 }

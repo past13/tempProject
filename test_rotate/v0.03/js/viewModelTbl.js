@@ -1,5 +1,4 @@
 'use strict'; 
-
 function optionsBtn(button) {
 'use strict'; 
     var dropdownlist = document.getElementById('dropDownList');	
@@ -12,15 +11,14 @@ function optionsBtn(button) {
         var checklegend = legendcheckbox.querySelectorAll("input[type='checkbox']:checked");        
         var selected = dropdownlist.querySelector("option:checked").value;	
         var slidervalue = slider.value;
-
         var parametters = {
             dropdown: selected,
             transparency: slidervalue,
             showOveralLegend: checklegend,            
             checkboxlist: checkedbox
         };
-
-        viewModelSettings(parametters);
+        var list = viewModelSettings(parametters);
+        getMeshInfo(list);
 
     } else if (button.value === 'reset') {
         $(dropdownlist).prop('selectedIndex', 0);

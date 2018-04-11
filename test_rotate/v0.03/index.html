@@ -16,6 +16,8 @@
 <script src="js/libs/xml2jsobj.js"></script>
 <script src="js/anotherproject.js"></script>
 
+<script src="js/viewModelSettings.js"></script>
+
 <script src="js/summaryTable.js"></script>
 <script src="js/viewModelTbl.js"></script>
 
@@ -26,17 +28,17 @@
 			<div class="box">Overlay:</div>
 			<div class="box">Transparency:</div>	
 			<div class="box">Show overlay legend:</div>			
-	</div>
+		</div>
 	<div class="bodyList">
 		<div class="dropdown">
 			<select id="dropDownList" > 
 			<option value="empty">No overlay</option>
-			<option>Family</option>
-			<option>Stacking class</option>
-			<option>Stability</option>
-			<option>Weight on top</option>
-			<option>Rotation</option>
-			<option>Random color per orderline</option>	
+			<option value="familycode">Family</option>
+			<option value="stacking">Stacking class</option>
+			<option value="stability">Stability</option>
+			<option value="weighontop">Weight on top</option>
+			<option value="rotation">Rotation</option>
+			<option value="random">Random color per orderline</option>	
 		</select>	
 		</div>
 		<div id="transparencyLine"> 
@@ -64,22 +66,20 @@
 		</ul>	
 	</div>
 </div>
-
 <div id="ThreeJS"></div>
 
 <script>
+	var raycaster = new THREE.Raycaster();
+	var mouse = new THREE.Vector2(), INTERSECTED;
+	var container, scene, camera, renderer, controls, stats;
+	var clock = new THREE.Clock();
 
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2(), INTERSECTED;
-var container, scene, camera, renderer, controls, stats;
-var clock = new THREE.Clock();
-
-// custom global variables
-var result;
-var parameters;
-var gui;
-var pallet;
-var ruler = false;
+	// custom global variables
+	var result;
+	var parameters;
+	var gui;
+	var pallet;
+	var ruler = false;
 
 init();
 animate();
@@ -161,152 +161,33 @@ function init() {
 	canvastest.addEventListener( 'mousedown', onDocumentMouseDown, false );		
 }
 
-function getOverlay(node, param, list) {
-	this.node = node;
-	this.param = param;	
-	if (node.userData && node.userData.orderline !== undefined) {
-		if (node.userData.orderline.familycode !== '') 	{			
-			var nodeobj = {
-				id: node.id,
-				familycode: Number(node.userData.orderline.familycode),
-				node: node
-			};
-			list.push(nodeobj);
-		}		
-	}	
-}
-function getStackingClass(node, param, list) {
-	this.node = node;
-	this.param = param;		
-	if (node.userData && node.userData.orderline !== undefined || '') {		
-		var nodeobj = {
-			id: node.id,
-			stackingclass: Number(node.userData.orderline.stackinginfo.stackingclass),
-			node: node
-		};
-		list.push(nodeobj);			
-	}
-}
-function getStability(node, param, list) {
-	this.node = node;
-	this.param = param;		
-	if (node.userData && node.userData.statistics !== undefined || '' ) {
-		var nodeobj = {
-			id: node.id,
-			stability: Number(node.userData.statistics.stability),
-			node: node
-		};
-		list.push(nodeobj);			
-	}
-}
-function getRotation(node, param, list) {
-	this.node = node;
-	this.param = param;	
-	if (node.userData && node.userData.rotation !== undefined || '' ) {	
-		var nodeobj = {
-			id: node.id,
-			rotation: node.userData.rotation,
-			node: node
-		};
-		list.push(nodeobj);			
-	}
-}
-function chkBoxList(node, param) { 
-	this.node = node;
-	this.param = param;	
-
-	for (var item in param) {
-		if (param[item].value === '1') {
-			console.log('1')
-			//add/create threejs object
-		}
-		if (param[item].value === '2') {
-			console.log('2')			
-			//add/create threejs object
-		}
-		if (param[item].value === '3') {
-			console.log('3')			
-			//add/create threejs object
-		}
-		if (param[item].value === '4') {
-			console.log('4')
-			//add/create threejs object
-		}
-		if (param[item].value === '5') {
-			console.log('5')
-			//add/create threejs object
-		}
-		if (param[item].value === '6') {
-			console.log('6')
-			//add/create threejs object
-		}
-	}	
-}
-
-function changeColor(list) {
-	this.list = list;	
-}
-
-function countUniqColors(arr){	
-	var dupes = [];
-	var numberuniqcol = [];
-	$.each(arr, function (index, entry) {
-			if (!dupes[entry.familycode]) {
-				dupes[entry.familycode] = true;
-				numberuniqcol.push(entry);
-			}
-	});
-	return numberuniqcol.length;
-}
-function overlayLegend(node, param) { 
-	this.node = node;
-	this.param = param;
-}	
-function viewModelSettings(param) {	
-	var overlaylist = [];
-	scene.traverse( function( node ) {		
-		if (node instanceof THREE.Mesh) {
-			if (param.dropdown === "Family")
-				getOverlay(node, param.dropdown, overlaylist);
-
-			if (param.dropdown === "Stacking class")
-				getStackingClass(node, param, overlaylist);
-
-			if (param.dropdown === "Stability")
-				getStability(node, param, overlaylist);
-
-			if (param.dropdown === "Rotation")
-				getRotation(node, param, overlaylist);
-
-		 	// if (param.dropdown === "Weight on top")
-			// 	getWeightOnTop(node, param, overlaylist);
-
-			// if (param.dropdown === "Random color per orderline")
-			// 	getRandomColorPerBox(node, param, overlaylist);			
-		}	
-	});	
-
-	if (param.checkboxlist.length > 0) 
-		chkBoxList(node, param.checkboxlist);
-		
-	if (param.showOveralLegend.length > 0) 
-		overlayLegend(node, param.showOveralLegend);
-
-	console.log(overlaylist)
-	//draw overlay family
-	// var uniqcolor = countUniqColors(overlaylist);
-	// drawOverlay(overlaylist, uniqcolor);	
-}
-
 function onDocumentMouseDown( event ) {    
 	event.preventDefault();    	
 
 	mouse.x = ( (event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
 	mouse.y = -( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
-
-	raycaster.setFromCamera( mouse, camera );
-	var intersects = raycaster.intersectObjects(pallet.children, true );  		
+	getMeshInfo();
+}
 	
+function getMeshInfo(obj) {
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects(pallet.children, true );
+
+	if (obj !== undefined) {
+
+		obj.forEach(element => {
+			console.log(element)
+			element.node.material.emissive.setHex( 0x2BD80D );
+			
+		});
+
+	
+
+	
+
+
+	}
+	else {
 	if ( intersects.length > 0) {
 		if ( INTERSECTED != intersects[ 0 ].object ) {
 			if ( INTERSECTED ) 
@@ -331,9 +212,10 @@ function onDocumentMouseDown( event ) {
 		// intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
 	}
 	else {
-	if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-		INTERSECTED = null;
-	}
+		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+			INTERSECTED = null;
+		}		
+	}	
 }
 	function animate() {		
 	requestAnimationFrame( animate );
@@ -343,8 +225,7 @@ function onDocumentMouseDown( event ) {
 	function update() {
 		controls.update();
 	}
-	function render() 
-	{
+	function render() {
 		renderer.render( scene, camera );
 	}
 </script>
