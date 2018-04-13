@@ -19,8 +19,13 @@ function getRandomColor() {
 	return color;
 }
 function getMapValues(node) {
-	var filtered = colorsmap.filter(c => c.param === node.param);
-	node.color = filtered[0].color;
+	if (node.param !== null && typeof node.param ===  'object' ) {
+		//change colors		
+	}
+	else if (node.param === 'string') {		
+		var filtered = colorsmap.filter(c => c.param === node.param);
+		node.color = filtered[0].color;
+	}
 	return node;
 }
 function changeColorsDL(colorsmap, list) {
@@ -113,15 +118,16 @@ var overlaylist = [];
 			}		
 		}	
 	});	
-
-	var cloneoverlaylist = $.extend(true, [], overlaylist);
-
 	var uniqcolorarray = countUniqColors(overlaylist);
 
-	var newlist = changeColorsDL(uniqcolorarray, cloneoverlaylist);
+	var newlist = changeColorsDL(uniqcolorarray, $.extend(true, [], overlaylist));
+
+	
+
 
 	// if (param.checkboxlist.length > 0) 
 	// 	chkBoxList(node, param.checkboxlist);
+
 		
 	// if (param.showOveralLegend.length > 0) 
 	// 	overlayLegend(node, param.showOveralLegend);

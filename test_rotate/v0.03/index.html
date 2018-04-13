@@ -126,21 +126,19 @@ function init() {
 
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-	// LIGHT
-	var light = new THREE.PointLight(0xffffff);
-	light.position.set(-100,150,100);
-	
-	var lightbulbGeometry = new THREE.SphereGeometry( 10, 16, 8 );
-	var lightbulbMaterial = new THREE.MeshBasicMaterial( { color: 0xffff44, transparent: true,  opacity: 0.8, blending: THREE.AdditiveBlending } );
-	var wireMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: true } );
-	var materialArray = [lightbulbMaterial, wireMaterial];
-	var lightbulb = THREE.SceneUtils.createMultiMaterialObject( lightbulbGeometry, materialArray );
-	// var lightbulb = new THREE.Mesh( lightbulbGeometry, lightbulbMaterial );
-	lightbulb.position = light.position;	
-	// lightbulb.material.;
-	// scene.add(lightbulb);
-	
+	// LIGHTS
+	var light = new THREE.DirectionalLight(0xffd0d0);
+	light.position.set(-100,50,100);
 	scene.add(light);
+
+	var seclight = new THREE.DirectionalLight(0xe0e0ff);
+	seclight.position.set(100,50,-100);	
+	scene.add(seclight);
+
+	var ambientlight = new THREE.AmbientLight();
+	scene.add(ambientlight);
+
+	
 	// FLOOR
 	// var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
 	// var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
@@ -164,8 +162,8 @@ function init() {
 function onDocumentMouseDown( event ) {    
 	event.preventDefault();    	
 
-	mouse.x = ( (event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
-	mouse.y = -( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
+	mouse.x = ((event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width) * 2 - 1;
+	mouse.y = -((event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height) * 2 + 1;
 	getMeshInfo();
 }
 	
@@ -173,19 +171,12 @@ function getMeshInfo(obj) {
 	raycaster.setFromCamera( mouse, camera );
 	var intersects = raycaster.intersectObjects(pallet.children, true );
 
+	
+
 	if (obj !== undefined) {
-
 		obj.forEach(element => {
-			console.log(element)
-			element.node.material.emissive.setHex( 0x2BD80D );
-			
-		});
-
-	
-
-	
-
-
+			element.node.material.emissive.setHex( 0x2BD80D );			
+		});	
 	}
 	else {
 	if ( intersects.length > 0) {
@@ -195,7 +186,12 @@ function getMeshInfo(obj) {
 			if (intersects[ 0 ].object.userData.productcode !== undefined) {	
 				INTERSECTED = intersects[ 0 ].object;
 				INTERSECTED.material = INTERSECTED.material.clone();
-				INTERSECTED.material.emissive.setHex( 0x2BD80D );				
+				INTERSECTED.material.emissive.setHex( 0x2BD80D );	
+
+
+
+				// console.log(intersects[ 0 ].object.geometry)
+							
 			}
 		// INTERSECTED.material.emissive.se
 		//mark groups

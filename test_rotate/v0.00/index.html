@@ -64,11 +64,10 @@ animate();
 function prepareDataFromXml() {
   var xmlObj = (function(dataURL) {  
     var result = $.ajax({
+      method: 'GET',  			
 			async: false,
 			url: 'recipe.xml',			
-      // url: 'recipe_old.xml',
-			
-      method: 'GET',  
+      // url: 'recipe_old.xml',			
 		}).done();		
     return result;
 	})();  

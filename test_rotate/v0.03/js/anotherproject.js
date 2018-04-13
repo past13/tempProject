@@ -1,3 +1,15 @@
+function getTextureMaping() {
+	var faceArray = {
+		face1 : [new THREE.Vector2(0, .5), new THREE.Vector2(.3333, .5), new THREE.Vector2(.3333, 1), new THREE.Vector2(0, 1)],
+		face2 : [new THREE.Vector2(.3333, .5), new THREE.Vector2(.6666, .5), new THREE.Vector2(.6666, 1), new THREE.Vector2(.3333, 1)],
+		face3 : [new THREE.Vector2(.6666, .5), new THREE.Vector2(1, .5), new THREE.Vector2(1, 1), new THREE.Vector2(.6666, 1)],
+		face4 : [new THREE.Vector2(0, 0), new THREE.Vector2(.3333, 0), new THREE.Vector2(.3333, .5), new THREE.Vector2(0, .5)],
+		face5 : [new THREE.Vector2(.3333, 0), new THREE.Vector2(.6666, 0), new THREE.Vector2(.6666, .5), new THREE.Vector2(.3333, .5)],
+		face6 : [new THREE.Vector2(.6666, 0), new THREE.Vector2(1, 0), new THREE.Vector2(1, .5), new THREE.Vector2(.6666, .5)]	
+	}
+	return faceArray;
+}
+
 function externalProj(xmlObj) {
 		var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
 		var recipe = customizeXmlObj(xml2bject);
@@ -30,7 +42,7 @@ function externalProj(xmlObj) {
 
 	function getBoxTexture() {
 		// var map = THREE.ImageUtils.loadTexture( "images/blanktexture.jpg" );
-		var map = new THREE.TextureLoader().load( 'images/blanktexture.jpg' );
+		var map = new THREE.TextureLoader().load( 'images/texture_2.jpg' );
 		return map;
 	}
 
@@ -80,9 +92,14 @@ function packageorders(jsObj, orderslist, containerTypeCode) {
 }  
 
   function recalculateCoordinates(packagelist) {
+		console.log(packagelist)
 	// this.packagelist = packagelist;  
 	$.each( packagelist, function( key, value ) {
-	  packagelist[key].map(function(pack) {       
+	  packagelist[key].map(function(pack) {      
+			// pack.rotation.x = Number(pack.rotation.x);  
+			// pack.rotation.y = Number(pack.rotation.y);  
+			// pack.rotation.z = Number(pack.rotation.z);
+			
 		  pack.rotation.x *=  (Math.PI/180);
 		  pack.rotation.y *=  (Math.PI/180);  
 		  pack.rotation.z *=  (Math.PI/180);        
@@ -104,49 +121,37 @@ function customizeXmlObj(jsObj) {
     //modife order properties and add to package
     var packagelist = packageorders(jsObj, orderslist, containerTypeCode);     
     //recalculate rotation property in pack
-		recalculateCoordinates(packagelist);		
+		recalculateCoordinates(packagelist);	
+
     return jsObj;
 }
-function prepareContainer(recipe) {	
-	this.recipe = recipe;
-	
+function createContainerType(recipe) {
+	this.recipe = recipe
 	var containertype;	
 	for (var key in recipe.order.containertypelist) if (recipe.order.containertypelist.hasOwnProperty(key)) {
 		containertype = recipe.order.containertypelist[key];
 		containertype.geometry = new THREE.BoxBufferGeometry( containertype.physicalsize.width, containertype.physicalsize.height, containertype.physicalsize.length );    
 		
-		containertype.material = new THREE.MeshStandardMaterial( { map: getBoxTexture(), transparent: true }); //0xa0a0a0 map: getBoxTexture(),
+		containertype.material = new THREE.MeshLambertMaterial( { transparent: true });
 		//todo: check with change xyz parameters
 		containertype.offset = { x: -containertype.contentoffset.deltax, y: -containertype.contentoffset.deltaz/2, z: -containertype.contentoffset.deltay }; 		
-		var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial());  
-	
+		var mesh = new THREE.Mesh( containertype.geometry, new THREE.MeshFaceMaterial());  	
 	}
-	  for (var key in recipe.order.orderlinelist.orderline) if (recipe.order.orderlinelist.orderline.hasOwnProperty(key)) {
-		var orderline = recipe.order.orderlinelist.orderline[key];
-	
-		orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
-		orderline.material = new THREE.MeshStandardMaterial( { map: getBoxTexture(), transparent: true} );	  //map: getBoxTexture(),
-	}
-	  for (var key in recipe.containerrecipelist.containerrecipe) if (recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
-		var container = recipe.containerrecipelist.containerrecipe[key];   
-		container.mesh = new THREE.Mesh();
-		var mesh;
-		mesh = new THREE.Mesh(container.containerlist.geometry, container.containerlist.material);
-		mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
-		//todo: BUG move to another place !!!dont change cas and receive shadow!!!
-		// mesh.castShadow = true;
-		// mesh.receiveShadow = true;
-		container.mesh.add( mesh );    
-	
-		for (var p in container.physicalresult.package) if (container.physicalresult.package.hasOwnProperty(p)) {
+	return containertype;
+}
+
+function createOrderlines(container) {
+	this.container = container;
+
+	for (var p in container.physicalresult.package) if (container.physicalresult.package.hasOwnProperty(p)) {
 		  var pack = container.physicalresult.package[p];		
 
-		  mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
+			mesh = new THREE.Mesh(pack.orderline.geometry, pack.orderline.material);
+			
 		  mesh.castShadow = true;
 			mesh.receiveShadow = true;								
 			mesh.userData = Object.assign({}, pack );
-			// mesh.userData = pack;
-	
+
 		  mesh.position.set(pack.x, pack.z, -pack.y);
 		  mesh.rotation.set(pack.rotation.x, pack.rotation.z, pack.rotation.y);
 		  container.mesh.add(mesh);
@@ -159,6 +164,36 @@ function prepareContainer(recipe) {
 		  line.rotation.copy(mesh.rotation);
 		  container.mesh.add( line );   
 		}	
+}
+
+function prepareContainer(recipe) {	
+	this.recipe = recipe;
+	
+		var containertype = createContainerType(recipe);
+
+	  for (var key in recipe.order.orderlinelist.orderline) if (recipe.order.orderlinelist.orderline.hasOwnProperty(key)) {
+			var orderline = recipe.order.orderlinelist.orderline[key];
+		
+			orderline.geometry = new THREE.BoxBufferGeometry( orderline.size.width, orderline.size.height, orderline.size.length );
+			orderline.material = new THREE.MeshLambertMaterial( { map: getBoxTexture(), transparent: true} );	  	
+	}		
+		var texturemap = getTextureMaping();
+
+		for (var key in recipe.containerrecipelist.containerrecipe) if (recipe.containerrecipelist.containerrecipe.hasOwnProperty(key)) {
+			var container = recipe.containerrecipelist.containerrecipe[key];   
+			container.mesh = new THREE.Mesh();
+			var mesh;
+
+			mesh = new THREE.Mesh(container.containerlist.geometry, container.containerlist.material);
+			mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
+		//todo: BUG move to another place !!!dont change cas and receive shadow!!!
+		// mesh.castShadow = true;
+		// mesh.receiveShadow = true;
+			container.mesh.add( mesh );    
+		
+			createOrderlines(container);
+
 		return container;
 	} 
+
 }

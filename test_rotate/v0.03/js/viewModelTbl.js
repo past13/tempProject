@@ -18,6 +18,7 @@ function optionsBtn(button) {
             checkboxlist: checkedbox
         };
         var list = viewModelSettings(parametters);
+        
         getMeshInfo(list);
 
     } else if (button.value === 'reset') {
