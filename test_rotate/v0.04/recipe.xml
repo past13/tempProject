@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recipe type="IPS">
+	<order type="ips" id="3021" code="hs_ox2_3021_20180327_111828" orderbatchcode="hs_ox2_3021_20180327_111828">
+		<orderinfo>
+			<modules>FREE:FAMILYHANDLING,CSA,PARCEL</modules>
+			<packagetype_crate>101</packagetype_crate>
+			<min_score>0</min_score>
+		</orderinfo>
+		<configuration/>
+		<parameterlist>
+			<parameter name="AllowOverhang" value="1"/>
+			<parameter name="MaxOverhang" value="20"/>
+			<parameter name="AllowXYRotation" value="1"/>
+			<parameter name="AllowZRotation" value="1"/>
+			<parameter name="CarrierTrainGap" value="100"/>
+			<parameter name="CarrierTrainMaxLength" value="1000000"/>
+			<parameter name="CenterTopLayer" value="1"/>
+			<parameter name="CombineCarriers" value="0"/>
+			<parameter name="ExpectedFillRatio" value="75"/>
+			<parameter name="FamilyHandlingFlags" value="12"/>
+			<parameter name="FenceWrapLeaning" value="0"/>
+			<parameter name="GroupMaxDeltaSize" value="20"/>
+			<parameter name="IncludeSubOptimalPatterns" value="0"/>
+			<parameter name="LandingMarginX" value="0"/>
+			<parameter name="LandingMarginY" value="0"/>
+			<parameter name="MaxBranchCount" value="10"/>
+			<parameter name="MaxCarrierOverhangNegX" value="10"/>
+			<parameter name="MaxCarrierOverhangNegY" value="10"/>
+			<parameter name="MaxCarrierOverhangPosX" value="10"/>
+			<parameter name="MaxCarrierOverhangPosY" value="10"/>
+			<parameter name="MaxCarrierOverhangZ" value="0"/>
+			<parameter name="MaxCarriersExceeded" value="5"/>
+			<parameter name="MaxCarrierWeight" value="750000"/>
+			<parameter name="MaxDeltaHeight" value="10"/>
+			<parameter name="MaxFallHeight" value="150"/>
+			<parameter name="MaxLayersPerCarrier" value="999"/>
+			<parameter name="MaxLeanDistance" value="25"/>
+			<parameter name="MaxPackagesPerCarrier" value="999"/>
+			<parameter name="MaxPackagesPerLayer" value="999"/>
+			<parameter name="MaxPerformanceSets" value="1"/>
+			<parameter name="MaxSetAOrderlines" value="1000"/>
+			<parameter name="MaxStackingHeight" value="2400"/>
+			<parameter name="MaxWeightOnTopFactor" value="100"/>
+			<parameter name="MinSupport" value="70"/>
+			<parameter name="MixFactor" value="1000"/>
+			<parameter name="NormCarrierCount" value="10"/>
+			<parameter name="Relax_MaxFillRatio" value="0"/>
+			<parameter name="Relax_MinNrBadCarriers" value="1000"/>
+			<parameter name="RequiredAngle" value="5"/>
+			<parameter name="Score_CombiHeight" value="1000"/>
+			<parameter name="Score_Complexity" value="1000"/>
+			<parameter name="Score_Efficiency" value="1000"/>
+			<parameter name="Score_OrderlineGrouping" value="1000"/>
+			<parameter name="Score_PackageArea" value="1000"/>
+			<parameter name="Score_RelativeVolume" value="1000"/>
+			<parameter name="Score_SmartHeight" value="1000"/>
+			<parameter name="Score_Stability" value="1000"/>
+			<parameter name="Score_Stackability" value="1000"/>
+			<parameter name="Score_Support" value="1000"/>
+			<parameter name="ScoreWeight_Carrier" value="50"/>
+			<parameter name="ScoreWeight_Efficiency" value="0"/>
+			<parameter name="ScoreWeight_FamilySpread" value="10"/>
+			<parameter name="ScoreWeight_OrderlineSpread" value="0"/>
+			<parameter name="ScoreWeight_Stability" value="15"/>
+			<parameter name="ScoreWeight_StackDensity" value="25"/>
+			<parameter name="SetADistributionFactor" value="70"/>
+			<parameter name="ShiftDirection" value="512"/>
+			<parameter name="SpacingMethod" value="1"/>
+			<parameter name="StableAngle" value="25"/>
+			<parameter name="SupportMargin" value="0"/>
+			<parameter name="WrapHeight" value="100"/>
+			<parameter name="ZRotatablePackageSize" value="0"/>
+			<parameter name="ZRotatableSizeDiff" value="0"/>
+			<performanceset>
+				<id>11</id>
+				<Score_CombiHeight>0</Score_CombiHeight>
+				<Score_Complexity>700</Score_Complexity>
+				<Score_Efficiency>3000</Score_Efficiency>
+				<Score_OrderlineGrouping>100</Score_OrderlineGrouping>
+				<Score_PackageArea>1650</Score_PackageArea>
+				<Score_RelativeVolume>3650</Score_RelativeVolume>
+				<Score_SmartHeight>540</Score_SmartHeight>
+				<Score_Stability>150</Score_Stability>
+				<Score_Stackability>480</Score_Stackability>
+				<Score_Support>70</Score_Support>
+			</performanceset>
+		</parameterlist>
+		<containertypelist>
+			<containertype id="33" code="EUR120X080" type="PALLET" category="PALLET_STANDARD">
+				<contentsize length="1200" width="800" height="1800"/>
+				<physicalsize length="1200" width="800" height="145"/>
+				<contentoffset deltax="0" deltay="0" deltaz="145"/>
+				<maxcontentweight>750000</maxcontentweight>
+				<fencecount>0</fencecount>
+				<fenceheight>2147483647</fenceheight>
+				<overhang direction="9" max="20"/>
+			</containertype>
+			<!-- <containertype id="34" code="BOX1" type="BOX" category="BOX">
+			<contentsize length="100" width="100" height="100"/>
+			<physicalsize length="100" width="100" height="100"/>
+			<contentoffset deltax="0" deltay="0" deltaz="145"/>
+			<maxcontentweight>100</maxcontentweight>
+			<fencecount>0</fencecount>
+			<fenceheight>2147483647</fenceheight>
+			<overhang direction="9" max="20"/>
+		</containertype> -->
+		</containertypelist>
+		<orderlinelist>
+			<orderline id="9376" productcode="box016501600098" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX165x160x98" contentamount="1" familycode="1" orderamount="0">
+				<name>BOX165x160x98</name>
+				<description>BOX165x160x98</description>
+				<size length="165" width="160" height="98"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9377" productcode="box019001280090" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX190x128x90" contentamount="1" familycode="" orderamount="9">
+				<name>BOX190x128x90</name>
+				<description>BOX190x128x90</description>
+				<size length="190" width="128" height="90"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9378" productcode="box020501630137" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX205x163x137" contentamount="1" familycode="" orderamount="0">
+				<name>BOX205x163x137</name>
+				<description>BOX205x163x137</description>
+				<size length="205" width="163" height="137"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9379" productcode="box024001420115" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX240x142x115" contentamount="1" familycode="" orderamount="0">
+				<name>BOX240x142x115</name>
+				<description>BOX240x142x115</description>
+				<size length="240" width="142" height="115"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9380" productcode="box030002000200" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX300x200x200" contentamount="1" familycode="" orderamount="5">
+				<name>BOX300x200x200</name>
+				<description>BOX300x200x200</description>
+				<size length="300" width="200" height="200"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9381" productcode="box030302040305" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX303x204x305" contentamount="1" familycode="" orderamount="5">
+				<name>BOX303x204x305</name>
+				<description>BOX303x204x305</description>
+				<size length="303" width="204" height="305"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9382" productcode="box030002250090" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX300x225x90" contentamount="1" familycode="1" orderamount="5">
+				<name>BOX300x225x90</name>
+				<description>BOX300x225x90</description>
+				<size length="300" width="225" height="90"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9383" productcode="box030502250125" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX305x225x125" contentamount="1" familycode="" orderamount="0">
+				<name>BOX305x225x125</name>
+				<description>BOX305x225x125</description>
+				<size length="305" width="225" height="125"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9384" productcode="box030502230260" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX305x223x260" contentamount="1" familycode="" orderamount="4">
+				<name>BOX305x223x260</name>
+				<description>BOX305x223x260</description>
+				<size length="305" width="223" height="260"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9385" productcode="box032502450120" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX325x245x120" contentamount="1" familycode="1" orderamount="4">
+				<name>BOX325x245x120</name>
+				<description>BOX325x245x120</description>
+				<size length="325" width="245" height="120"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9386" productcode="box041002500260" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX410x250x260" contentamount="1" familycode="" orderamount="1">
+				<name>BOX410x250x260</name>
+				<description>BOX410x250x260</description>
+				<size length="410" width="250" height="260"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9387" productcode="box042503080186" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX425x308x186" contentamount="1" familycode="" orderamount="2">
+				<name>BOX425x308x186</name>
+				<description>BOX425x308x186</description>
+				<size length="425" width="308" height="186"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9388" productcode="box044803520306" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX448x352x306" contentamount="1" familycode="" orderamount="4">
+				<name>BOX448x352x306</name>
+				<description>BOX448x352x306</description>
+				<size length="448" width="352" height="306"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9389" productcode="box050005050507" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX500x505x507" contentamount="1" familycode="1" orderamount="0">
+				<name>BOX500x505x507</name>
+				<description>BOX500x505x507</description>
+				<size length="505" width="500" height="507"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9390" productcode="box060005000500" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX600x500x500" contentamount="1" familycode="" orderamount="2">
+				<name>BOX600x500x500</name>
+				<description>BOX600x500x500</description>
+				<size length="600" width="500" height="500"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9391" productcode="box060303070406" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX603x307x406" contentamount="1" familycode="2" orderamount="4">
+				<name>BOX603x307x406</name>
+				<description>BOX603x307x406</description>
+				<size length="603" width="307" height="406"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+			<orderline id="9392" productcode="box060804080410" subordercode="null" groupcode="null" typecode="BOX" contentcode="CONTENT_BOX608x408x410" contentamount="1" familycode="2" orderamount="4">
+				<name>BOX608x408x410</name>
+				<description>BOX608x408x410</description>
+				<size length="608" width="408" height="410"/>
+				<weight>100</weight>
+				<needsbox>0</needsbox>
+				<labelside>0</labelside>
+				<stackinginfo stackingclass="1" maxweightontop="10000" topnonsupportborder="0" bottomnonsupportborder="0" rigidity="100" maxoverhang="20" rotationxscore="100" rotationyscore="100"/>
+			</orderline>
+		</orderlinelist>
+	</order>
+	<recipestatistics>
+		<statistic name="avgfillratio" value="0.919629206019"/>
+		<statistic name="calculationtime" value="865"/>
+		<statistic name="calcversion" value="v4.20.00040"/>
+		<statistic name="carrierscore" value="1.000010000000"/>
+		<statistic name="containercount" value="1"/>
+		<statistic name="efficiencyscore" value="1.000000000000"/>
+		<statistic name="expectedcarriercount" value="1"/>
+		<statistic name="expectedcontainercount" value="1"/>
+		<statistic name="familyspreadscore" value="1.000000000000"/>
+		<statistic name="finalcontainercount" value="1"/>
+		<statistic name="footprint" value="1041600"/>
+		<statistic name="ipscalcversion" value="v4.20.00040"/>
+		<statistic name="labelvisibilityscore" value="1.000000000000"/>
+		<statistic name="loadmeters" value="1041600"/>
+		<statistic name="orderlinespreadscore" value="1.000000000000"/>
+		<statistic name="packagevisibilityscore" value="0.979591836735"/>
+		<statistic name="performanceset" value="11"/>
+		<statistic name="recipescore" value="0.914484788734"/>
+		<statistic name="stabilityscore" value="0.538718475961"/>
+		<statistic name="stackdensityscore" value="0.934688069359"/>
+		<statistic name="strappabilityscore" value="0.952749415426"/>
+		<statistic name="totalfootprint" value="1041600"/>
+		<statistic name="totalvolume" value="1995705600"/>
+		<statistic name="volume" value="1995705600"/>
+	</recipestatistics>
+	<containerrecipelist>
+		<containerrecipe index="1" containertypecode="EUR120X080" containercode="">
+			<containerstatistics>
+				<statistic name="containerscore" value="0.538718475961"/>
+				<statistic name="efficiencyscore" value="1.000000000000"/>
+				<statistic name="familycount" value="1"/>
+				<statistic name="fillratiomax" value="0.919629206019"/>
+				<statistic name="fillratiotop" value="0.934688069359"/>
+				<statistic name="footprint" value="1041600"/>
+				<statistic name="instructionstepcount" value="23"/>
+				<statistic name="isfinalcontainer" value="1"/>
+				<statistic name="labelvisibilityscore" value="1.000000000000"/>
+				<statistic name="packagecount" value="49"/>
+				<statistic name="packagevisibilityscore" value="0.979591836735"/>
+				<statistic name="packagevolume" value="1589119268"/>
+				<statistic name="packageweight" value="4900"/>
+				<statistic name="stabilityscore" value="0.538718475961"/>
+				<statistic name="strappabilityscore" value="0.952749415426"/>
+				<statistic name="topheight" value="1771"/>
+				<statistic name="totalcontentamount" value="49"/>
+				<statistic name="totalheight" value="1916"/>
+				<statistic name="totallength" value="1240"/>
+				<statistic name="totalvolume" value="1995705600"/>
+				<statistic name="totalweight" value="4900"/>
+				<statistic name="totalwidth" value="840"/>
+			</containerstatistics>
+			<instructionlist>
+				<instruction index="1" typecode="PickP" locationcode="" orderlineid="9392" productcode="box060804080410" amount="4" packageindexlist="0,1,2,3"/>
+				<instruction index="2" typecode="PickP" locationcode="" orderlineid="9391" productcode="box060303070406" amount="4" packageindexlist="4,5,6,7"/>
+				<instruction index="3" typecode="PickP" locationcode="" orderlineid="9388" productcode="box044803520306" amount="4" packageindexlist="8,9,10,11"/>
+				<instruction index="4" typecode="PickP" locationcode="" orderlineid="9381" productcode="box030302040305" amount="2" packageindexlist="12,13"/>
+				<instruction index="5" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="14"/>
+				<instruction index="6" typecode="PickP" locationcode="" orderlineid="9381" productcode="box030302040305" amount="2" packageindexlist="15,16"/>
+				<instruction index="7" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="1" packageindexlist="17"/>
+				<instruction index="8" typecode="PickP" locationcode="" orderlineid="9390" productcode="box060005000500" amount="1" packageindexlist="18"/>
+				<instruction index="9" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="2" packageindexlist="19,20"/>
+				<instruction index="10" typecode="PickP" locationcode="" orderlineid="9385" productcode="box032502450120" amount="2" packageindexlist="21,22"/>
+				<instruction index="11" typecode="PickP" locationcode="" orderlineid="9390" productcode="box060005000500" amount="1" packageindexlist="23"/>
+				<instruction index="12" typecode="PickP" locationcode="" orderlineid="9385" productcode="box032502450120" amount="2" packageindexlist="24,25"/>
+				<instruction index="13" typecode="PickP" locationcode="" orderlineid="9380" productcode="box030002000200" amount="5" packageindexlist="26,27,28,29,30"/>
+				<instruction index="14" typecode="PickP" locationcode="" orderlineid="9382" productcode="box030002250090" amount="2" packageindexlist="31,32"/>
+				<instruction index="15" typecode="PickP" locationcode="" orderlineid="9384" productcode="box030502230260" amount="4" packageindexlist="33,34,35,36"/>
+				<instruction index="16" typecode="PickP" locationcode="" orderlineid="9382" productcode="box030002250090" amount="2" packageindexlist="37,38"/>
+				<instruction index="17" typecode="PickP" locationcode="" orderlineid="9386" productcode="box041002500260" amount="1" packageindexlist="39"/>
+				<instruction index="18" typecode="PickP" locationcode="" orderlineid="9382" productcode="box030002250090" amount="1" packageindexlist="40"/>
+				<instruction index="19" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="2" packageindexlist="41,42"/>
+				<instruction index="20" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="43"/>
+				<instruction index="21" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="4" packageindexlist="44,45,46,47"/>
+				<instruction index="22" typecode="PickP" locationcode="" orderlineid="9381" productcode="box030302040305" amount="1" packageindexlist="48"/>
+			</instructionlist>
+			<physicalresult>
+				<package index="0" typecode="BOX" orderlineid="9392" productcode="box060804080410">
+					<position x="-410" y="-608" z="0"/>
+					<extent x="0" y="0" z="408"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.962773"/>
+				</package>
+				<package index="1" typecode="BOX" orderlineid="9392" productcode="box060804080410">
+					<position x="0" y="-608" z="0"/>
+					<extent x="410" y="0" z="408"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.962773"/>
+				</package>
+				<package index="2" typecode="BOX" orderlineid="9392" productcode="box060804080410">
+					<position x="-410" y="0" z="0"/>
+					<extent x="0" y="608" z="408"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.962773"/>
+				</package>
+				<package index="3" typecode="BOX" orderlineid="9392" productcode="box060804080410">
+					<position x="0" y="0" z="0"/>
+					<extent x="410" y="608" z="408"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.962773"/>
+				</package>
+				<package index="4" typecode="BOX" orderlineid="9391" productcode="box060303070406">
+					<position x="-406" y="-598" z="408"/>
+					<extent x="0" y="5" z="715"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="5" typecode="BOX" orderlineid="9391" productcode="box060303070406">
+					<position x="0" y="-598" z="408"/>
+					<extent x="406" y="5" z="715"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="6" typecode="BOX" orderlineid="9391" productcode="box060303070406">
+					<position x="-406" y="5" z="408"/>
+					<extent x="0" y="608" z="715"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="7" typecode="BOX" orderlineid="9391" productcode="box060303070406">
+					<position x="0" y="5" z="408"/>
+					<extent x="406" y="608" z="715"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="8" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="-420" y="-620" z="715"/>
+					<extent x="-68" y="-172" z="1021"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.913073"/>
+				</package>
+				<package index="9" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="-68" y="-620" z="715"/>
+					<extent x="380" y="-268" z="1021"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.937500"/>
+				</package>
+				<package index="10" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="28" y="-268" z="715"/>
+					<extent x="380" y="180" z="1021"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="11" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="-420" y="-172" z="715"/>
+					<extent x="28" y="180" z="1021"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.968750"/>
+				</package>
+				<package index="12" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-408" y="180" z="715"/>
+					<extent x="-103" y="384" z="1018"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.867574"/>
+				</package>
+				<package index="13" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-103" y="180" z="715"/>
+					<extent x="202" y="384" z="1018"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="14" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="202" y="180" z="715"/>
+					<extent x="388" y="605" z="1023"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.700037"/>
+				</package>
+				<package index="15" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-408" y="384" z="715"/>
+					<extent x="-103" y="588" z="1018"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.867574"/>
+				</package>
+				<package index="16" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-103" y="384" z="715"/>
+					<extent x="202" y="588" z="1018"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="17" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="223" y="-616" z="1021"/>
+					<extent x="413" y="-488" z="1111"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.813779"/>
+				</package>
+				<package index="18" typecode="BOX" orderlineid="9390" productcode="box060005000500">
+					<position x="-405" y="-580" z="1021"/>
+					<extent x="95" y="20" z="1521"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.472597"/>
+				</package>
+				<package index="19" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="95" y="-550" z="1021"/>
+					<extent x="223" y="-360" z="1111"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="20" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="223" y="-488" z="1021"/>
+					<extent x="413" y="-360" z="1111"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.826316"/>
+				</package>
+				<package index="21" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="95" y="-360" z="1021"/>
+					<extent x="420" y="-115" z="1141"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.521436"/>
+				</package>
+				<package index="22" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="95" y="-115" z="1021"/>
+					<extent x="420" y="130" z="1141"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.496108"/>
+				</package>
+				<package index="23" typecode="BOX" orderlineid="9390" productcode="box060005000500">
+					<position x="-405" y="20" z="1021"/>
+					<extent x="95" y="620" z="1521"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.313242"/>
+				</package>
+				<package index="24" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="95" y="130" z="1023"/>
+					<extent x="420" y="375" z="1143"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.332241"/>
+				</package>
+				<package index="25" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="95" y="375" z="1023"/>
+					<extent x="420" y="620" z="1143"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.310611"/>
+				</package>
+				<package index="26" typecode="BOX" orderlineid="9380" productcode="box030002000200">
+					<position x="95" y="-560" z="1111"/>
+					<extent x="395" y="-360" z="1311"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.219820"/>
+				</package>
+				<package index="27" typecode="BOX" orderlineid="9380" productcode="box030002000200">
+					<position x="95" y="-360" z="1141"/>
+					<extent x="395" y="-160" z="1341"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.336932"/>
+				</package>
+				<package index="28" typecode="BOX" orderlineid="9380" productcode="box030002000200">
+					<position x="95" y="-160" z="1141"/>
+					<extent x="395" y="40" z="1341"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.246398"/>
+				</package>
+				<package index="29" typecode="BOX" orderlineid="9380" productcode="box030002000200">
+					<position x="95" y="40" z="1143"/>
+					<extent x="395" y="240" z="1343"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.210523"/>
+				</package>
+				<package index="30" typecode="BOX" orderlineid="9380" productcode="box030002000200">
+					<position x="95" y="240" z="1143"/>
+					<extent x="395" y="440" z="1343"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.143421"/>
+				</package>
+				<package index="31" typecode="BOX" orderlineid="9382" productcode="box030002250090">
+					<position x="95" y="440" z="1143"/>
+					<extent x="395" y="530" z="1368"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.143335"/>
+				</package>
+				<package index="32" typecode="BOX" orderlineid="9382" productcode="box030002250090">
+					<position x="95" y="530" z="1143"/>
+					<extent x="395" y="620" z="1368"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.136861"/>
+				</package>
+				<package index="33" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="95" y="-583" z="1311"/>
+					<extent x="355" y="-360" z="1616"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.148768"/>
+				</package>
+				<package index="34" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="95" y="-360" z="1341"/>
+					<extent x="400" y="-100" z="1564"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.156917"/>
+				</package>
+				<package index="35" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="95" y="-100" z="1343"/>
+					<extent x="400" y="160" z="1566"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.138253"/>
+				</package>
+				<package index="36" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="95" y="160" z="1343"/>
+					<extent x="400" y="420" z="1566"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.129382"/>
+				</package>
+				<package index="37" typecode="BOX" orderlineid="9382" productcode="box030002250090">
+					<position x="95" y="420" z="1368"/>
+					<extent x="395" y="510" z="1593"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.060596"/>
+				</package>
+				<package index="38" typecode="BOX" orderlineid="9382" productcode="box030002250090">
+					<position x="95" y="510" z="1368"/>
+					<extent x="395" y="600" z="1593"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.075463"/>
+				</package>
+				<package index="39" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-390" y="-580" z="1521"/>
+					<extent x="-130" y="-170" z="1771"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.245687"/>
+				</package>
+				<package index="40" typecode="BOX" orderlineid="9382" productcode="box030002250090">
+					<position x="-130" y="-580" z="1521"/>
+					<extent x="95" y="-280" z="1611"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.350216"/>
+				</package>
+				<package index="41" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="-280" z="1521"/>
+					<extent x="95" y="-190" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.373966"/>
+				</package>
+				<package index="42" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="-190" z="1521"/>
+					<extent x="95" y="-100" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.384290"/>
+				</package>
+				<package index="43" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-403" y="-170" z="1521"/>
+					<extent x="-95" y="255" z="1707"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.208135"/>
+				</package>
+				<package index="44" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="-100" z="1521"/>
+					<extent x="95" y="-10" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.394857"/>
+				</package>
+				<package index="45" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="-10" z="1521"/>
+					<extent x="95" y="80" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.286849"/>
+				</package>
+				<package index="46" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="80" z="1521"/>
+					<extent x="95" y="170" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.290418"/>
+				</package>
+				<package index="47" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="-95" y="170" z="1521"/>
+					<extent x="95" y="260" z="1649"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.282278"/>
+				</package>
+				<package index="48" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-208" y="260" z="1521"/>
+					<extent x="95" y="565" z="1725"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.241910"/>
+				</package>
+			</physicalresult>
+			<containercontentlist>
+				<containercontentitem type="PRODUCT" productcode="box060303070406" subordercode="" packagingtype="" amount="4"/>
+				<containercontentitem type="PRODUCT" productcode="box030502230260" subordercode="" packagingtype="" amount="4"/>
+				<containercontentitem type="PRODUCT" productcode="box030002250090" subordercode="" packagingtype="" amount="5"/>
+				<containercontentitem type="PRODUCT" productcode="box041002500260" subordercode="" packagingtype="" amount="1"/>
+				<containercontentitem type="PRODUCT" productcode="box044803520306" subordercode="" packagingtype="" amount="4"/>
+				<containercontentitem type="PRODUCT" productcode="box042503080186" subordercode="" packagingtype="" amount="2"/>
+				<containercontentitem type="PRODUCT" productcode="box060804080410" subordercode="" packagingtype="" amount="4"/>
+				<containercontentitem type="PRODUCT" productcode="box060005000500" subordercode="" packagingtype="" amount="2"/>
+				<containercontentitem type="PRODUCT" productcode="box030002000200" subordercode="" packagingtype="" amount="5"/>
+				<containercontentitem type="PRODUCT" productcode="box030302040305" subordercode="" packagingtype="" amount="5"/>
+				<containercontentitem type="PRODUCT" productcode="box032502450120" subordercode="" packagingtype="" amount="4"/>
+				<containercontentitem type="PRODUCT" productcode="box019001280090" subordercode="" packagingtype="" amount="9"/>
+			</containercontentlist>
+		</containerrecipe>
+		<containerrecipe index="0" containertypecode="EUR120X080" containercode="">
+			<containerstatistics>
+				<statistic name="containerscore" value="0.773530450952"/>
+				<statistic name="efficiencyscore" value="1.000000000000"/>
+				<statistic name="familycount" value="1"/>
+				<statistic name="fillratiomax" value="0.887253196181"/>
+				<statistic name="fillratiotop" value="0.893207915618"/>
+				<statistic name="footprint" value="1032416"/>
+				<statistic name="instructionstepcount" value="28"/>
+				<statistic name="isfinalcontainer" value="1"/>
+				<statistic name="labelvisibilityscore" value="1.000000000000"/>
+				<statistic name="packagecount" value="58"/>
+				<statistic name="packagevisibilityscore" value="0.896551724138"/>
+				<statistic name="packagevolume" value="1533173523"/>
+				<statistic name="packageweight" value="5800"/>
+				<statistic name="stabilityscore" value="0.773530450952"/>
+				<statistic name="strappabilityscore" value="0.925794444293"/>
+				<statistic name="topheight" value="1788"/>
+				<statistic name="totalcontentamount" value="58"/>
+				<statistic name="totalheight" value="1933"/>
+				<statistic name="totallength" value="1232"/>
+				<statistic name="totalvolume" value="1995660128"/>
+				<statistic name="totalweight" value="5800"/>
+				<statistic name="totalwidth" value="838"/>
+			</containerstatistics>
+			<instructionlist>
+				<instruction index="1" typecode="PickP" locationcode="" orderlineid="9386" productcode="box041002500260" amount="9" packageindexlist="0,1,2,3,4,5,6,7,8"/>
+				<instruction index="2" typecode="PickP" locationcode="" orderlineid="9384" productcode="box030502230260" amount="3" packageindexlist="9,10,11"/>
+				<instruction index="3" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="12"/>
+				<instruction index="4" typecode="PickP" locationcode="" orderlineid="9384" productcode="box030502230260" amount="4" packageindexlist="13,14,15,16"/>
+				<instruction index="5" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="17"/>
+				<instruction index="6" typecode="PickP" locationcode="" orderlineid="9384" productcode="box030502230260" amount="2" packageindexlist="18,19"/>
+				<instruction index="7" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="2" packageindexlist="20,21"/>
+				<instruction index="8" typecode="PickP" locationcode="" orderlineid="9383" productcode="box030502250125" amount="2" packageindexlist="22,23"/>
+				<instruction index="9" typecode="PickP" locationcode="" orderlineid="9385" productcode="box032502450120" amount="2" packageindexlist="24,25"/>
+				<instruction index="10" typecode="PickP" locationcode="" orderlineid="9383" productcode="box030502250125" amount="7" packageindexlist="26,27,28,29,30,31,32"/>
+				<instruction index="11" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="1" packageindexlist="33"/>
+				<instruction index="12" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="34"/>
+				<instruction index="13" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="3" packageindexlist="35,36,37"/>
+				<instruction index="14" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="38"/>
+				<instruction index="15" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="2" packageindexlist="39,40"/>
+				<instruction index="16" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="41"/>
+				<instruction index="17" typecode="PickP" locationcode="" orderlineid="9377" productcode="box019001280090" amount="3" packageindexlist="42,43,44"/>
+				<instruction index="18" typecode="PickP" locationcode="" orderlineid="9387" productcode="box042503080186" amount="1" packageindexlist="45"/>
+				<instruction index="19" typecode="PickP" locationcode="" orderlineid="9386" productcode="box041002500260" amount="2" packageindexlist="46,47"/>
+				<instruction index="20" typecode="PickP" locationcode="" orderlineid="9381" productcode="box030302040305" amount="1" packageindexlist="48"/>
+				<instruction index="21" typecode="PickP" locationcode="" orderlineid="9389" productcode="box050005050507" amount="2" packageindexlist="49,50"/>
+				<instruction index="22" typecode="PickP" locationcode="" orderlineid="9381" productcode="box030302040305" amount="1" packageindexlist="51"/>
+				<instruction index="23" typecode="PickP" locationcode="" orderlineid="9388" productcode="box044803520306" amount="2" packageindexlist="52,53"/>
+				<instruction index="24" typecode="PickP" locationcode="" orderlineid="9386" productcode="box041002500260" amount="1" packageindexlist="54"/>
+				<instruction index="25" typecode="PickP" locationcode="" orderlineid="9390" productcode="box060005000500" amount="1" packageindexlist="55"/>
+				<instruction index="26" typecode="PickP" locationcode="" orderlineid="9389" productcode="box050005050507" amount="1" packageindexlist="56"/>
+				<instruction index="27" typecode="PickP" locationcode="" orderlineid="9391" productcode="box060303070406" amount="1" packageindexlist="57"/>
+			</instructionlist>
+			<physicalresult>
+				<package index="0" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-411" y="-595" z="0"/>
+					<extent x="-1" y="-335" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="1" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-1" y="-595" z="0"/>
+					<extent x="409" y="-335" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="2" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-411" y="-335" z="0"/>
+					<extent x="-1" y="-75" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="3" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-1" y="-335" z="0"/>
+					<extent x="409" y="-75" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="4" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-411" y="-75" z="0"/>
+					<extent x="-1" y="185" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="5" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-1" y="-75" z="0"/>
+					<extent x="409" y="185" z="250"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.975610"/>
+				</package>
+				<package index="6" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-391" y="185" z="0"/>
+					<extent x="-131" y="595" z="250"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="7" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-131" y="185" z="0"/>
+					<extent x="129" y="595" z="250"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="8" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="129" y="185" z="0"/>
+					<extent x="389" y="595" z="250"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="9" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="-371" y="-610" z="250"/>
+					<extent x="-111" y="-305" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.950820"/>
+				</package>
+				<package index="10" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="-111" y="-610" z="250"/>
+					<extent x="149" y="-305" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.950820"/>
+				</package>
+				<package index="11" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="149" y="-610" z="250"/>
+					<extent x="409" y="-305" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.950820"/>
+				</package>
+				<package index="12" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-419" y="-305" z="250"/>
+					<extent x="-111" y="120" z="436"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.974026"/>
+				</package>
+				<package index="13" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="-111" y="-305" z="250"/>
+					<extent x="149" y="0" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="14" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="149" y="-305" z="250"/>
+					<extent x="409" y="0" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="15" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="-111" y="0" z="250"/>
+					<extent x="149" y="305" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="16" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="149" y="0" z="250"/>
+					<extent x="409" y="305" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.984868"/>
+				</package>
+				<package index="17" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-419" y="120" z="250"/>
+					<extent x="-111" y="545" z="436"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.946524"/>
+				</package>
+				<package index="18" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="-111" y="305" z="250"/>
+					<extent x="149" y="610" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.950820"/>
+				</package>
+				<package index="19" typecode="BOX" orderlineid="9384" productcode="box030502230260">
+					<position x="149" y="305" z="250"/>
+					<extent x="409" y="610" z="473"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.877680"/>
+				</package>
+				<package index="20" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-419" y="-305" z="436"/>
+					<extent x="-111" y="120" z="622"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="21" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-419" y="120" z="436"/>
+					<extent x="-111" y="545" z="622"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="22" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="-111" y="-610" z="473"/>
+					<extent x="114" y="-305" z="598"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="23" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="114" y="-610" z="473"/>
+					<extent x="419" y="-385" z="598"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.967213"/>
+				</package>
+				<package index="24" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="-356" y="-545" z="473"/>
+					<extent x="-111" y="-425" z="798"/>
+					<rotation x="90" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.447483"/>
+				</package>
+				<package index="25" typecode="BOX" orderlineid="9385" productcode="box032502450120">
+					<position x="-356" y="-425" z="473"/>
+					<extent x="-111" y="-305" z="798"/>
+					<rotation x="90" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.447483"/>
+				</package>
+				<package index="26" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="114" y="-385" z="473"/>
+					<extent x="419" y="-160" z="598"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.967213"/>
+				</package>
+				<package index="27" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="-111" y="-305" z="473"/>
+					<extent x="114" y="0" z="598"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="28" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="114" y="-160" z="473"/>
+					<extent x="419" y="65" z="598"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.967213"/>
+				</package>
+				<package index="29" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="-111" y="0" z="473"/>
+					<extent x="114" y="305" z="598"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="30" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="114" y="65" z="473"/>
+					<extent x="419" y="290" z="598"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.967213"/>
+				</package>
+				<package index="31" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="114" y="290" z="473"/>
+					<extent x="419" y="515" z="598"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.967213"/>
+				</package>
+				<package index="32" typecode="BOX" orderlineid="9383" productcode="box030502250125">
+					<position x="-111" y="305" z="473"/>
+					<extent x="114" y="610" z="598"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="33" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="114" y="515" z="473"/>
+					<extent x="304" y="605" z="601"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="34" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-111" y="-616" z="598"/>
+					<extent x="314" y="-308" z="784"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.495117"/>
+				</package>
+				<package index="35" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="-599" z="598"/>
+					<extent x="404" y="-471" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.416606"/>
+				</package>
+				<package index="36" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="-471" z="598"/>
+					<extent x="404" y="-343" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.712863"/>
+				</package>
+				<package index="37" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="-343" z="598"/>
+					<extent x="404" y="-215" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="38" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-111" y="-308" z="598"/>
+					<extent x="314" y="0" z="784"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="39" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="-215" z="598"/>
+					<extent x="404" y="-87" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.534535"/>
+				</package>
+				<package index="40" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="-87" z="598"/>
+					<extent x="404" y="41" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.617658"/>
+				</package>
+				<package index="41" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-111" y="0" z="598"/>
+					<extent x="314" y="308" z="784"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.913673"/>
+				</package>
+				<package index="42" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="41" z="598"/>
+					<extent x="404" y="169" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.466099"/>
+				</package>
+				<package index="43" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="169" z="598"/>
+					<extent x="404" y="297" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.466099"/>
+				</package>
+				<package index="44" typecode="BOX" orderlineid="9377" productcode="box019001280090">
+					<position x="314" y="297" z="598"/>
+					<extent x="404" y="425" z="788"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.529449"/>
+				</package>
+				<package index="45" typecode="BOX" orderlineid="9387" productcode="box042503080186">
+					<position x="-111" y="308" z="601"/>
+					<extent x="314" y="616" z="787"/>
+					<rotation x="0" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.972823"/>
+				</package>
+				<package index="46" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-361" y="-305" z="622"/>
+					<extent x="-111" y="105" z="882"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="1.000000"/>
+				</package>
+				<package index="47" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-361" y="105" z="622"/>
+					<extent x="-111" y="515" z="882"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.821543"/>
+				</package>
+				<package index="48" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-111" y="394" z="787"/>
+					<extent x="194" y="598" z="1090"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.644845"/>
+				</package>
+				<package index="49" typecode="BOX" orderlineid="9389" productcode="box050005050507">
+					<position x="-111" y="-616" z="788"/>
+					<extent x="396" y="-111" z="1288"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.167422"/>
+				</package>
+				<package index="50" typecode="BOX" orderlineid="9389" productcode="box050005050507">
+					<position x="-111" y="-111" z="788"/>
+					<extent x="396" y="394" z="1288"/>
+					<rotation x="0" y="90" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.150828"/>
+				</package>
+				<package index="51" typecode="BOX" orderlineid="9381" productcode="box030302040305">
+					<position x="-315" y="-608" z="798"/>
+					<extent x="-111" y="-305" z="1103"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.309972"/>
+				</package>
+				<package index="52" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="-417" y="-305" z="882"/>
+					<extent x="-111" y="47" z="1330"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.564877"/>
+				</package>
+				<package index="53" typecode="BOX" orderlineid="9388" productcode="box044803520306">
+					<position x="-417" y="47" z="882"/>
+					<extent x="-111" y="399" z="1330"/>
+					<rotation x="90" y="0" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.362816"/>
+				</package>
+				<package index="54" typecode="BOX" orderlineid="9386" productcode="box041002500260">
+					<position x="-361" y="-565" z="1103"/>
+					<extent x="-111" y="-305" z="1513"/>
+					<rotation x="90" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.137242"/>
+				</package>
+				<package index="55" typecode="BOX" orderlineid="9390" productcode="box060005000500">
+					<position x="-111" y="-561" z="1288"/>
+					<extent x="389" y="39" z="1788"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.130089"/>
+				</package>
+				<package index="56" typecode="BOX" orderlineid="9389" productcode="box050005050507">
+					<position x="-111" y="39" z="1288"/>
+					<extent x="394" y="546" z="1788"/>
+					<rotation x="0" y="90" z="90"/>
+					<statistics remainingweightontop="10000" stability="0.139715"/>
+				</package>
+				<package index="57" typecode="BOX" orderlineid="9391" productcode="box060303070406">
+					<position x="-418" y="-305" z="1330"/>
+					<extent x="-111" y="298" z="1736"/>
+					<rotation x="0" y="0" z="0"/>
+					<statistics remainingweightontop="10000" stability="0.139431"/>
+				</package>
+			</physicalresult>
+			<containercontentlist>
+				<containercontentitem type="PRODUCT" productcode="box030502230260" subordercode="" packagingtype="" amount="9"/>
+				<containercontentitem type="PRODUCT" productcode="box030502250125" subordercode="" packagingtype="" amount="9"/>
+				<containercontentitem type="PRODUCT" productcode="box060303070406" subordercode="" packagingtype="" amount="1"/>
+				<containercontentitem type="PRODUCT" productcode="box050005050507" subordercode="" packagingtype="" amount="3"/>
+				<containercontentitem type="PRODUCT" productcode="box042503080186" subordercode="" packagingtype="" amount="8"/>
+				<containercontentitem type="PRODUCT" productcode="box041002500260" subordercode="" packagingtype="" amount="12"/>
+				<containercontentitem type="PRODUCT" productcode="box044803520306" subordercode="" packagingtype="" amount="2"/>
+				<containercontentitem type="PRODUCT" productcode="box060005000500" subordercode="" packagingtype="" amount="1"/>
+				<containercontentitem type="PRODUCT" productcode="box032502450120" subordercode="" packagingtype="" amount="2"/>
+				<containercontentitem type="PRODUCT" productcode="box030302040305" subordercode="" packagingtype="" amount="2"/>
+				<containercontentitem type="PRODUCT" productcode="box019001280090" subordercode="" packagingtype="" amount="9"/>
+			</containercontentlist>
+		</containerrecipe>
+	</containerrecipelist>
+</recipe>
