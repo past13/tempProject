@@ -1,37 +1,37 @@
-function SceneSubject(scene) {	
-	console.log("SceneSubject")
-	var xmlObj = (function(dataURL) {  
-		var result = $.ajax({
-		  async: false,
-		  url: 'recipe.xml',
-		  method: 'GET',  
-		}).done();
-		return result;
-	  })();
+// function SceneSubject(scene) {	
+// 	console.log("SceneSubject")
+// 	var xmlObj = (function(dataURL) {  
+// 		var result = $.ajax({
+// 		  async: false,
+// 		  url: 'recipe.xml',
+// 		  method: 'GET',  
+// 		}).done();
+// 		return result;
+// 	  })();
 
-	var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
-	var recipe = customizeXmlObj(xml2bject);
-	var container = prepareContainer(recipe);
+// 	var xml2bject = XML2jsobj(xmlObj.responseXML.documentElement);
+// 	var recipe = customizeXmlObj(xml2bject);
+// 	var container = prepareContainer(recipe);
 
 
-	//todo clear improve width/heigh of window
-	container.mesh.scale.set( .005, .005, .005 );
-	container.mesh.position.set(0, 0, -90);
+// 	//todo clear improve width/heigh of window
+// 	container.mesh.scale.set( .005, .005, .005 );
+// 	container.mesh.position.set(0, 0, -90);
 
-	scene.add(container.mesh);
+// 	scene.add(container.mesh);
 	
-	this.init = function() {
+// 	this.init = function() {
 		
-	}
+// 	}
 
-	this.update = function(time) {
-		container.mesh.rotation.x += 0.001;
-		container.mesh.rotation.y += 0.005;
+// 	this.update = function(time) {
+// 		container.mesh.rotation.x += 0.001;
+// 		container.mesh.rotation.y += 0.005;
 
-		// const scale = Math.sin(time)+2;
-		// container.mesh.scale.set(scale, scale, scale);
-	}
-}
+// 		// const scale = Math.sin(time)+2;
+// 		// container.mesh.scale.set(scale, scale, scale);
+// 	}
+// }
 
 function createDefaultMesh(orderline) {  
 	//todo: add default meshes

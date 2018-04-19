@@ -10,18 +10,29 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-    <script src='js/3DModel/libs/three.min.js'></script>    
-    <script src="./js/libs/xml2jsobj.js"></script>	
-    <script src="./js/data/data.js"></script>
-    <script src="./js/assignpanels/initialise.js"></script>
-    <script src="./commonfunctions.js"></script>
+    <script src="./js/libs/xml2jsobj.js"></script>
+    <script src='js/3DModel/libs/three.min.js'></script> 
     
+    <script src='js/functions/eventsListener.js'></script>     
+    <script src='js/functions/navFunc.js'></script> 
+
+    <script src="./js/data/processDataFile.js"></script>     	
+    <script src="./js/libs/commonfunctions.js"></script>    
+    <script src="./js/data/data.js"></script>    
+
+    <script src="./js/initialize/initialise.js"></script>
+    <script src="./js/initialize/initialize_head.js"></script>    
+    <script src="./js/initialize/initialize_body.js"></script>
+    <script src="./js/initialize/initialize_panels.js"></script>
+    <script src="./js/initialize/initialize_footer.js"></script>    
+    
+    <script src="./js/assign/assignData.js"></script>    
+        
     <!-- 3D Model -->
-    <script src="./js/3DModel/main.js"></script>
+    <!-- <script src="./js/3DModel/main.js"></script>
     <script src="./js/3DModel/SceneManager.js"></script>
     <script src="./js/3DModel/sceneSubjects/GeneralLights.js"></script>
-    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script>
-
+    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script> -->
     
     <script src='./js/3DModel/recipe.js'></script>
     <script src='./js/ui.js'></script>
@@ -33,8 +44,13 @@
     <script src="./js/collapse/collapsefunc.js"></script>
     
 </head>
-<body>     
-    <div class="main">
+<header></header>
+<body>
+<nav></nav>     
+<main></main>
+    
+    
+    <!-- <div class="main">
         <div id="visualisation">
             <div id="splitter1" class="splitter"></div>
             <div id="col1" class="col">
@@ -62,37 +78,33 @@
                 <div id="panel4" class="panelbody"></div> 
             </div>
         </div>
-    </div>  
+    </div>   -->
     <!-- <div id="content"> -->
         <!-- <div id="statusLabel"><p>Loading</p></div> -->
-        <!-- <div id="toolbar">test</div> -->
-        
+        <!-- <div id="toolbar">test</div> -->        
       <!-- </div> -->
 </body>
+<footer></footer>
+
 <script type="text/javascript">
 
-const REGPATTERN = /^\D+/g;
+var url = "recipe.xml";
+var methodType = "GET";
 
-var test = new panelsFunctions();
+var globalrecipe;
+var globalviewlist = [];
 
-
-
-
-$(document).ready(function(){ 
-    //while loading run status   
-    var recipe = $.ajax({url: './js/data/recipe.xml'});
-    
-    $.when(recipe).done(function(data){
-        preparedData(data); 
-        init();    
-    
-    });
-
-    
+if (url !== undefined) {
+    ajaxCall(url, methodType); 
+}
+$(document).ready(function() {
+    initialise();
+    if (globalrecipe !== undefined) {
+        assignData();
+    }
+    // var elements = document.querySelectorAll( '#visualisation' );
+    // console.log(elements)
 });
-
-// window.addEventListener('resize', resizeCanvas, false);
-
 
 </script>
 </html>

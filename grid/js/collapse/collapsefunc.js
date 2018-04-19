@@ -46,25 +46,8 @@ function collapseFunctions() {
                 if (list[item].gap > 0) { 
                     addWidth(list[item], item);
                 }                
-            }
-        //     for (item in list) {
-        //         if (list[item].gap > 0 && list[item].columnid === nearid) {                     
-        //         // if (list[item].columnid === nearid) { 
-        //             // currwidth = list[item].gap;
-        //             currentcol.columnwidth = list[item].gap;
-        //             list[item].gap = 0;
-        //             list[item].columnwidth - list[item].gap;
-        //             console.log(list)
-        //         }
-        //         else {
-        //             console.log('hit')
-        //             currentcol.columnwidth = list[item].gap;
-        //             list[item].gap = 0;
-        //             list[item].columnwidth - list[item].gap;
-        //         }
-        //     }
-        }
-        // else {
+            }    
+        }    
             for (item in list) { 
                 if (list[item].columnid === id) { 
                     list[item].colwidth = 0;
@@ -75,8 +58,7 @@ function collapseFunctions() {
                     list[item].gap += currwidth;
                     currwidth = 0;
                 }
-            }
-        // }  
+            } 
         return list;
     }
     this.animateCol = function(index, col) {
