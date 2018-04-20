@@ -2,31 +2,37 @@ function getTextureMaping(orderline) {
 	this.orderline = orderline;
 	
 	var faceArray = {
-		top : [new THREE.Vector2(0, 0), new THREE.Vector2(.5, 0), new THREE.Vector2(.5, .5), new THREE.Vector2(.0, .5) ],
+		top : [new THREE.Vector2(0, 0), new THREE.Vector2(.5, 0), new THREE.Vector2(.5, .5), new THREE.Vector2(0, .5) ],
   	bottom : [new THREE.Vector2(.5, 0), new THREE.Vector2(1, 0), new THREE.Vector2(1, .5), new THREE.Vector2(.5, .5) ],
     front : [new THREE.Vector2(0, .5), new THREE.Vector2(.5, .5), new THREE.Vector2(.5, 1), new THREE.Vector2(0, 1) ],
-    back : [new THREE.Vector2(.5, .5), new THREE.Vector2(1, .5), new THREE.Vector2(1, 1), new THREE.Vector2(.5, 1) ]
+    side : [new THREE.Vector2(.5, .5), new THREE.Vector2(1, .5), new THREE.Vector2(1, 1), new THREE.Vector2(.5, 1)]
 	}
 
-	orderline.geometry.faceVertexUvs[0] = [];
+		orderline.geometry.faceVertexUvs[0] = [];
 
-	orderline.geometry.faceVertexUvs[0][0] = [faceArray.top[0], faceArray.top[1], faceArray.top[3]];
-	orderline.geometry.faceVertexUvs[0][1] = [faceArray.top[1], faceArray.top[2], faceArray.top[3]];
+		var face = faceArray.front;
+    orderline.geometry.faceVertexUvs[0][0] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][1] = [face[0], face[1], face[2]];
+  
+    face = faceArray.front;
+    orderline.geometry.faceVertexUvs[0][2] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][3] = [face[0], face[1], face[2]];
+  
+    face = faceArray.top;
+    orderline.geometry.faceVertexUvs[0][4] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][5] = [face[0], face[1], face[2]];
 
-	orderline.geometry.faceVertexUvs[0][2] = [faceArray.bottom[0], faceArray.bottom[1], faceArray.bottom[3]];
-	orderline.geometry.faceVertexUvs[0][3] = [faceArray.bottom[1], faceArray.bottom[2], faceArray.bottom[3]];
-
-	orderline.geometry.faceVertexUvs[0][4] = [faceArray.front[0], faceArray.front[1], faceArray.front[3]];
-	orderline.geometry.faceVertexUvs[0][5] = [faceArray.front[1], faceArray.front[2], faceArray.front[3]];
-
-	orderline.geometry.faceVertexUvs[0][6] = [faceArray.front[0], faceArray.front[1], faceArray.front[3]];
-	orderline.geometry.faceVertexUvs[0][7] = [faceArray.front[1], faceArray.front[2], faceArray.front[3]];
-
-	orderline.geometry.faceVertexUvs[0][8] = [faceArray.back[0], faceArray.back[1], faceArray.back[3]];
-	orderline.geometry.faceVertexUvs[0][9] = [faceArray.back[1], faceArray.back[2], faceArray.back[3]];
-
-	orderline.geometry.faceVertexUvs[0][10] = [faceArray.back[2], faceArray.back[3], faceArray.back[1]];
-	orderline.geometry.faceVertexUvs[0][11] = [faceArray.back[3], faceArray.back[0], faceArray.back[1]];
+    face = faceArray.bottom;    
+    orderline.geometry.faceVertexUvs[0][6] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][7] = [face[0], face[1], face[2]];
+  
+    face = faceArray.side;        
+    orderline.geometry.faceVertexUvs[0][8] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][9] = [face[0], face[1], face[2]];
+  
+    face = faceArray.side;
+    orderline.geometry.faceVertexUvs[0][10] = [face[3], face[0], face[2]];
+    orderline.geometry.faceVertexUvs[0][11] = [face[0], face[1], face[2]];
 
 	return faceArray;
 }
@@ -93,10 +99,10 @@ function packageorders(jsObj, orderslist, containerTypeCode) {
 	
 	var containertypeslist = $.each( containerTypeCode, function( key, value ) {  
 		var containertype = jsObj.order.containertypelist.containertype;
-		var containerlist = containerTypeCode[key];
+		var containertype = containerTypeCode[key];
 	
 		var containertypes = $.each( containertype, function( key, value ) {  
-			containerlist.containerlist = containertype;
+			containertype.containertype = containertype;
 		});
 	});  
 
@@ -113,7 +119,7 @@ function packageorders(jsObj, orderslist, containerTypeCode) {
 }  
 
   function recalculateCoordinates(packagelist) {
-	// this.packagelist = packagelist;  
+	this.packagelist = packagelist;  
 	$.each( packagelist, function( key, value ) {
 	  packagelist[key].map(function(pack) {      
 			pack.rotation.x = parseInt(pack.rotation.x);  
@@ -170,13 +176,12 @@ function createOrderlines(container) {
 			
 		  mesh.castShadow = true;
 			mesh.receiveShadow = true;								
-			mesh.userData = Object.assign({}, pack );
+			//mesh.userData = Object.assign({}, pack );
 			
 			mesh.position.set(pack.x, pack.z, pack.y);
 			mesh.rotation.set(pack.rotation.x, pack.rotation.z, pack.rotation.y);
 			
 		  container.mesh.add(mesh);
-			
 
 		  var edges = new THREE.EdgesGeometry( pack.orderline.geometry ); //missing sphere parameters
 	
@@ -207,7 +212,9 @@ function prepareContainer(recipe) {
 			container.mesh = new THREE.Mesh();
 			var mesh;
 
-			mesh = new THREE.Mesh(container.containerlist.geometry, container.containerlist.material);
+			console.log(container)
+
+			mesh = new THREE.Mesh(container.containertype.geometry, container.containertype.material);
 			mesh.position.set(containertype.offset.x, containertype.offset.y, containertype.offset.z);
 		//todo: BUG move to another place !!!dont change cas and receive shadow!!!
 		// mesh.castShadow = true;
@@ -215,6 +222,8 @@ function prepareContainer(recipe) {
 			container.mesh.add( mesh );    
 		
 			createOrderlines(container);
+
+
 
 		return container;
 	} 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Grid Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="./js/libs/xml2jsobj.js"></script>
+    <script src='js/3DModel/libs/three.min.js'></script> 
+    <script src="./js/libs/commonfunctions.js"></script>  
+    <script src="./js/data/data.js"></script>    
+    <script src="./js/data/processDataFile.js"></script> 
+    
+    <!-- initialise dom elements -->
+    <script src="./js/initialise/initialiseDom/initialise.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_head.js"></script>    
+    <script src="./js/initialise/initialiseDom/initialize_body.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_panels.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_footer.js"></script>
+    <!-- initialise recipe -->
+    <script src="./js/initialise/initialiseRecipe/initialiseRecipe.js"></script>
+    <script src="./js/initialise/initialiseRecipe/initialiseContainer.js"></script>
+    
+    <script src="./js/data/assign/assignData.js"></script>   
+
+    <script src='js/functions/eventsListener.js'></script>   
+    <script src="./js/functions/panelFunc.js"></script> 
+    <script src='js/functions/navFunc.js'></script> 
+
+
+    <script src="./js/initialise/initialiseRecipe/tempThreeModel.js"></script>
+    
+    
+    <!-- 3D Model -->
+    <!-- <script src="./js/3DModel/main.js"></script>
+    <script src="./js/3DModel/SceneManager.js"></script> 
+    <script src="./js/3DModel/sceneSubjects/GeneralLights.js"></script>
+    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script>  -->
+    
+    <script src='./js/3DModel/recipe.js'></script>
+    <script src='./js/ui.js'></script>  
+ 
+    <script src="./js/collapse/collapse.js"></script>
+    <script src="./js/collapse/collapsefunc.js"></script>    
+</head>
+<header></header>
+<body>
+<nav></nav>     
+<main></main>
+</body>
+<footer></footer>
+
+<script type="text/javascript">
+var url = "recipe.xml";
+var methodType = "GET";
+var globalrecipe;
+var globalviewlist = [];
+    if (url !== undefined) {
+        ajaxCall(url, methodType); 
+    }
+    
+    $(document).ready(function() {
+        initialise();
+        if (globalrecipe !== undefined) {
+            assignDataToViews();
+            initialiseRecipe();
+        }
+    });
+// console.log(initrecipe.getContainer())
+
+     
+
+</script>
+</html>
+
+
+    
+    

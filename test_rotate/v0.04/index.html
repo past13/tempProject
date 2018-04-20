@@ -33,7 +33,7 @@
 		<div class="dropdown">
 			<select id="dropDownList" > 
 			<option value="empty">No overlay</option>
-			<option value="familycode">Family</option>
+			<option value="family">Family</option>
 			<option value="stacking">Stacking class</option>
 			<option value="stability">Stability</option>
 			<option value="weighontop">Weight on top</option>
@@ -174,10 +174,8 @@ function getMeshInfo(obj) {
 
 	if (obj !== undefined && intersects !== undefined) {
 		for (i=0; i<obj.length; i++) {				
-			obj[i].node.material.color.setHex( obj[i].color );     
-			
-			
-			
+			obj[i].node.material.color.setHex( obj[i].color );	
+
 		} 
 	}
 	else {
@@ -188,7 +186,9 @@ function getMeshInfo(obj) {
 				if (intersects[ 0 ].object.userData.productcode !== undefined) {	
 					INTERSECTED = intersects[ 0 ].object;
 					INTERSECTED.material = INTERSECTED.material.clone();
-					
+
+					console.log(intersects[ 0 ].object)
+
 					INTERSECTED.material.emissive.setHex( 0x2BD80D );		
 												
 				}

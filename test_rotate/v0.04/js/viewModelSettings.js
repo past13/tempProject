@@ -10,10 +10,11 @@ function getOverlay(id, node, data, param, list) {
 	};	
 	list.push(newobj);		
 }
+//expand color pallet
 function getRandomColor(colormap) {
 	for (i=0; i<colormap.length; i++) {
 		colormap[i].color = Math.random() * 0xffffff;
-	}
+	}	
 	return colormap;
 }
 function countUniqColors(arr, param){	
@@ -21,7 +22,6 @@ function countUniqColors(arr, param){
 	this.arr = arr;
 	var dupes = [];
 	var numberuniqcol = [];
-
 	$.each(arr, function (index, entry) {		
 			if (!dupes[entry.param]) {
 				dupes[entry.param] = true;
@@ -32,44 +32,41 @@ function countUniqColors(arr, param){
 	});
 	return numberuniqcol;
 }
-function overlayLegend(node, param) { 
-	this.node = node;
-	this.param = param;
-}	
-
 function chkBoxList(node, param) { 
 	this.node = node;
 	this.param = param;	
+	
+	console.log(param)	
 
-	for (var item in param) {
-		if (param[item].value === '1') {
-			console.log('1')
-			//add/create threejs object
-		}
-		if (param[item].value === '2') {
-			console.log('2')			
-			//add/create threejs object
-		}
-		if (param[item].value === '3') {
-			console.log('3')			
-			//add/create threejs object
-		}
-		if (param[item].value === '4') {
-			console.log('4')
-			//add/create threejs object
-		}
-		if (param[item].value === '5') {
-			console.log('5')
-			//add/create threejs object
-		}
-		if (param[item].value === '6') {
-			console.log('6')
-			//add/create threejs object
-		}
-	}	
+	// for (var item in param) {
+	// 	if (param[item].value === '1') {
+	// 		console.log('1')
+	// 		//add/create threejs object
+	// 	}
+	// 	if (param[item].value === '2') {
+	// 		console.log('2')			
+	// 		//add/create threejs object
+	// 	}
+	// 	if (param[item].value === '3') {
+	// 		console.log('3')			
+	// 		//add/create threejs object
+	// 	}
+	// 	if (param[item].value === '4') {
+	// 		console.log('4')
+	// 		//add/create threejs object
+	// 	}
+	// 	if (param[item].value === '5') {
+	// 		console.log('5')
+	// 		//add/create threejs object
+	// 	}
+	// 	if (param[item].value === '6') {
+	// 		console.log('6')
+	// 		//add/create threejs object
+	// 	}
+	// }	
 }
 
-function familyStackingColors(obj, color) {
+function familyStackingColors(obj, color) {	
 	this.obj = obj;
 	this.color = color;
 	var newcolor = color.filter(x => x.param === obj.param);
@@ -93,39 +90,60 @@ function stabilityColors(obj){
 	}	
 	return obj;
 }
-function randomColors(obj, colormap, colorscount) {
-	this.obj = obj;
-	this.colormap = colormap;
-	this.colorscount = colorscount;
-
-	var colors = [];	
-	
-	
-
-	// var test = Array.apply(null, {length: colorscount}).map(Function.call, Math.random)
-	// console.log(test)
-	
+function IsEqual(a, b) {
+	return (Math.abs(a-b) < 0.001);
 }
+function checkRotationStatus(node) {
+	this.node = node;
+	
+	console.log(node)
 
+	var ninetydeg = Math.PI / 2;              //1.5707963267948966;
+	
+	if (node.param.x === 0 && node.param.y === 0 && node.param.z === 0) {
+		node.color = 0x6a5acd;
+	}
+	else if (node.param.x === 0 && IsEqual(node.param.y, ninetydeg) && node.param.z === 0 ) {
+		node.color = 0x6495ed;
+	}
+	else if (IsEqual(node.param.x, ninetydeg)) {
+		node.color = 0x5574B9; //
+	}
+	else if (IsEqual(node.param.z, ninetydeg)) {
+		node.color = 0xffd700; //yellow	
+	}	
+	else {
+		node.color = 0x9400d3;
+	}
+	return node;
+}
 function mapColors(list, colormap, param) {
 	this.list = list;	
-	this.colormap = colormap;			
-	if (param.dropdown === 'familycode' || 'stacking') {
+	this.colormap = colormap;	
+	this.param = param;	
+	
+	if (param.dropdown === 'family' || param.dropdown === 'stacking') {		
 		list.map(function(x) {familyStackingColors(x, colormap) } );
 	}
 	if (param.dropdown === 'stability') {
 		list.map(stabilityColors);
 	}	
-	if (param.dropdown === 'random') {
-		list.map(function(x) {randomColors(x, colormap, list.length) } );	
+	if (param.dropdown === 'rotation') {
+		list.map(checkRotationStatus);
 	}
-
+	if (param.dropdown === 'weighontop') {
+		console.log('weighontop')
+		// list.map(checkRotationStatus);
+	}
 	return list;
 }
 
 function viewModelSettings(param) {	
 	this.param = param;
 	var overlaylist = [];	
+	var uniqcolorarray = [];
+	var coloredArray = [];
+	var newArray = [];
 	
 	scene.traverse( function( node ) {		
 		if (node instanceof THREE.Mesh && 
@@ -138,38 +156,46 @@ function viewModelSettings(param) {
 			var rotation = node.userData.rotation;			
 			
 			switch (param.dropdown) {
-				case 'familycode':			
+				case 'family':			
 					getOverlay(orderline.uuid, node, (orderline.familycode === "" ? "0": orderline.familycode), param.dropdown, overlaylist);
+					uniqcolorarray = countUniqColors($.extend(true, [], overlaylist), param).sort(function (obj1, obj2) { return obj1.param - obj2.param; });
+					var arrayColors = getRandomColor(overlaylist);					
+					coloredArray = mapColors(overlaylist, arrayColors, param);										
 					break;		
 				case 'stacking':
-					getOverlay(orderlineid, node, orderline.stackinginfo.stackingclass, param.dropdown, overlaylist);		
+					getOverlay(orderlineid, node, orderline.stackinginfo.stackingclass, param.dropdown, overlaylist);	
+					uniqcolorarray = countUniqColors($.extend(true, [], overlaylist), param).sort(function (obj1, obj2) { return obj1.param - obj2.param; });
+					var arrayColors = getRandomColor(overlaylist);					
+					coloredArray = mapColors(overlaylist, arrayColors, param);
 					break;	
 				case 'stability':
-					getOverlay(orderlineid, node, statistics.stability, param.dropdown, overlaylist);		
-					break;
-				// case 'weighontop':
-				// 	getOverlay(orderlineid, node, statistics.stability, param.dropdown, overlaylist);		
-				// break;
-				case 'rotation':
-					getOverlay(orderlineid, node, rotation, param.dropdown, overlaylist);		
+					getOverlay(orderlineid, node, statistics.stability, param.dropdown, overlaylist);
+					uniqcolorarray = countUniqColors($.extend(true, [], overlaylist), param).sort(function (obj1, obj2) { return obj1.param - obj2.param; });
+					coloredArray = mapColors(overlaylist, arrayColors, param);							
 					break;
 				case 'random':	
-					getOverlay(orderlineid, node, null, param.dropdown, overlaylist);		
+					getOverlay(orderlineid, node, null, param.dropdown, overlaylist);	
+					var arrayColors = getRandomColor(overlaylist);
+					coloredArray = mapColors(overlaylist, arrayColors, param);
+					break;
+				case 'rotation':
+					getOverlay(orderlineid, node, rotation, param.dropdown, overlaylist);
+					coloredArray = mapColors(overlaylist, null, param);
+					break;
+				case 'weighontop':
+					getOverlay(orderlineid, node, statistics.stability, param.dropdown, overlaylist);
+					var arrayColors = getRandomColor(overlaylist);
+					// coloredArray = mapColors(overlaylist, null, param);
 					break;
 				default:
 					break;
 			}		
 		}	
-	});	
+	});			
 
-	var uniqcolorarray = countUniqColors($.extend(true, [], overlaylist), param).sort(function (obj1, obj2) { return obj1.param - obj2.param; });
-		
-	var arrayColors = getRandomColor(uniqcolorarray);
-	
-	var coloredArray = mapColors(overlaylist, arrayColors, param);
-	
-	// if (param.checkboxlist.length > 0) 
-	// 	chkBoxList(node, param.checkboxlist);
+		console.log(coloredArray)
+	if (param.checkboxlist.length > 0) 
+		chkBoxList(node, param.checkboxlist);
 		
 	// if (param.showOveralLegend.length > 0) 
 	// 	overlayLegend(node, param.showOveralLegend);

@@ -1,0 +1,153 @@
+tbody {   
+    margin-right: 10%;
+    margin-bottom: 10%;
+    margin-left: 10%;
+}
+td, th{
+    width: 100%;
+}
+.main { 
+    width: 100%;
+    white-space:nowrap;
+}
+.navItem {  
+    background-color: #d2d2d2;
+    width: 95%;
+    display: inline-block;
+    height: 600px;
+}
+.splitter {    
+    float: left; 
+    width: 1%;
+    height: 100%;    
+    /* left: 25%; */
+    z-index: 9000;
+}
+.col {
+    float: left; 
+    width: 24%;
+    height: 100%;
+    z-index: 8000;
+    overflow: hidden;
+}
+/* columns content */
+.panel {
+    width: 100%;
+    height: 5%;
+}
+.panelbody {
+    width: 100%; 
+    height: 89%;
+}
+.minimzepanel {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+    color: red;
+    transform: translate(-140px, 90px) rotate(90deg); 
+  }
+
+
+  .labelView {
+    /* background-color: red; */
+      
+    border-style: solid;
+    width: 100%;
+    height: 20%; 
+  }
+  .bodyView {
+    /* background-color: blue; */
+    border-style: solid;
+    width: 100%;
+    height: 65%; 
+  }
+  .footerView {
+    /* background-color: green; */
+    border-style: solid;
+    width: 100%;
+    height: 15%; 
+  }
+/* #col3 { 
+    background-color: blue;    
+}
+#col4 {
+    background-color: yellow;    
+} */
+#splitter1 {
+    background-color: green;    
+}
+#splitter2 {
+    background-color: greenyellow;    
+}
+#splitter3 {
+    background-color: goldenrod;   
+}
+#splitter4 {
+    background-color: goldenrod; 
+}
+
+/* //table */
+#tblstatistic {
+    display: grid;
+    overflow-y: scroll;
+    height: 100%; 
+}
+#tblstatistic thead{
+    font-size: 150%;
+    font-weight:bold;
+    text-align: left;     
+}
+#tblstatistic tbody tr {
+    width: 350px;    
+}
+#tblstatistic tbody tr td:nth-child(even){
+    text-align: center;   
+    padding-right: 20%; 
+    font-size: 90%;    
+}
+#tblstatistic tbody tr td:nth-child(odd){
+    font-weight:bold;
+    font-size: 110%;    
+}
+
+/* container preview 3 Model list */
+#containerpreviews{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-auto-rows: 130px;
+    grid-gap: 1px;   
+}
+.containerpreview {
+    width: 150px;
+    height: 100px;
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+.containerpreview canvas {
+    background-color: #d2d2d2;  
+    border-radius: 5px;
+}
+
+canvas:hover {
+    background-color: yellow;
+}
+/* 3D model fullview */
+
+#containerfullview {
+    height: 100%;
+    width: 100%;
+}
+
+canvas {
+    /* padding: 0;
+    margin: auto; */
+    display: block;
+    width: 100%;
+    height : 100%;
+    
+}
