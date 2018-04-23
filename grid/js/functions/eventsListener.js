@@ -1,13 +1,20 @@
+
 addEventListener("click", function(event) { 
     var node = event.originalTarget;     
     var attribute = node.getAttribute('href');
 
     switch (event.originalTarget.parentNode.className) {
         case 'menuItem':
+        // initialise3Dmodel if nav clicked
+            if (attribute === '#visualisation') {  
+                // Module.initialiseModel();
+            }
             navBtnClicked(attribute);
             break;
-        case 'navItem': 
-            // interface.splitterDragged(event.originalTarget);
+        case 'navItem':                
+            var parent = new panelFunctions();
+        //bug with container width
+            parent.draggPanell();
             break;     
         case 'col':           
             // interface.collapseCol(event.originalTarget); 
