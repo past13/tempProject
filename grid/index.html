@@ -12,99 +12,66 @@
     
     <script src="./js/libs/xml2jsobj.js"></script>
     <script src='js/3DModel/libs/three.min.js'></script> 
+    <script src="./js/libs/commonfunctions.js"></script>  
+    <script src="./js/data/data.js"></script>    
+    <script src="./js/data/processDataFile.js"></script> 
     
-    <script src='js/functions/eventsListener.js'></script>     
+    <!-- initialise dom elements -->
+    <script src="./js/initialise/initialiseDom/initialise.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_head.js"></script>    
+    <script src="./js/initialise/initialiseDom/initialize_body.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_panels.js"></script>
+    <script src="./js/initialise/initialiseDom/initialize_footer.js"></script>
+    <!-- initialise recipe -->
+    <script src="./js/initialise/initialiseRecipe/initialiseRecipe.js"></script>
+    <script src="./js/initialise/initialiseRecipe/initialiseContainer.js"></script>
+    
+    <script src="./js/data/assign/assignData.js"></script>   
+
+    <script src='js/functions/eventsListener.js'></script>   
+    <script src="./js/functions/panelFunc.js"></script> 
     <script src='js/functions/navFunc.js'></script> 
 
-    <script src="./js/data/processDataFile.js"></script>     	
-    <script src="./js/libs/commonfunctions.js"></script>    
-    <script src="./js/data/data.js"></script>    
-
-    <script src="./js/initialize/initialise.js"></script>
-    <script src="./js/initialize/initialize_head.js"></script>    
-    <script src="./js/initialize/initialize_body.js"></script>
-    <script src="./js/initialize/initialize_panels.js"></script>
-    <script src="./js/initialize/initialize_footer.js"></script>    
-    
-    <script src="./js/assign/assignData.js"></script>    
-        
     <!-- 3D Model -->
-    <!-- <script src="./js/3DModel/main.js"></script>
-    <script src="./js/3DModel/SceneManager.js"></script>
+    <script src="./js/initialise/initialiseThreeJs/main_threejs.js"></script> 
+    <script src="./js/initialise/initialiseThreeJs/threejs.app.js"></script> 
+
+    <!-- <script src="./js/3DModel/SceneManager.js"></script> 
     <script src="./js/3DModel/sceneSubjects/GeneralLights.js"></script>
-    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script> -->
+    <script src="./js/3DModel/sceneSubjects/SceneSubject.js"></script>  -->
     
     <script src='./js/3DModel/recipe.js'></script>
-    <script src='./js/ui.js'></script>
-    
+    <script src='./js/ui.js'></script>  
  
-
-    <script src="./js/dragg/dragg.js"></script> 
     <script src="./js/collapse/collapse.js"></script>
-    <script src="./js/collapse/collapsefunc.js"></script>
-    
+    <script src="./js/collapse/collapsefunc.js"></script>    
 </head>
 <header></header>
 <body>
 <nav></nav>     
 <main></main>
-    
-    
-    <!-- <div class="main">
-        <div id="visualisation">
-            <div id="splitter1" class="splitter"></div>
-            <div id="col1" class="col">
-                <h3 id="panellabel1" onclick="hidepanel(this)" class="panel">Statistics</h3>
-                <div id="panel1" class="panelbody"></div>   
-            </div>             
-            <div id="splitter2" class="splitter"></div>
-            <div id="col2" class="col">
-                <h3 id="panellabel2" onclick="hidepanel(this)" class="panel">Pallets</h3>
-                <div id="panel2" class="panelbody">
-                    <div id="containerpreviews"></div>
-                </div>         
-            
-            </div>
-            <div id="splitter3" class="splitter"></div>
-            <div id="col3" class="col">
-                <h3 id="panellabel3" onclick="hidepanel(this)" class="panel">Visualisation</h3>                
-                <div id="panel3" class="panelbody">
-                    <div id="containerfullview"></div>                    
-                </div> 
-            </div>
-            <div id="splitter4" class="splitter"></div>
-            <div id="col4" class="col">
-                <h3 id="panellabel4" onclick="hidepanel(this)" class="panel">Warehouse</h3>                
-                <div id="panel4" class="panelbody"></div> 
-            </div>
-        </div>
-    </div>   -->
-    <!-- <div id="content"> -->
-        <!-- <div id="statusLabel"><p>Loading</p></div> -->
-        <!-- <div id="toolbar">test</div> -->        
-      <!-- </div> -->
 </body>
 <footer></footer>
 
 <script type="text/javascript">
-
 var url = "recipe.xml";
 var methodType = "GET";
-
 var globalrecipe;
 var globalviewlist = [];
 
-if (url !== undefined) {
-    ajaxCall(url, methodType); 
-}
-$(document).ready(function() {
-    initialise();
-    if (globalrecipe !== undefined) {
-        assignData();
+    if (url !== undefined) {
+        ajaxCall(url, methodType); 
     }
-    // var elements = document.querySelectorAll( '#visualisation' );
-    // console.log(elements)
-});
-
+    $(document).ready(function() {
+        initialise();
+        if (globalrecipe !== undefined) {
+            assignDataToViews();
+            
+        }
+    });
 </script>
 </html>
+
+
+    
+    
