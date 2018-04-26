@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel=stylesheet href="css/base.css"/>
+	<link rel=stylesheet href="css/modelViewTbl.css"/>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/libs/detector.js"></script>
+
+<script src="js/libs/three.js"></script>
+<script src="js/libs/orbit_controls.js"></script>
+<script src="js/libs/xml2jsobj.js"></script>
+
+<script src="temp/processDataFile.js"></script>
+
+<script src="temp/initGeometry.js"></script>
+
+
+<script src="js/viewModelSettings.js"></script>
+
+<script src="js/summaryTable.js"></script>
+<script src="js/viewModelTbl.js"></script>
+
+
+
+</head>
+<body>
+	<div class="wrapper">
+		<div class="headerList">
+			<div class="box">Overlay:</div>
+			<div class="box">Transparency:</div>	
+			<div class="box">Show overlay legend:</div>			
+		</div>
+	<div class="bodyList">
+		<div class="dropdown">
+			<select id="dropDownList" > 
+			<option value="empty">No overlay</option>
+			<option value="family">Family</option>
+			<option value="stacking">Stacking class</option>
+			<option value="stability">Stability</option>
+			<option value="weighontop">Weight on top</option>
+			<option value="rotation">Rotation</option>
+			<option value="random">Random color per orderline</option>	
+		</select>	
+		</div>
+		<div id="transparencyLine"> 
+			<div><input type="range" aria-label="select pen size" id="myRange" min="1" max="100" value="50" ></div>
+		</div>
+		<div id="showOveralLegend"> 
+			<input type="checkbox" value="7">
+		</div>
+	</div>	
+	<div class="footerList">
+		<ul id="checkBoxList">
+			<li><label><input type="checkbox" value="1">Show carrier model</label></li>
+			<li><label><input type="checkbox" value="2">Show maximum stacking height</label></li>
+			<li><label><input type="checkbox" value="3">Show fences</label></li>
+			<li><label><input type="checkbox" value="4">Show wrapping</label></li>
+			<li><label><input type="checkbox" value="5">Show ruler</label></li>
+			<li><label><input type="checkbox" value="6">Show ghost packages</label></li>	
+		</ul>	 
+	</div>
+	<div class="buttonsList">
+		<ul>
+			<li><button type="button" value="reset" onclick="optionsBtn(this)">Reset</button></li>
+			<li><button type="button" value="submit" onclick="optionsBtn(this)">Submit</button></li>
+			<li><button type="button" value="cancel" onclick="optionsBtn(this)">Cancel</button></li>					
+		</ul>	
+	</div>
+</div>
+<div id="ThreeJS"></div>
+
+<script>
+
+
+	var raycaster = new THREE.Raycaster();
+	var mouse = new THREE.Vector2(), INTERSECTED;
+	var container, scene, camera, renderer, controls, stats;
+	var clock = new THREE.Clock();
+	
+	var globalrecipe;
+
+	// custom global variables
+	var result;
+	var parameters;
+
+	var pallet;
+
+var url = "recipe.xml";
+var methodType = "GET";
+if (url !== undefined) {
+        ajaxCall(url, methodType); 
+}
+
+
+$(document).ready(function() { 
+	
+init();
+animate();
+
+function init() {
+	scene = new THREE.Scene();
+	// CAMERA
+	var SCREEN_WIDTH = 500;//window.innerWidth, 
+	var SCREEN_HEIGHT = 400; //window.innerHeight;
+
+	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 2000;
+
+	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0,150,400);
+	camera.lookAt(scene.position);	
+	// RENDERER
+	if ( Detector.webgl )
+      renderer = new THREE.WebGLRenderer({antialias:true,
+  	});
+	else
+    renderer = new THREE.CanvasRenderer(); 
+			
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	container = document.getElementById( 'ThreeJS' );
+	container.appendChild( renderer.domElement );
+    console.log(container)
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	
+	// LIGHTS
+	var light = new THREE.DirectionalLight(0xffd0d0);
+	light.position.set(-100,50,100);
+	scene.add(light);
+
+	var seclight = new THREE.DirectionalLight(0xe0e0ff);
+	seclight.position.set(100,50,-100);	
+	scene.add(seclight);
+
+	var ambientlight = new THREE.AmbientLight();
+	scene.add(ambientlight);
+
+	pallet = initMeshes();
+	pallet.mesh.scale.set(.09, .09, .09);
+
+	//summaryTable.js
+	// overalTable(result);
+  	// pallet = result[0].mesh;
+	scene.add(pallet.mesh); //pallet.mesh
+
+	var canvastest = document.querySelector('canvas');	
+
+	canvastest.addEventListener( 'mousedown', onDocumentMouseDown, false );		
+}
+
+function onDocumentMouseDown( event ) {    
+	event.preventDefault();    	
+
+	mouse.x = ((event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width) * 2 - 1;
+	mouse.y = -((event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height) * 2 + 1;
+	getMeshInfo();
+}
+	
+function getMeshInfo(obj) {
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects(pallet.children, true );
+
+
+	if (obj !== undefined && intersects !== undefined) {
+		for (i=0; i<obj.length; i++) {				
+			obj[i].node.material.color.setHex( obj[i].color );	
+
+		} 
+	}
+	else {
+		if ( intersects.length > 0) {
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				if ( INTERSECTED ) 
+					INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );	
+				if (intersects[ 0 ].object.userData.productcode !== undefined) {	
+					INTERSECTED = intersects[ 0 ].object;
+					INTERSECTED.material = INTERSECTED.material.clone();
+
+					console.log(intersects[ 0 ].object)
+
+					INTERSECTED.material.emissive.setHex( 0x2BD80D );		
+												
+				}
+			//mark groups
+			// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+			// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+			}			
+			//mark groups
+			// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();			
+			// INTERSECTED.material.emissive.setHex( 0x2BD80D );
+			// intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );        
+		}
+		else {
+			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+				INTERSECTED = null;
+			}		
+	}	
+}
+	function animate() {		
+	requestAnimationFrame( animate );
+		render();		
+		update();
+	}
+	function update() {
+		controls.update();
+	}
+	function render() {
+		renderer.render( scene, camera );
+	}
+});
+</script>
+</body>
+</html>
+
+

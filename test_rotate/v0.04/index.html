@@ -14,7 +14,13 @@
 <script src="js/libs/three.js"></script>
 <script src="js/libs/orbit_controls.js"></script>
 <script src="js/libs/xml2jsobj.js"></script>
-<script src="js/anotherproject.js"></script>
+<script src="js/data.js"></script>
+<script src="js/newproj.js"></script>
+
+
+<!-- <script src="js/anotherproject.js"></script> -->
+
+
 
 <script src="js/viewModelSettings.js"></script>
 
@@ -80,24 +86,30 @@
 	var gui;
 	var pallet;
 	var ruler = false;
+	var globalrecipe;
+
 
 init();
 animate();
 
-function prepareDataFromXml() {
+
+
+function ajaxCall() {
   var xmlObj = (function(dataURL) {  
     var result = $.ajax({
 			async: false,
 			url: 'recipe.xml',			
-      // url: 'recipe_old.xml',			
-      method: 'GET',  
+			success: assignRecipeToGlobal,
+      		method: 'GET',  
 		}).done();		
     return result;
 	})();  
 
-	var external = new externalProj(xmlObj);
-	external[0].mesh.scale.set(.09, .09, .09);	
-  return external;
+	var meshes = initMeshes();
+	// var external = new externalProj(xmlObj);
+	
+	meshes.mesh.scale.set(.09, .09, .09);	
+  return meshes;
 }
 
 function init() {
@@ -147,11 +159,11 @@ function init() {
 	// scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
 
   	//prepared container with meshes and product info
-	result = prepareDataFromXml();
+	result = ajaxCall();
 
 	//summaryTable.js
-	overalTable(result);
-  	pallet = result[0].mesh;
+	// overalTable(result);
+  	pallet = result.mesh;
 	scene.add(pallet);
 
 	var canvastest = document.querySelector('canvas');	
