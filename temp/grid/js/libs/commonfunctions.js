@@ -48,6 +48,7 @@ function add_Childs(packages) {
   });
   return newlist;
 }
+//todo move away
 function create_MenuView() {
 	var tag = 'li';
 	var list = titleslist.listofviews;

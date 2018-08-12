@@ -17,7 +17,6 @@ function addOrderLinesToPackages(orderslist, recipe ){
     var container = {};
 	$.each( model = recipe.containerlist , function( key, value ) {     
         var pack = model[key].physicalresult.package;
-        //todo ask
         $.each( pack, function( key, value ) {
             pack[key].orderline = orderslist[pack[key].productcode];  
         });
@@ -56,7 +55,6 @@ function assignRecipeToGlobal(data) {
     var jscriptobj = XML2jsobj(data.childNodes[0]); 
     var globalvar = parseXmlRecipe(jscriptobj);  
 
-    //assign to global
     globalrecipe = globalvar;  
 } 
 function ajaxCall(url, methodType, callback) {

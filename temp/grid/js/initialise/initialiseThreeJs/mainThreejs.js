@@ -20,7 +20,6 @@ var strDownloadMime = "image/octet-stream";
 function initThreeJs () {
 	scene = new THREE.Scene();
 
-	thumbnailscene = new THREE.Scene();
 	// CAMERA
 	var SCREEN_WIDTH = window.innerWidth;
 	var SCREEN_HEIGHT = window.innerHeight;
@@ -156,7 +155,7 @@ function saveAsImage() {
 			var img = document.createElement("img");
 			
 			
-			img.src = rendererNew.domElement.toDataURL("image/npg");
+			console.log(rendererNew.domElement.toDataURL("image/npg"));
 			// panel2.appendChild(img);
 			console.log(img.src)
 		}

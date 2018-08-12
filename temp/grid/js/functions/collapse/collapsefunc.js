@@ -80,7 +80,7 @@ function collapseFunctions() {
             document.getElementById(currentpanelid).classList.remove('minimzepanel');
           }   
     }
-    //todo minimize code and check if panel is less then min???
+    //todo minimize buggggg
     function checkGaps(width) {
         if (width > 300 && width !== 300 ) {
             width = Math.abs(300 - width)
